@@ -101,7 +101,21 @@ const returnFinalData = async () => {
   return finalData; // 좌표 정보가 추가된 최종 데이터 반환
 };
 
-// Promise.resolve(concatData(finalCol, returnFinalData())).then(res => { // concatData(finalCol, finalData)의 반환 값이 Promise{<Pending>}으로 나와서 Promise.resolve 사용
-//     const result = res.join('\n'); // 배열 형태인 Column과 각 Row들을 줄바꿈 기준으로 Join
+// 최종 가공된 데이터의 Column과 Row들을 concat해서 줄 바꿈('\n') 단위로 join 하여 CSV 파일을 생성하는 async/await 함수
+const writeCsvFile = async () => {
+  const resultData = await concatData(finalCol, returnFinalData()).catch(
+    (err) => console.error(err)
+  );
+  const result = resultData.join("\n");
+  fs.writeFileSync(writeCsvPath, result);
+};
+
+writeCsvFile(); // 최종 CSV 파일 생성하는 함수 호출
+
+// Promise.resolve(concatData(finalCol, returnFinalData()))
+//   .then((res) => {
+//     // concatData(finalCol, finalData)의 반환 값이 Promise{<Pending>}으로 나와서 Promise.resolve 사용
+//     const result = res.join("\n"); // 배열 형태인 Column과 각 Row들을 줄바꿈 기준으로 Join
 //     fs.writeFileSync(writeCsvPath, result); // File로 내려받는다.
-// }).catch(err => console.error(err));
+//   })
+//   .catch((err) => console.error(err));
