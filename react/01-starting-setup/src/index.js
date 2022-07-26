@@ -1,6 +1,6 @@
 //! index.js는 npm start로 앱을 실행하면 가장 먼저 실행되는 파일이다.
-import ReactDOM from "react-dom/client";
-// react-dom이라는 서드파티 라이브러리를 불러오 ReactDom이라는 객체로 불러온다.
+import ReactDOM from "react-dom";
+// react-dom이라는 서드파티 라이브러리를 불러와 ReactDom이라는 객체로 불러온다.
 //? 실제로 package.json의 dependencies에 설치되어 있다.(CRA를 사용하면 프로젝트를 생성할 때, 자동으로 설치된다.)
 //? dependencies에 보면 react도 있다. 그 말은 react도 외부 라이브러리를 불러와 사용하고 있다는 것이다.
 //? CRA를 사용하면 React 라이브러리를 설치하고 React 개발에 꼭 필요한 필수 라이브러리를 설치해주는 것이다.
@@ -10,6 +10,7 @@ import "./index.css";
 import App from "./App";
 //? 같은 디렉토리의 App 컴포넌트를 import 한다.
 //? 컴포넌트를 import 하여 불러올 때는 확장자(.js)는 꼭 생략해야 한다.
+// import ExpenseItem from "./components/ExpenseItem";
 
 // const root = ReactDOM.createRoot(document.getElementById("root"));
 // //? 위에서 불러온 ReactDOM 객체의 createRoot() 메서드로 root 객체 생성
