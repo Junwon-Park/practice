@@ -7,8 +7,14 @@ require("dotenv").config();
 // File 관련 변수 / File 형식 변환
 let readFILE_NAME = `dataset5000line.csv`;
 let writeFILE_NAME = `newDataset5000line.csv`;
+let seperateFILE_NAME = "seperatedFile";
 const readCsvPath = path.join(__dirname, "sourceData", readFILE_NAME);
 const writeCsvPath = path.join(__dirname, "resultData", writeFILE_NAME);
+const seperateFilePath = path.join(
+  __dirname,
+  "seperateData",
+  seperateFILE_NAME
+);
 const encodeUTF16to8 = new Iconv("utf-16", "utf-8"); // utf16을 utf8로 변환하는 encoder
 const csvFileUtf16 = fs.readFileSync(readCsvPath); // 변환할 utf16 File 불러오기
 const csvFileUtf8 = encodeUTF16to8.convert(csvFileUtf16); // 위에서 불러온 encoder 사용해서 utf16 -> utf8(Buffer)로 변환
@@ -17,14 +23,6 @@ const utf8Text = csvFileUtf8.toString("utf-8"); // Buffer를 utf8로 변환
 // File 내용을 Column과 Row로 분리
 let csvCol = utf8Text.split("\n")[0]; // Column 부분 추출
 let csvRow = utf8Text.split("\n").slice(1); // Row(Data) 부분 추출
-
-// // 데이터를 100000개 씩 자르는 함수
-// const seperate10ThousandData = (rows) => {
-//   const dataArr = [];
-//   for (let i = 0; i < Math.ceil(rows.length / 100000); i++) {
-//     if()
-//   }
-// };
 
 //? NodeJS의 fs모듈의 readFileSync는 utf-8 Encoding을 지원하지 않는다. -> 그래서 파일 불러온 후 Iconv 모듈 사용
 // const readCSVFile = fs.readFileSync(readCsvPath, 'utf-8');
@@ -120,6 +118,7 @@ const writeCsvFile = async () => {
 
 writeCsvFile(); // 최종 CSV 파일 생성하는 함수 호출
 
+// 아래 Promise.resolve 부분 writeCsvFile async / await 함수로 대체
 // Promise.resolve(concatData(finalCol, returnFinalData()))
 //   .then((res) => {
 //     // concatData(finalCol, finalData)의 반환 값이 Promise{<Pending>}으로 나와서 Promise.resolve 사용
