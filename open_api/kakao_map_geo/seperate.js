@@ -11,40 +11,40 @@ console.log(writeCsvPath);
 const convertedData = fs.readFileSync(readCsvPath);
 // console.log(convertedData.toString());
 let convertedDataCol = convertedData.toString().split("\n")[0];
-let convertedDataRows = convertedData.toString().split("\n").slice(1);
+let convertedDataRows = convertedData.toString().split("\r").slice(1);
+//? \n을 기준으로 split 하면 ","가 다음 row의 0번째 인덱스에 붙음
+//? \r을 기준으로 split 해서 해결
 // console.log(convertedDataRows);
+const seperateCount = 100000;
 
-// 데이터를 100000개 씩 자르는 함수
+// 데이터를 100000개 씩 자르는 함수(재귀)
 const seperate10ThousandData = (rows) => {
-  let fileCount = Math.ceil(rows.length / 50000);
+  let fileCount = Math.ceil(rows.length / seperateCount);
   let remainData;
   let seperatedData;
 
   // Base Case
   if (fileCount === 0) {
-    console.log("Base Case!!!", rows.length);
     return;
   }
 
-  if (rows.length >= 50000) {
-    seperatedData = rows.slice(0, 50000);
-    console.log(seperatedData.length);
-    remainData = rows.slice(50000);
-    console.log("DATA!!!", remainData.length);
+  if (rows.length >= seperateCount) {
+    // rows의 길이가 seperateCount 이상일 때
+    seperatedData = rows.slice(0, seperateCount);
+    remainData = rows.slice(seperateCount);
     seperate10ThousandData(remainData);
-  } else if (rows.length < 50000) {
+  } else if (rows.length < seperateCount) {
+    // rows의 길이가 seperateCount 미만일 때
     seperatedData = rows.slice(0, rows.length);
     remainData = rows.slice(rows.length);
     seperate10ThousandData(remainData);
   }
   console.log(`${writeCsvPath}${fileCount}.csv`);
-  //   console.log(...seperatedData);
   fs.writeFile(
     `${writeCsvPath}${fileCount}.csv`,
     convertedDataCol.concat(seperatedData),
-    (err, result) => {
+    (err) => {
       if (err) console.log("error", err);
-      else console.log(result);
     }
   );
 };
