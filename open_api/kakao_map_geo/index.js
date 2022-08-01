@@ -1,24 +1,19 @@
 const axios = require("axios");
-const Iconv = require("iconv").Iconv;
+// const Iconv = require("iconv").Iconv; // toString()으로 해결
 const fs = require("fs");
 const path = require("path");
 require("dotenv").config();
 
 // File 관련 변수 / File 형식 변환
-let readFILE_NAME = `dataset5000line.csv`;
-let writeFILE_NAME = `newDataset5000line.csv`;
-let seperateFILE_NAME = "seperatedFile";
-const readCsvPath = path.join(__dirname, "sourceData", readFILE_NAME);
+let readFILE_NAME = `seperateFileYesan2.csv`;
+let writeFILE_NAME = `resultFileYesan.csv`;
+const readCsvPath = path.join(__dirname, "seperatedData", readFILE_NAME);
 const writeCsvPath = path.join(__dirname, "resultData", writeFILE_NAME);
-const seperateFilePath = path.join(
-  __dirname,
-  "seperateData",
-  seperateFILE_NAME
-);
-const encodeUTF16to8 = new Iconv("utf-16", "utf-8"); // utf16을 utf8로 변환하는 encoder
+// const encodeUTF16to8 = new Iconv("utf-16", "utf-8"); // utf16을 utf8로 변환하는 encoder
 const csvFileUtf16 = fs.readFileSync(readCsvPath); // 변환할 utf16 File 불러오기
-const csvFileUtf8 = encodeUTF16to8.convert(csvFileUtf16); // 위에서 불러온 encoder 사용해서 utf16 -> utf8(Buffer)로 변환
-const utf8Text = csvFileUtf8.toString("utf-8"); // Buffer를 utf8로 변환
+const utf8Text = csvFileUtf16.toString();
+// const csvFileUtf8 = encodeUTF16to8.convert(csvFileUtf16); // 위에서 불러온 encoder 사용해서 utf16 -> utf8(Buffer)로 변환
+// const utf8Text = csvFileUtf8.toString("utf-8"); // Buffer를 utf8로 변환
 
 // File 내용을 Column과 Row로 분리
 let csvCol = utf8Text.split("\n")[0]; // Column 부분 추출
@@ -97,7 +92,7 @@ const returnFinalData = async () => {
     finalData.push(
       await addGeoData(
         kakaoGeoAPI(
-          encodeURI(`${csvRow[i].split(",")[3]} ${csvRow[i].split(",")[4]}`)
+          encodeURI(`${csvRow[i].split(",")[2]} ${csvRow[i].split(",")[3]}`)
         ),
         csvRow[i]
       )
