@@ -17,8 +17,8 @@ let convertedDataRows = convertedData.toString().split("\r").slice(1);
 // console.log(convertedDataRows);
 const seperateCount = 100000;
 
-// 데이터를 100000개 씩 자르는 함수(재귀)
-const seperate10ThousandData = (rows) => {
+// 데이터를 자르는 함수(재귀)
+const seperateData = (rows) => {
   let fileCount = Math.ceil(rows.length / seperateCount);
   let remainData;
   let seperatedData;
@@ -32,12 +32,12 @@ const seperate10ThousandData = (rows) => {
     // rows의 길이가 seperateCount 이상일 때
     seperatedData = rows.slice(0, seperateCount);
     remainData = rows.slice(seperateCount);
-    seperate10ThousandData(remainData);
+    seperateData(remainData);
   } else if (rows.length < seperateCount) {
     // rows의 길이가 seperateCount 미만일 때
     seperatedData = rows.slice(0, rows.length);
     remainData = rows.slice(rows.length);
-    seperate10ThousandData(remainData);
+    seperateData(remainData);
   }
   console.log(`${writeCsvPath}${fileCount}.csv`);
   fs.writeFile(
@@ -49,4 +49,4 @@ const seperate10ThousandData = (rows) => {
   );
 };
 
-seperate10ThousandData(convertedDataRows);
+seperateData(convertedDataRows);
