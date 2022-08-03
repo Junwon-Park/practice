@@ -5,8 +5,8 @@ const path = require("path");
 require("dotenv").config();
 
 // File 관련 변수 / File 형식 변환
-let readFILE_NAME = `seperateFileYesan2.csv`;
-let writeFILE_NAME = `resultFileYesan.csv`;
+let readFILE_NAME = `seperateFileBoryeong3.csv`;
+let writeFILE_NAME = `resultFileBoryeong.csv`;
 const readCsvPath = path.join(__dirname, "seperatedData", readFILE_NAME);
 const writeCsvPath = path.join(__dirname, "resultData", writeFILE_NAME);
 // const encodeUTF16to8 = new Iconv("utf-16", "utf-8"); // utf16을 utf8로 변환하는 encoder
@@ -26,24 +26,26 @@ let csvRow = utf8Text.split("\n").slice(1); // Row(Data) 부분 추출
 // Kakao API 호출, 위도/경도 부분 추출 함수
 const kakaoGeoAPI = async (adrs) => {
   const res = await axios
-    .get(`http://dapi.kakao.com/v2/local/search/address.json?query=${adrs}`, {
-      headers: { Authorization: process.env.KAKAO_API_KEY_1 },
-    })
+    .get(
+      // adrs는 배열로 들어오고 0번 인덱스에 주소 정보가 들어오기 때문에 0번 대입
+      `http://dapi.kakao.com/v2/local/search/address.json?query=${adrs[0]}`,
+      {
+        headers: { Authorization: process.env.KAKAO_API_KEY_1 },
+      }
+    )
     .catch((err) => console.error(err));
-
   console.count("kakaoGeoAPI"); // 요청 횟수 count
+  console.log(decodeURI(`${adrs[0]} - ${adrs[1]}`));
 
   if (res.data.documents.length === 0) {
     // 데이터의 결측치 예외 처리(Kakao Local API 요청 시, 주소에 대한 정보가 없어 빈 배열로 응답이 오는 경우)
     return { geoX: -1, geoY: -1 };
   }
-
   // 좌표 - 소수점 7자리 까지 끊어야 한다.
   const geoX = res.data.documents[0].address.x.slice(0, 11);
   const geoY = res.data.documents[0].address.y.slice(0, 10);
   console.log("X : ", geoX);
   console.log("Y : ", geoY);
-
   return { geoX, geoY };
 };
 
@@ -52,7 +54,7 @@ const kakaoGeoAPI = async (adrs) => {
 // 읽어온 CSV File의 컬럼에 좌표 컬럼을 추가하는 함수
 const addGeoCol = async (col) => {
   //? async/await이 아닌 일반함수로 실행 시, geo가 Promise{<Pending>} 상태로 출력
-  let newCol = "GeoX," + "GeoY," + " " + col;
+  let newCol = "위도(y)," + "경도(x)," + " " + col;
 
   return newCol;
 };
@@ -63,7 +65,7 @@ const addGeoData = async (geo, row) => {
   const x = Geo.geoX;
   const y = Geo.geoY;
 
-  let newRow = `${x},${y},` + row; // 각각의 Row에 좌표 데이터 추가
+  let newRow = `${y},${x},` + row; // 각각의 Row에 좌표 데이터 추가
   console.log(newRow);
 
   return newRow;
@@ -92,7 +94,21 @@ const returnFinalData = async () => {
     finalData.push(
       await addGeoData(
         kakaoGeoAPI(
-          encodeURI(`${csvRow[i].split(",")[2]} ${csvRow[i].split(",")[3]}`)
+          // 각 row의 5번 인덱스의 값이 "임야대장"인 경우 지번 앞에 "산"을 붙이도록 구현
+          // 각 row의 5번 인덱스의 값을 확인하기 위해 배열 형태로 대입
+          csvRow[i].split(",")[5] === "임야대장"
+            ? [
+                encodeURI(
+                  `${csvRow[i].split(",")[2]} 산 ${csvRow[i].split(",")[3]}`
+                ),
+                csvRow[i].split(",")[5],
+              ]
+            : [
+                encodeURI(
+                  `${csvRow[i].split(",")[2]} ${csvRow[i].split(",")[3]}`
+                ),
+                csvRow[i].split(",")[5],
+              ]
         ),
         csvRow[i]
       )

@@ -1,20 +1,30 @@
 const fs = require("fs");
 const path = require("path");
 
-let readFILE_NAME = `Yesan.csv`;
-let writeFILE_NAME = `seperateFile${readFILE_NAME.slice(0, 5)}`;
-console.log(writeFILE_NAME);
+let readFILE_NAME = `Boryeong.csv`;
+let writeFILE_NAME = `seperateFile${readFILE_NAME.slice(
+  0,
+  readFILE_NAME.length - 4
+)}`;
+// console.log(writeFILE_NAME);
 const readCsvPath = path.join(__dirname, "sourceData", readFILE_NAME);
 // console.log(readCsvPath);
 const writeCsvPath = path.join(__dirname, "seperatedData", writeFILE_NAME);
-console.log(writeCsvPath);
-const convertedData = fs.readFileSync(readCsvPath);
-// console.log(convertedData.toString());
-let convertedDataCol = convertedData.toString().split("\n")[0];
-let convertedDataRows = convertedData.toString().split("\r").slice(1);
+// console.log(writeCsvPath);
+const readData = fs.readFileSync(readCsvPath);
+
+// 문자 인코딩 확인(jschardet 모듈 사용)
+// let content = jschardet.detect(readData);
+// console.log(content);
+
+// console.log(convertedData.toString()); // toString()으로 Buffer를 자연어 문자로 변환
+let convertedDataCol = readData.toString().split("\n")[0];
+// console.log(convertedDataCol);
+let convertedDataRows = readData.toString().split("\r").slice(1);
 //? \n을 기준으로 split 하면 ","가 다음 row의 0번째 인덱스에 붙음
 //? \r을 기준으로 split 해서 해결
 // console.log(convertedDataRows);
+
 const seperateCount = 100000;
 
 // 데이터를 자르는 함수(재귀)
@@ -39,6 +49,7 @@ const seperateData = (rows) => {
     remainData = rows.slice(rows.length);
     seperateData(remainData);
   }
+
   console.log(`${writeCsvPath}${fileCount}.csv`);
   fs.writeFile(
     `${writeCsvPath}${fileCount}.csv`,
