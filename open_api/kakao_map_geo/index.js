@@ -5,7 +5,7 @@ const path = require("path");
 require("dotenv").config();
 
 // File 관련 변수 / File 형식 변환
-let readFILE_NAME = `seperateFileBoryeong3.csv`;
+let readFILE_NAME = `seperateFileBoryeong1.csv`;
 let writeFILE_NAME = `resultFileBoryeong.csv`;
 const readCsvPath = path.join(__dirname, "seperatedData", readFILE_NAME);
 const writeCsvPath = path.join(__dirname, "resultData", writeFILE_NAME);
@@ -30,7 +30,7 @@ const kakaoGeoAPI = async (adrs) => {
       // adrs는 배열로 들어오고 0번 인덱스에 주소 정보가 들어오기 때문에 0번 대입
       `http://dapi.kakao.com/v2/local/search/address.json?query=${adrs[0]}`,
       {
-        headers: { Authorization: process.env.KAKAO_API_KEY_1 },
+        headers: { Authorization: process.env.KAKAO_API_KEY_2 },
       }
     )
     .catch((err) => console.error(err));
