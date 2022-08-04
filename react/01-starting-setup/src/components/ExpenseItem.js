@@ -1,19 +1,40 @@
+import ExpenseDate from "./ExpenseDate";
 import "./ExpenseItem.css";
 
-function ExpenseItem() {
-  const expenseDate = new Date(2022, 8, 1);
-  const expenseTitle = "Car Insurance";
-  const expenseAmount = 294.67;
+function ExpenseItem({ title, amount, date }) {
+  //? Props는 꼭 객체이기 때문에 당연히 구조분해 할당으로 받을 수 있다.
+  //! 물론 이때, 각 속성의 이름은 넘겨줄 때의 이름과 동일해야 한다.
 
   return (
     <div className="expense-item">
-      <div>{expenseDate.toISOString()}</div>
+      <ExpenseDate date={date} />
       <div className="expense-item__description">
-        <h2>{expenseTitle}</h2>
-        <div className="expense-item__price">${expenseAmount}</div>
+        <h2>{title}</h2>
+        <div className="expense-item__price">${amount}</div>
       </div>
     </div>
   );
+
+  // function ExpenseItem(props) {
+  //   //? props라는 이름의 객체로 Props 전달(이 객체의 이름은 사용자 지정으로 내가 정하는 것이다.)
+
+  //   const month = props.date.toLocaleString("en-US", { month: "long" });
+  //   const day = props.date.toLocaleString("en-US", { day: "2-digit" });
+  //   const year = props.date.getFullYear();
+  //   return (
+  //     <div className="expense-item">
+  //       <div>
+  //         <div>{month}</div>
+  //         <div>{year}</div>
+  //         <div>{day}</div>
+  //       </div>
+  //       <div className="expense-item__description">
+  //         <h2>{props.title}</h2>
+  //         <div className="expense-item__price">${props.amount}</div>
+  //       </div>
+  //     </div>
+  //   );
+
   // return (
   //  <h2>Expense item!</h2>
   //  <h2>It's too expensive!</h2>
