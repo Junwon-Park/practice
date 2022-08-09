@@ -1,4 +1,5 @@
 import ExpenseDate from "./ExpenseDate";
+import Card from "./Card";
 import "./ExpenseItem.css";
 
 function ExpenseItem({ title, amount, date }) {
@@ -6,13 +7,13 @@ function ExpenseItem({ title, amount, date }) {
   //! 물론 이때, 각 속성의 이름은 넘겨줄 때의 이름과 동일해야 한다.
 
   return (
-    <div className="expense-item">
+    <Card className="expense-item">
       <ExpenseDate date={date} />
       <div className="expense-item__description">
         <h2>{title}</h2>
         <div className="expense-item__price">${amount}</div>
       </div>
-    </div>
+    </Card>
   );
 
   // function ExpenseItem(props) {
