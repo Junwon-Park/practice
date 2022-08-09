@@ -1,10 +1,19 @@
 import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css";
 
-function Expenses({ title, amount, date }) {
+function Expenses({ expenses }) {
   return (
     <div className="expenses">
-      <ExpenseItem title={title} amount={amount} date={date} />
+      {expenses.map((el, idx) => {
+        return (
+          <ExpenseItem
+            title={el.title}
+            amount={el.amount}
+            date={el.date}
+            key={idx}
+          />
+        );
+      })}
     </div>
   );
 }

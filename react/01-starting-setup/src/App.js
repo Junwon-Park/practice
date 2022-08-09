@@ -31,16 +31,7 @@ function App() {
     //! 이 것은 당연히 일반적인 자바스크립트 문법은 아니고 리액트 팀에서 개발한 JSX라는 파일을 반환하는 구문으로 자바스크립트에서 정상 동작한다.
     <div>
       <h2>Let's get started!</h2>
-      {expenses.map((el, idx) => {
-        return (
-          <Expenses
-            title={el.title}
-            amount={el.amount}
-            date={el.date}
-            key={idx}
-          />
-        );
-      })}
+      <Expenses expenses={expenses} />
     </div>
     //? JSX는 JavaScript XML의 줄임말이다.
     //? HTML은 XML이라고 할 수 있고, JS에서 XML(HTML) 구문을 사용하는 형식을 JSX라고 하며 JSX는 React의 실행 됫단에서 변환 과정을 거쳐 브라우저가 이해할 수 있도록 해석된다.
