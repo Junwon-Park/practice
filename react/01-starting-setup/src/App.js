@@ -1,3 +1,4 @@
+// import React from "react";
 import Expenses from "./components/Expenses";
 
 function App() {
@@ -26,6 +27,12 @@ function App() {
     },
   ];
 
+  // return React.createElement(
+  //   "div",
+  //   {},
+  //   React.createElement("h2", {}, "Let's get started!"),
+  //   React.createElement(Expenses, { expenses: expenses })
+  // );
   return (
     //? 컴포넌트는 HTML 요소를 반환한다.
     //! 이 것은 당연히 일반적인 자바스크립트 문법은 아니고 리액트 팀에서 개발한 JSX라는 파일을 반환하는 구문으로 자바스크립트에서 정상 동작한다.
