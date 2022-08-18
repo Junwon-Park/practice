@@ -47,6 +47,6 @@ function App() {
 }
 
 export default App;
-//? export default는 기본 값으로 내보내는 객체를 정의한다.
-//? export default로 내보내면 내보낸 이름 그 대로 import하여 사용 가능하다.(import App from App;)
+//? export default는 기본 값으로 내보내는 객체를 정의한다.(export default에 지정된 단 하나의 함수(컴포넌트)만을 내보낸다는 의미이다.)
+//? export default로 내보내면 지정된 함수만을 내보내기 때문에 다른 컴포넌트에서 import 할 때, 원하는 이름으로 해당 함수(컴포넌트)를 사용할 수 있다.
 //! App.js라는 App 컴포넌트를 선언한 파일은 기본 값으로 App 컴포넌트(App 함수 컴포넌트)를 내보내서 다른 곳에서 불러와(import) 사용할 수 있도록 한다.
