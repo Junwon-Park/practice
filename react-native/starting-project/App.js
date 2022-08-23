@@ -6,6 +6,7 @@ import {
   Button,
   TextInput,
   ScrollView,
+  FlatList,
 } from "react-native";
 
 export default function App() {
@@ -21,7 +22,7 @@ export default function App() {
   const addGoalHandler = () => {
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
-      enteredGoalText,
+      { text: enteredGoalText, id: Math.random().toString() },
     ]);
     // 상태 갱신 함수를 사용해서 State를 갱신할 때, 갱신할 값이 기존의 State에 의존한다면,
     // 즉 기존의 State는 그 대로 유지하면서 갱신하는 경우라면 위 처럼 익명 함수로 기존 함수를 전달하는 방식으로 진행하는 것이 올바른 방법이다.
@@ -43,19 +44,24 @@ export default function App() {
       <View style={styles.goalContainer}>
         {/* ScrollView를 사용할 때에는 <View> 컨테이너 컴포넌트로 감싸서 스크롤이 적용될 부분의 공간을 만들어 줘야 한다. */}
         {/* ScrollView는 부모 컴포넌트에 맞게 적용된다. */}
-        <ScrollView>
-          {courseGoals.map((goal, idx) => {
+        <FlatList
+          data={courseGoals}
+          renderItem={(itemData) => {
             return (
-              <View style={styles.goalItem} key={idx}>
-                {/* iOS에서는 Text 요소에 직접 둥근 모서리 속성을 적용할 수 없기 때문에 <View> 컴포넌트로 감싸서 해당 컴포넌트에 해당 속성을 적용했다. */}
-                {/* <View> 컴포넌트에 해당 속성을 적용하면 양쪽 Native 플랫폼에 모두 잘 적용된다. */}
-                <Text style={styles.goalItem}>{goal}</Text>
-                {/* RN에서는 CSS 처럼 부모의 스타일 속성이 자식에게 상속되지 않기 때문에 <View> 컴포넌트에 지정한 속성이 <Text> 컴포넌트에 적용되지 않아 텍스트 색상인 color 속성이 적용되지 않았다. */}
-                {/* 그래서 동일한 스타일을 적용해주었다.. */}
+              <View style={styles.goalItem}>
+                <Text style={styles.goalItem}>{itemData.item.text}</Text>
               </View>
             );
-          })}
-        </ScrollView>
+          }}
+          keyExtractor={(item, index) => item.id}
+        />
+        {/* <FlatList> 컴포넌트는 셀프 클로징 컴포넌트이다. */}
+        {/* 컨텐츠 목록을 보여주고 스크롤 기능을 제공하는 컴포넌트이고 데이터는 배열 형태로 제공해야하며 배열의 타입은 객체 형태여야 한다. */}
+        {/* key라는 키가 있다면 자동으로 인식하여 목록의 고유한 key로 사용하기 때문에 데이터 목록의 키 중에 key라는 이름의 키가 있다면 따로 key를 지정하지 않아도 된다.(리스트 목록의 각 컨텐츠에는 고유한 key가 반드시 있어야 한다.) */}
+        {/* 데이터 목록은 data라는 속성으로 받는다. */}
+        {/* <FlatList> 컴포넌트는 스크롤 기능 내부에 렌더링 될 컨텐츠를 renderItem 속성에 익명함수를 지정하여 그 인자로 받고 넘겨 받는 item은 data 속성에 지정한 목록으로 부터 <FlatList>가 넘겨준다. 즉, 화면에 뿌려줄 컨텐츠는 여기에 지정하는 것이다. */}
+        {/* 만약 사용할 데이터 목록의 item에 key라는 이름을 가진 키가 없는 경우 keyExtractor 속성을 사용해서 key로 사용될 고유한 값을 반환 받아야 한다. 보통 DB 또는 다른 서버에 API로 받은 데이터의 경우 key라는 키가 존재하지 않을 가능성이 높다. */}
+        {/* 보통 DB, API로 받는 데이터의 경우 고유한 값으로 id라는 키를 가지는 경우가 많다. 그래서 여기에서는 keyExtractor 속성을 통해 각 item의 id라는 키를 반환 받아서 각 컨텐츠의 고유한 key로 사용한다. */}
       </View>
     </View>
   );
