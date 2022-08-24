@@ -1,25 +1,14 @@
 import { useState } from "react"; // useState는 react 라이브러리의 useState 객체를 그 대로 사용한다.
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { StyleSheet, View, Button, FlatList } from "react-native";
+
+// Componenets
+import GoalItem from "./components/GoalItem";
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
-  const [enteredGoalText, setEnteredGoalText] = useState("");
   const [courseGoals, setCourseGoals] = useState([]);
 
-  const goalInputHandler = (enteredText) => {
-    // JSX의 TextInput의 onChangeText가 입력한 값을 인자로 넘겨준다.
-    // 파라미터의 이름은 당연히 자유롭게 지을 수 있다.
-    setEnteredGoalText(enteredText);
-  };
-
-  const addGoalHandler = () => {
+  const addGoalHandler = (enteredGoalText) => {
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
       { text: enteredGoalText, id: Math.random().toString() },
@@ -29,28 +18,31 @@ export default function App() {
     // 상태 갱신 함수의 인자로 익명함수를 지정하면 익명함수의 인자로 해당 갱신함수의 현재 State를 받을 수 있는데, 그 것을 이용하는 것이고 이 방법이 추천되는 방법이다.
   };
 
+  const deleteGoalHandler = (id) => {
+    // 이 함수는 FlatList에 추가된 Item을 누르면 호출되는 함수로 눌린 Item을 삭제하는 기능이다.
+    // 이 함수가 여기에 선언된 이유는 Item을 지우는 것이 courseGoals 상태의 해당 Item을 지우는 것이기 때문에 해당 상태가 존재하는 컴포넌트에 선언한 것이다.
+    // 특정 요소를 제외해야 하기 때문에 각 item의 고유한 값인 id를 인자로 받도록 한다.
+    setCourseGoals((currentCourseGoals) => {
+      return currentCourseGoals.filter((item) => item.id !== id);
+      // 기존의 상태를 활용하여 상태를 갱신하기 위해 상태 갱신 함수가 반환하는 기존 상태를 사용한 상태 갱신
+      // 기존의 상태에서 현재 함수의 인자로 전달된 id와 동일한 id를 가진 Item filter 함수로 제거
+    });
+  };
+
   return (
     <View style={styles.appContainer}>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Your course goal!"
-          onChangeText={goalInputHandler}
-        />
-        {/* 해당 인풋 컴포넌트에서 발생하는 입력 이벤트는 입력된 값을 지정한 함수의 인자로 전달한다. */}
-        <Button title="Add Goal" onPress={addGoalHandler} />
-        {/* RN에서 Button 컴포넌트의 클릭 이벤트는 onPress라는 속성에 지정한다. */}
-      </View>
+      <GoalInput addGoalHandler={addGoalHandler} />
+      {/* RN에서 Button 컴포넌트의 클릭 이벤트는 onPress라는 속성에 지정한다. */}
       <View style={styles.goalContainer}>
-        {/* ScrollView를 사용할 때에는 <View> 컨테이너 컴포넌트로 감싸서 스크롤이 적용될 부분의 공간을 만들어 줘야 한다. */}
-        {/* ScrollView는 부모 컴포넌트에 맞게 적용된다. */}
         <FlatList
           data={courseGoals}
           renderItem={(itemData) => {
             return (
-              <View style={styles.goalItem}>
-                <Text style={styles.goalItem}>{itemData.item.text}</Text>
-              </View>
+              <GoalItem
+                text={itemData.item.text}
+                deleteGoalHandler={deleteGoalHandler}
+                id={itemData.item.id}
+              />
             );
           }}
           keyExtractor={(item, index) => item.id}
@@ -77,38 +69,10 @@ const styles = StyleSheet.create({
     padding: 50,
     paddingHorizontal: 16,
   },
-  inputContainer: {
-    flex: 1,
-    // flex 속성은 같은 부모 아래 존재하는 형제 컴포넌트 끼리의 비율을 지정한다.
-    // 현재 이 속성으로 공간의 비율을 공유하는 형제 컴포넌트는 하나이며 해당 컴포넌트에 flex: 3이 지정되어 있기 때문에
-    // 이 컴포넌트는 총 합 4 중에 1의 비율(1/5)을 차지하게 된다.
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    // alignItems의 값을 지정하지 않으면 기본 값을 'stretch'가 적용된다.
-    // 그래서 alignItems의 값을 'center'로 하지 않았을 때, 버튼의 height가 세로로 부모의 height 만큼 늘어나 버튼의 상단에 붙어 있던 것이다.
-    // alignItems에 'center'를 지정해서 버튼이 부모의 height 만큼 늘어나지 않고 가운데 정렬 되도록 했다.
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
-  },
-  textInput: {
-    borderWidth: 1,
-    borderColor: "#cccccc",
-    width: "70%",
-    marginRight: 8,
-    padding: 8,
-  },
+
   goalContainer: {
     flex: 4,
     // flex 속성은 같은 부모 아래 존재하는 형제 컴포넌트 끼리의 비율을 지정한다.
     // 이 컴포넌트는 총 합 4 중에 3의 비율(4/5)을 차지하게 된다.
-  },
-  goalItem: {
-    margin: 8,
-    padding: 8,
-    borderRadius: 6,
-    backgroundColor: "#5e0acc",
-    color: "white",
   },
 });
