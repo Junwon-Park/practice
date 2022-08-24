@@ -1,7 +1,14 @@
 import { useState } from "react";
-import { StyleSheet, View, TextInput, Button } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  Modal,
+  Image,
+} from "react-native";
 
-const GoalInput = ({ addGoalHandler }) => {
+const GoalInput = ({ addGoalHandler, modalIsVisible, endAddGoalHandler }) => {
   const [enteredGoalText, setEnteredGoalText] = useState("");
 
   const goalInputHandler = (enteredText) => {
@@ -23,18 +30,35 @@ const GoalInput = ({ addGoalHandler }) => {
   };
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.textInput}
-        placeholder="Your course goal!"
-        onChangeText={goalInputHandler}
-        value={enteredGoalText}
-      />
-      {/* 해당 인풋 컴포넌트에서 발생하는 입력 이벤트는 입력된 값을 지정한 함수의 인자로 전달한다. */}
-      {/* 버튼이 눌린 후에는 위 liftUpGoalText 함수의 setEnteredGoalText 갱신 함수에 의해서 빈 문자열이 대입된다. */}
-      <Button title="Add Goal" onPress={liftUpGoalText} />
-      {/* 위에 선언된 상태 끌어올리기 함수 대입 */}
-    </View>
+    <Modal visible={modalIsVisible} animationType="fade">
+      <View style={styles.inputContainer}>
+        <Image
+          style={styles.image}
+          source={require("../assets/images/goalImage.png")}
+        />
+        <TextInput
+          style={styles.textInput}
+          placeholder="Your course goal!"
+          onChangeText={goalInputHandler}
+          value={enteredGoalText}
+        />
+        {/* 해당 인풋 컴포넌트에서 발생하는 입력 이벤트는 입력된 값을 지정한 함수의 인자로 전달한다. */}
+        {/* 버튼이 눌린 후에는 위 liftUpGoalText 함수의 setEnteredGoalText 갱신 함수에 의해서 빈 문자열이 대입된다. */}
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="Add Goal" onPress={liftUpGoalText} color="#b180f0" />
+            {/* 위에 선언된 상태 끌어올리기 함수 대입 */}
+          </View>
+          <View style={styles.button}>
+            <Button
+              title="Cancel"
+              onPress={endAddGoalHandler}
+              color="#f31282"
+            />
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 };
 
@@ -42,25 +66,38 @@ export default GoalInput;
 
 const styles = StyleSheet.create({
   inputContainer: {
+    flex: 1,
     // flex 속성은 같은 부모 아래 존재하는 형제 컴포넌트 끼리의 비율을 지정한다.
     // 현재 이 속성으로 공간의 비율을 공유하는 형제 컴포넌트는 하나이며 해당 컴포넌트에 flex: 3이 지정되어 있기 때문에
     // 이 컴포넌트는 총 합 4 중에 1의 비율(1/5)을 차지하게 된다.
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     // alignItems의 값을 지정하지 않으면 기본 값을 'stretch'가 적용된다.
     // 그래서 alignItems의 값을 'center'로 하지 않았을 때, 버튼의 height가 세로로 부모의 height 만큼 늘어나 버튼의 상단에 붙어 있던 것이다.
     // alignItems에 'center'를 지정해서 버튼이 부모의 height 만큼 늘어나지 않고 가운데 정렬 되도록 했다.
-    marginBottom: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: "#cccccc",
     padding: 16,
+    backgroundColor: "#311b6b",
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "#cccccc",
-    width: "70%",
-    marginRight: 8,
-    padding: 8,
+    borderColor: "#e4d0ff",
+    backgroundColor: "#e4d0ff",
+    color: "#120438",
+    borderRadius: 6,
+    width: "100%",
+    padding: 16,
+  },
+  buttonContainer: {
+    marginTop: 16,
+    flexDirection: "row",
+  },
+  button: {
+    width: 100,
+    marginHorizontal: 16,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20,
   },
 });
