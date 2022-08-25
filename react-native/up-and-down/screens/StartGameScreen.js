@@ -4,7 +4,7 @@ import { TextInput, View, StyleSheet, Alert } from "react-native";
 // Components
 import PrimaryButton from "../components/PrimaryButton";
 
-const StartGameScreen = () => {
+const StartGameScreen = ({ onPickNumber }) => {
   const [enteredNumber, setEnteredNumber] = useState("");
   // TextInput에 입력된 값을 관리할 상태
   // TextInput에 입력되는 값은 모두 문자열이기 때문에 초기 값도 빈 문자열로 초기화
@@ -28,7 +28,9 @@ const StartGameScreen = () => {
       );
       return;
     }
-    console.log("Valid number!");
+    onPickNumber(chosenNumber);
+    // App 컴포넌트의 선택된 숫자를 저장하는 상태를 갱신하는 함수이다.
+    // 유효성 검증이 완료된 숫자를 인자로 넘겨 App 컴포넌트의 해당 핸들러 함수에서 처리한다.(상태 끌어 올리기)
   };
 
   return (
