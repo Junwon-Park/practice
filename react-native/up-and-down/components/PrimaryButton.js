@@ -1,10 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
-const PrimaryButton = ({ children }) => {
-  const pressHandler = () => {
-    console.log("Pressed!");
-  };
-
+const PrimaryButton = ({ children, onPress }) => {
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
@@ -13,7 +9,7 @@ const PrimaryButton = ({ children }) => {
             ? [styles.buttonInnerContainer, styles.buttonPressed]
             : styles.buttonInnerContainer
         }
-        onPress={pressHandler}
+        onPress={onPress}
         android_ripple={{ color: "#640233" }}
       >
         {/* Android에서는 버튼을 눌렀을 때, android_ripple 속성으로 물결 효과를 줬지만 iOS는 여기에 바로 속성으로 물결 효과를 줄 수 없기 때문에 스타일 객체를 추가해서 눌렀을 때, 투명도가 변하도록 구현한 것이다 */}
