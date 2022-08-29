@@ -1,5 +1,8 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
+// Constants
+import Colors from "../../constants/colors";
+
 const PrimaryButton = ({ children, onPress }) => {
   return (
     <View style={styles.buttonOuterContainer}>
@@ -10,7 +13,7 @@ const PrimaryButton = ({ children, onPress }) => {
             : styles.buttonInnerContainer
         }
         onPress={onPress}
-        android_ripple={{ color: "#640233" }}
+        android_ripple={{ color: Colors.primayr600 }}
       >
         {/* Android에서는 버튼을 눌렀을 때, android_ripple 속성으로 물결 효과를 줬지만 iOS는 여기에 바로 속성으로 물결 효과를 줄 수 없기 때문에 스타일 객체를 추가해서 눌렀을 때, 투명도가 변하도록 구현한 것이다 */}
         {/* 일단 style 속성의 값으로 배열을 줄 수 있는데, 배열의 스타일 속성이 모두 적용된다. 스타일을 여러 개 줄 때, 사용할 수 있다. */}
@@ -33,7 +36,7 @@ const styles = StyleSheet.create({
     overflow: "hidden", // 물결 효과가 컨테이너를 넘어가는 경우 넘어가는 부분을 안보이게 해주는 속성
   },
   buttonInnerContainer: {
-    backgroundColor: "#72063c",
+    backgroundColor: Colors.primary500,
     borderRadius: 28,
     paddingVertical: 8,
     paddingHorizontal: 16,

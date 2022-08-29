@@ -1,16 +1,26 @@
 import { useState } from "react";
-import { StyleSheet, ImageBackground } from "react-native";
+import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 // Components
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
 
+// Constants
+import Colors from "./constants/colors";
+import GameOverScreen from "./screens/GameOverScreen";
+
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
+  const [gameIsOver, setGameIsOver] = useState(true);
 
   const pickedNumberHandler = (pickedNumber) => {
     setUserNumber(pickedNumber);
+    setGameIsOver(false);
+  };
+
+  const gameOverHandler = () => {
+    setGameIsOver(true);
   };
 
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
@@ -19,10 +29,18 @@ export default function App() {
 
   // userNumber가 Truthy 값이면 screen에 GameScreen 컴포넌트를 재할당 한다.
   // 이미 StartGameScreen에서 검증이 끝난 숫자가 들어오기 때문에 숫자가 들어오면 스크린을 변경해줘도 된다.
-  if (userNumber) screen = <GameScreen />;
+  if (userNumber)
+    screen = (
+      <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
+    );
+
+  if (gameIsOver && userNumber) screen = <GameOverScreen />;
 
   return (
-    <LinearGradient colors={["#4e0329", "#ddb52f"]} style={styles.rootScreen}>
+    <LinearGradient
+      colors={[Colors.primary700, Colors.accent500]}
+      style={styles.rootScreen}
+    >
       {/* 반드시 color 속성으로 사용될 색상을 지정해주어야 하고 값은 배열 형태로 주어야 한다. */}
       {/* 그리고 배열의 색상에대한 값은 반드시 두 개 이상이어야 한다. */}
       <ImageBackground
@@ -31,7 +49,7 @@ export default function App() {
         style={styles.rootScreen}
         imageStyle={styles.backgroundImage}
       >
-        {screen}
+        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
