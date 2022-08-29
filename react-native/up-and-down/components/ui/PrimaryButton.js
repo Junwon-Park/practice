@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     margin: 4,
     elevation: 4, // Android 전용 Shadow 효과
+    paddingHorizontal: 40,
   },
   buttonText: {
     color: "white",

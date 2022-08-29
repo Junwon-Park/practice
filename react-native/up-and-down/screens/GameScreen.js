@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+// expo에서 제공하는 vector-icons 모듈의 Ionicons라는 Icon set를 불러온 것이다.
 
 // Components
 import Title from "../components/ui/title";
 import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
+import InstructionText from "../components/ui/InstructionText";
+import Card from "../components/ui/Card";
 
-// Unit function
+// Until function
 const generateRandomBetween = (min, max, exclude) => {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
 
@@ -58,23 +62,20 @@ const GameScreen = ({ userNumber, onGameOver }) => {
     <View style={styles.screen}>
       <Title>Opponent's Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <View>
-        <Text>Higher or lower?</Text>
+      <Card>
+        <InstructionText style={styles.instructionText}>
+          {/* 커스텀 컴포넌트인 InstructionText의 Props로 style을 전달한 것이다.(Props이기 떄문에 style이라는 이름은 다른 이름으로 전달할 수 있다.) */}
+          Higher or lower?
+        </InstructionText>
         <View style={styles.primaryButtonContainer}>
-          <PrimaryButton
-            onPress={nextGuessHandler.bind(this, "greater")}
-            style={styles.primaryButton}
-          >
-            +
+          <PrimaryButton onPress={nextGuessHandler.bind(this, "greater")}>
+            <Ionicons name="md-add" size={24} color="white" />
           </PrimaryButton>
-          <PrimaryButton
-            onPress={nextGuessHandler.bind(this, "lower")}
-            style={styles.primaryButton}
-          >
-            -
+          <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+            <Ionicons name="md-remove" size={24} color="white" />
           </PrimaryButton>
         </View>
-      </View>
+      </Card>
     </View>
   );
 };
@@ -88,9 +89,8 @@ const styles = StyleSheet.create({
   },
   primaryButtonContainer: {
     flexDirection: "row",
-    justifyContent: "center",
   },
-  primaryButton: {
-    flex: 1,
+  instructionText: {
+    marginBottom: 12,
   },
 });
