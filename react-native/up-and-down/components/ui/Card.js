@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     // <View>에 적용할 스타일이고 <View>는 기본적으로 Flexbox이다.
     justifyContent: "center",
     alignItems: "center", // RN에서 Flexbox의 alignItems의 기본 값은 Column이다.
-    marginTop: 100,
+    marginTop: 50,
     marginHorizontal: 24,
     padding: 16,
     backgroundColor: Colors.primary800,

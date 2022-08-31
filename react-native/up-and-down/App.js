@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from "expo-font";
+// expo에서 제공하는 expo-font 라이브러리의 useFonts 훅을 불러온다.
+import AppLoading from "expo-app-loading";
+// 앱이 로딩 중일 때, 스플래시 화면을 연장해주는 라이브러리
 
 // Components
 import StartGameScreen from "./screens/StartGameScreen";
@@ -13,6 +17,19 @@ import GameOverScreen from "./screens/GameOverScreen";
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
   const [gameIsOver, setGameIsOver] = useState(true);
+
+  // useFonts Hooks
+  const [fontsLoaded] = useFonts({
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+  });
+  // 불러온 useFonts 훅의 인자로 객체 형태로 사용할 Font의 이름('키') 값은 require() 메서드의 인자로 파일의 상대 경로를 넣는다.
+  // 그러면 앱을 실행했을 때, App 컴포넌트가 가장 먼저 실행되면서 useFonts의 각 Font들도 로딩된다.
+  // useState 훅 처럼 []에 변수를 넣어서 Font가 로딩 중이면 true
+
+  // fontsLoaded가 Falsy 값이라면 AppLoading 컴포넌트를 반환한다.(스플래시 화면 반환)
+  // useFonts의 Font가 로딩 중일 때, AppLoading을 반환(스플래시 화면 반환)하고 로딩이 완료되면 App 컴포넌트가 재실행된다.
+  if (!fontsLoaded) return <AppLoading />;
 
   const pickedNumberHandler = (pickedNumber) => {
     setUserNumber(pickedNumber);
