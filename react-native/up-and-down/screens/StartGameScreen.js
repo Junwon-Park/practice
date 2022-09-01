@@ -3,7 +3,7 @@ import { TextInput, View, StyleSheet, Alert } from "react-native";
 
 // Components
 import PrimaryButton from "../components/ui/PrimaryButton";
-import Title from "../components/ui/title";
+import Title from "../components/ui/Title";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
 

@@ -17,6 +17,7 @@ import GameOverScreen from "./screens/GameOverScreen";
 export default function App() {
   const [userNumber, setUserNumber] = useState(null);
   const [gameIsOver, setGameIsOver] = useState(true);
+  const [guessRounds, setGuessRounds] = useState(0);
 
   // useFonts Hooks
   const [fontsLoaded] = useFonts({
@@ -25,7 +26,8 @@ export default function App() {
   });
   // 불러온 useFonts 훅의 인자로 객체 형태로 사용할 Font의 이름('키') 값은 require() 메서드의 인자로 파일의 상대 경로를 넣는다.
   // 그러면 앱을 실행했을 때, App 컴포넌트가 가장 먼저 실행되면서 useFonts의 각 Font들도 로딩된다.
-  // useState 훅 처럼 []에 변수를 넣어서 Font가 로딩 중이면 true
+  // useState 훅 처럼 []에 변수를 넣어서 Font가 로딩 중인지 여부를 boolean 값으로 반환한다.
+  // 이렇게 등록한 Font는 로딩이 완료되고 나면 모든 컴포넌트에서 사용이 가능하다.
 
   // fontsLoaded가 Falsy 값이라면 AppLoading 컴포넌트를 반환한다.(스플래시 화면 반환)
   // useFonts의 Font가 로딩 중일 때, AppLoading을 반환(스플래시 화면 반환)하고 로딩이 완료되면 App 컴포넌트가 재실행된다.
@@ -36,8 +38,14 @@ export default function App() {
     setGameIsOver(false);
   };
 
-  const gameOverHandler = () => {
+  const gameOverHandler = (numberOfRounds) => {
     setGameIsOver(true);
+    setGuessRounds(numberOfRounds);
+  };
+
+  const startNewGameHandler = () => {
+    setUserNumber(null);
+    setGuessRounds(0);
   };
 
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
@@ -51,7 +59,14 @@ export default function App() {
       <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
     );
 
-  if (gameIsOver && userNumber) screen = <GameOverScreen />;
+  if (gameIsOver && userNumber)
+    screen = (
+      <GameOverScreen
+        userNumber={userNumber}
+        roundNumber={guessRounds}
+        onStartNewGame={startNewGameHandler}
+      />
+    );
 
   return (
     <LinearGradient
