@@ -48,7 +48,7 @@ export default function App() {
       {/* Flagment */}
       {/* 아무 컴포넌트가 아닌 빈 꺽쇠? <></> 이런 형식으로 모든 JSX 구문을 묶는 태그를 Flagment라고 한다. */}
       {/* JSX에서 컨테이너로 Flagment를 사용할 수 있으며, 여기에서는 StatusBar와 기존 최상위 컨테이너였던 View와 동일선상에 놓기 위해 사용했다. */}
-      <StatusBar style="light" />
+      {/* <StatusBar style="light" /> */}
       {/* StatusBar 컴포넌트는 Expo에서 제공하는 것이며 핸드폰의 최상단에 시간, 네트워크, 배터리 잔량 등이 표시되는 상태바를 다룰 수 있는 컴포넌트이다. */}
       {/* 현재 앱의 BackgroundColor가 보라색이라 기본 값인 검은 글자가 잘 안보여 light(밝은 흰색으로 표현)로 지정했다. */}
       <View style={styles.appContainer}>
