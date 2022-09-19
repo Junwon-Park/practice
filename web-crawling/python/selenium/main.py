@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By # HTML 요소를 찾을 때, 속성을 지정하는 객체
+from selenium.webdriver.chrome.service import Service # 크롬 드라이버를 자동으로 찾기 위해 ChromeDriverManager를 등록하는 객체
+from webdriver_manager.chrome import ChromeDriverManager # 크롬 드라이버를 자동으로 찾거나 관리하는 객체
 
 query_txt = input('크롤링할 키워드는 무엇입니까?: ')
 
