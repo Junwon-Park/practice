@@ -8,6 +8,7 @@ import sys
 
 query_txt = input('크롤링할 키워드는 무엇입니까?: ')
 f_name = input('검색 결과를 저장할 파일 경로와 이름을 지정하세요: ')
+# ~/Documents/coding/practice/web-crawling/python/save-file
 
 opts = webdriver.ChromeOptions() # 크롬 드라이버의 옵션을 지정하는 메서드
 opts.add_argument('--start-maximized') # 크롬 드라이버의 실행 옵션 중 시작 시 Full Screen 사이즈로 실행되도록 하는 "--start-maximized" 추가
@@ -28,9 +29,18 @@ element = driver.find_element(By.ID, "inp_search") # 속성의 id가 inp_search�
 element.send_keys(query_txt) # 위에서 찾은 속성에 send_keys()의 인자로 넣은 query_txt(위에서 input() 함수로 전달 받은 문자열)를 전달해라
 driver.find_element(By.CLASS_NAME, 'btn_search').click() # 속성의 class가 btn_search인 것을 찾아서 클릭해라
 
-html = driver.page_source
-soup = BeautifulSoup(html, 'html-parser')
-blog_list = soup.find('ul')
+time.sleep(1) # 위 작업이 끝날 때 까지 기다려야하기 때문에 1초 동안 기다려준 것이다.
+# 위 작업이 진행되지 않고 아래 작업으로 넘어가 정상적으로 작업이 수행되지 않는 경우 time.sleep()으로 잠시 기다려준다.
+
+html = driver.page_source # 크롬 드라이버로 현재 페이지의 HTML 소스 파일을 가져온다.
+soup = BeautifulSoup(html, 'html.parser') # 위에서 가져온 HTML 소스 파일을 BeautifulSoup에 넣고 html-parser로 분석한다.
+blog_list = soup.find('ul','list_thumType type1') # BeautifulSoup으로 분석한 HTML 소스 파일의 ul 태그를 찾아서 ul 태그와 그 자식 요소들을 불러온다.
+
+# print(blog_list)
+
+for i in blog_list:
+    print(i.text.strip())
+    print('\n')
 
 while(True): pass # 크롬 브라우저 실행 유지
 # selenium에서 driver.get() 함수의 실행이 종료되면 브라우저도 종료된다.
