@@ -7,8 +7,10 @@ import time
 import sys
 
 query_txt = input('크롤링할 키워드는 무엇입니까?: ')
-f_name = input('검색 결과를 저장할 파일 경로와 이름을 지정하세요: ')
-# ~/Documents/coding/practice/web-crawling/python/save-file
+f_name = input('검색 결과를 저장할 파일 경로와 이름을 지정하세요(txt): ')
+fc_name = input('검색 결과를 저장할 파일 경로와 이름을 지정하세요(csv): ')
+fx_name = input('검색 결과를 저장할 파일 경로와 이름을 지정하세요(xlsx): ')
+# ./file.txt
 
 opts = webdriver.ChromeOptions() # 크롬 드라이버의 옵션을 지정하는 메서드
 opts.add_argument('--start-maximized') # 크롬 드라이버의 실행 옵션 중 시작 시 Full Screen 사이즈로 실행되도록 하는 "--start-maximized" 추가
@@ -25,16 +27,18 @@ driver.get('https://korean.visitkorea.or.kr/main/main.html')
 # 검색 버튼 class -> btn_search
 
 # 동작 명령 -> 논리적 동작 순서대로 작성해야 한다.
-element = driver.find_element(By.ID, "inp_search") # 속성의 id가 inp_search인 것을 찾아라
-element.send_keys(query_txt) # 위에서 찾은 속성에 send_keys()의 인자로 넣은 query_txt(위에서 input() 함수로 전달 받은 문자열)를 전달해라
+input_element = driver.find_element(By.ID, "inp_search") # 속성의 id가 inp_search인 것을 찾아라
+input_element.send_keys(query_txt) # 위에서 찾은 속성에 send_keys()의 인자로 넣은 query_txt(위에서 input() 함수로 전달 받은 문자열)를 전달해라
 driver.find_element(By.CLASS_NAME, 'btn_search').click() # 속성의 class가 btn_search인 것을 찾아서 클릭해라
 
 time.sleep(1) # 위 작업이 끝날 때 까지 기다려야하기 때문에 1초 동안 기다려준 것이다.
 # 위 작업이 진행되지 않고 아래 작업으로 넘어가 정상적으로 작업이 수행되지 않는 경우 time.sleep()으로 잠시 기다려준다.
 
-orig_stdout = sys.stdout
-f = open(f_name, 'a', encoding='UTF-8') # 크롤링에는 반드시 계속 추가하는 'a'모드를 사용한다.
-sys.stdout = f
+# orig_stdout = sys.stdout # 컴퓨터에서 기본 출력 뱡향은 모니터이다. 
+# # 위 코드는 출력 방향을 기본인 모니터가 아닌 다른 변수에 할당함으로써 다른 채널로 변경한다는 의미이다.(다시 원래대로(sys.stdout = orig_stdout) 돌려놓을 때까지 화면에 데이터가 출력되지 않는다.)
+# f = open(f_name, 'a', encoding='UTF-8') # 크롤링에는 반드시 계속 추가하는 'a'모드를 사용한다.
+# # open()의 첫 번째 인자인 파일의 경로는 상대경로를 대입한다.
+# sys.stdout = f # 기본 출력 방향을 화면이 아닌 f(위에서 open으로 지정한 파일)로 바꾸었기 때문에 print() 메서드로 출력하면 화면에 출력되는 것이 아닌 해당 파일에 작성된다.
 
 html = driver.page_source # 크롬 드라이버로 현재 페이지의 HTML 소스 파일을 가져온다.
 soup = BeautifulSoup(html, 'html.parser') # 위에서 가져온 HTML 소스 파일을 BeautifulSoup에 넣고 html-parser로 분석한다.
@@ -42,12 +46,54 @@ blog_list = soup.find('ul','list_thumType type1') # BeautifulSoup으로 분석�
 
 time.sleep(1)
 
-for i in blog_list:
-    print(i.text.strip())
+no = 1
+no2 = []
+titles = []
+tags = []
+
+for i in blog_list: # 위에서 Selenium으로 가져온 ul 태그와 그 자식 요소들을 각각 순횐한다.
+
+    if i.find('div', 'pc'): # 요소 중 배너가 있어서 예외처리
+        continue
+    
+    no2.append(no)
+    print('번호', no)
+
+    title = i.find('div', 'tit').get_text()
+    titles.append(title.strip())
+    print('제목', titles)
+
+    tag = i.find('p', 'tag_type').get_text()
+    tags.append(tag.strip())
+    print('태그: ', tags)
     print('\n')
 
-sys.stdout = orig_stdout
+    no += 1
+
+# 다양한 형태의 파일에 저장하기
+
+# .txt 형태로 저장하기
+f = open(f_name, 'a', encoding='UTF-8')
+f.write(str(titles))
+f.write(str(tags))
 f.close()
+print('txt 파일 저장 경로: %s' %f_name)
+
+# Pandas를 사용하여 csv, excel(xls)로 만들기
+import pandas as pd
+
+korea_trip = pd.DataFrame()
+korea_trip['번호'] = no2
+korea_trip['제목'] = titles
+korea_trip['태그'] = tags
+
+# .csv 형식으로 작성
+korea_trip.to_csv(fc_name, encoding='utf-8-sig')
+print('csv 파일 저장 경로: %s' %fc_name)
+
+# Excel 형식으로 작성
+korea_trip.to_excel(fx_name)
+print('xls 파일 저장 경로: %s' %fx_name)
 
 print('요청하신 데이터 수집 작업이 정상적으로 완료되었습니다.')
 
