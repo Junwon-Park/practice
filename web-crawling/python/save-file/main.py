@@ -43,11 +43,13 @@ time.sleep(1) # 위 작업이 끝날 때 까지 기다려야하기 때문에 1�
 html = driver.page_source # 크롬 드라이버로 현재 페이지의 HTML 소스 파일을 가져온다.
 soup = BeautifulSoup(html, 'html.parser') # 위에서 가져온 HTML 소스 파일을 BeautifulSoup에 넣고 html-parser로 분석한다.
 blog_list = soup.find('ul','list_thumType type1') # BeautifulSoup으로 분석한 HTML 소스 파일의 ul 태그를 찾아서 ul 태그와 그 자식 요소들을 불러온다.
+# find는 조건으로 넣은 태그를 포함해서 자식 요소들도 모두 가져오지만 조건을 만족하는 형제 태그는 모두 반환하지 않고 가장 먼저 찾은 태그만 반환한다.
+# 특정 조건의 태그를 모두 가져오려면 find_all() 메서드를 사용해야 한다.
 
 time.sleep(1)
 
 no = 1
-no2 = []
+no_array = []
 titles = []
 tags = []
 
@@ -56,19 +58,22 @@ for i in blog_list: # 위에서 Selenium으로 가져온 ul 태그와 그 자식
     if i.find('div', 'pc'): # 요소 중 배너가 있어서 예외처리
         continue
     
-    no2.append(no)
+    # 각 데이터 번호
+    no_array.append(no)
     print('번호', no)
 
+    # BeautifulSoup의 find로 div 태그 중 tit라는 클래스 이름을 가진 요소의 Text 값 추출 후 제목 배열에 append
     title = i.find('div', 'tit').get_text()
     titles.append(title.strip())
     print('제목', titles)
 
+    # BeautifulSoup의 find로 p 태그 중 tag_type이라는 클래스 이름을 가진 요소의 Text 값 추출 후 태그 배열에 append
     tag = i.find('p', 'tag_type').get_text()
     tags.append(tag.strip())
     print('태그: ', tags)
     print('\n')
 
-    no += 1
+    no += 1 # 번호 카운팅
 
 # 다양한 형태의 파일에 저장하기
 
@@ -83,7 +88,7 @@ print('txt 파일 저장 경로: %s' %f_name)
 import pandas as pd
 
 korea_trip = pd.DataFrame()
-korea_trip['번호'] = no2
+korea_trip['번호'] = no_array
 korea_trip['제목'] = titles
 korea_trip['태그'] = tags
 
