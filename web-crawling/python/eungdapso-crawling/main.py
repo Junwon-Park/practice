@@ -49,6 +49,7 @@ driver.get('https://eungdapso.seoul.go.kr/')
 time.sleep(3) # 딜레이가 필요한 곳에 넣어준다.
 # 안그러면 딜레이가 필요한 작업이 끝나기 전에 다음 코드가 실행되어 에러가 발생하고 프로그램이 종료된다.
 
+# "시장에게 바란다" 바로가기 버튼(링크) 클릭
 # driver.find_element(By.CLASS_NAME, 'izc-btn').click()
 # # 여기에서는 부모 태그를 찾아서 해당 요소를 찾을 필요 없이 바로 해당 태그의 Class 또는 ID 값을 넣으면 된다.
 driver.find_element(By.XPATH, '//*[@id="gnb"]/div[4]/div[2]/div/a').click()
@@ -59,8 +60,8 @@ driver.find_element(By.XPATH, '//*[@id="gnb"]/div[4]/div[2]/div/a').click()
 html = driver.page_source # 크롬 드라이버로 현재 페이지의 HTML 소스 파일을 가져온다.
 soup = BeautifulSoup(html, 'html.parser') # 위에서 가져온 HTML 소스 파일을 BeautifulSoup에 넣고 html-parser로 분석한다.
 
+# 게시판의 번호, 제목, 날짜 등의 텍스트 수집
 result_list = soup.find('div', 'pclist_table mt20').get_text()
-print(result_list)
 
 no2 = [] # 게시글 번호 컬럼
 contents = [] # 게시글 내용 컬럼
@@ -70,21 +71,21 @@ no = 1
 click_cnt = 1 # 현재 페이지 번호
 
 #  이중 for문
-for x in range(1, page_cnt + 1): # 페이지를 순회하기 위한 반복문
+for x in range(1, page_cnt + 1): # 페이지를 순회하기 위한 반복문(마지막 숫자는 포함 안되기 때문에 +1을 해준 것이다.)
     print('%s 페이지 내용 수집 시작 =====================' %x)
-    for i in range(2, 11): # 각 페이지의 게시물을 순회하기 위한 반복문
+    for i in range(2, 12): # 각 페이지의 게시물을 순회하기 위한 반복문(게시물 제목의 XPath의 tr의 인덱스 2가 첫 게시물이라 2부터 시작)
         driver.find_element(By.XPATH, '//*[@id="content_cont"]/div[2]/div/form/div[4]/table/tbody/tr[%s]/td[2]/a' %i).click()
 
         html = driver.page_source
         soup = BeautifulSoup(html, 'html.parser')
 
-        content = soup.find('div', 'table_inner_desc').get_text()
+        content = soup.find('div', 'table_inner_desc').get_text() # 게시글 본문 텍스트 수집
         print(content)
 
-        no2.append(no) # 게시글 번호에 추가
-        contents.append(content.replace('\n', "") + '\n') # 내용에 추가
+        no2.append(no) # 게시글 번호 리스트 추가
+        contents.append(content.replace('\n', "") + '\n') # 내용 리스트 추가 - 게시글 본문 텍스트 컨텐츠 리스트에 저장
 
-        no += 1
+        no += 1 # 게시물 추가될 때마다 +1 증가
 
         time.sleep(1)
 
@@ -92,17 +93,16 @@ for x in range(1, page_cnt + 1): # 페이지를 순회하기 위한 반복문
 
         time.sleep(2)
 
-        if click_cnt > page_cnt + 1:
-            break
+    if click_cnt > page_cnt + 1:
+        break
 
-        click_cnt += 1
+    click_cnt += 1 # 게시판 페이징의 숫자를 누를지 > 버튼을 누를지 결정하기 위한 카운트 변수
 
-        if(click_cnt % 5 == 0): # 현재 페이지가 5 페이지라면
-
-            # By.LINK_TEXT는 해당 링크 태그(a 태그)의 컨텐츠 값을 넣으면 된다.
-            driver.find_element(By.LINK_TEXT, '''>''').click()
-        else:
-            driver.find_element(By.LINK_TEXT, """%s""" %click_cnt).click() # 게시판 다음 페이지 번호 클릭
+    if(click_cnt % 5 == 0): # 현재 페이지가 5 페이지라면(이 사이트의 게시판은 다섯 페이지 까지 숫자 페이지 버튼을 누르고 그 이상은 > 버튼을 눌러야 한다.)
+        # By.LINK_TEXT는 해당 링크 태그(a 태그)의 컨텐츠 값을 넣으면 된다.
+        driver.find_element(By.LINK_TEXT, '''>''').click()
+    else:
+        driver.find_element(By.LINK_TEXT, """%s""" %click_cnt).click() # 게시판 다음 페이지 번호 클릭
 
 seoul = pd.DataFrame()
 seoul['번호'] = no2
@@ -126,6 +126,6 @@ print('파일 저장 완료: xlsx 파일명: %s ' %fx_name)
 driver.close() # 브라우저 닫기
 
 
-while(True): pass # 크롬 브라우저 실행 유지
-# selenium에서 driver.get() 함수의 실행이 종료되면 브라우저도 종료된다.
-# 터미널에서 실행이 종료되면 브라우저도 종료된다.
+# while(True): pass # 크롬 브라우저 실행 유지
+# # selenium에서 driver.get() 함수의 실행이 종료되면 브라우저도 종료된다.
+# # 터미널에서 실행이 종료되면 브라우저도 종료된다.
