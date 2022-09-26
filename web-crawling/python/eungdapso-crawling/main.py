@@ -109,9 +109,9 @@ seoul['번호'] = no2
 seoul['내용'] = contents
 
 # txt
-f = open(ff_name, 'a', encoding="UTF-8")
-f.write(str(contents) + '\n')
-f.close()
+f = open(ff_name, 'a', encoding="UTF-8") # a 모드로 해야 컨텐츠를 덮어쓰지 않고 추가한다.
+f.write(str(contents) + '\n') # 실제 컨텐츠를 쓰는 작업
+f.close() # 파일 쓰기 닫기
 
 # CSV
 seoul.to_csv(fc_name, encoding="utf-8-sig")
@@ -124,8 +124,3 @@ print('파일 저장 완료: csv 파일명: %s ' %fc_name)
 print('파일 저장 완료: xlsx 파일명: %s ' %fx_name)
 
 driver.close() # 브라우저 닫기
-
-
-# while(True): pass # 크롬 브라우저 실행 유지
-# # selenium에서 driver.get() 함수의 실행이 종료되면 브라우저도 종료된다.
-# # 터미널에서 실행이 종료되면 브라우저도 종료된다.
