@@ -1,11 +1,27 @@
-var add = function (n1, n2, showResult, phrase) {
-    var result = n1 + n2;
-    if (showResult)
-        console.log(phrase + result);
-    return result;
+// const person: object = {
+//   // person이라는 객체의 타입으로 object라고 명시하면 이 객체는
+//   name: "Jhon",
+//   age: 30,
+// };
+// console.log(person.name); // Jhon
+// person.name = 1;
+// console.log(person.name); // 1
+// const person: {
+//   name: string;
+//   age: number;
+// } = {
+//   // person이라는 객체의 타입으로 object라고 명시하면 이 객체는
+//   name: "Jhon",
+//   age: 30,
+// };
+// console.log(person.name); // Jhon
+// person.name = 1;
+// console.log(person.name); // 1
+var person = {
+    // person이라는 객체의 타입으로 object라고 명시하면 이 객체는
+    name: "Jhon",
+    age: 30
 };
-var number1 = 5;
-var number2 = 2.8;
-var printResult = true;
-var resultPhrase = "Result is ";
-var result = add(number1, number2, printResult, resultPhrase);
+console.log(person.name); // Jhon
+person.name = 1;
+console.log(person.name); // 1

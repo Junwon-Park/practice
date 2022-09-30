@@ -1,4 +1,3 @@
-from unittest import result
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By # HTML 요소를 찾을 때, 속성을 지정하는 객체
