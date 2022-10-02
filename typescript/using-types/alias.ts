@@ -20,8 +20,6 @@ const combine = (
     result = +input1 + +input2;
   else result = input1.toString() + input2.toString();
 
-  // if (resultConversion === "as-number") return +result;
-  // else result.toString();
   return result;
 };
 
@@ -33,3 +31,16 @@ console.log(combineStringAges);
 
 const combineNames = combine("Max", "Anna", "as-text");
 console.log(combineNames);
+
+// 별칭에는 객체 타입도 지정할 수 있다.
+type User = { name: string; age: number };
+const u1: User = { name: "Max", age: 30 }; // this works!
+
+type Product = { title: string; price: number };
+const p1: Product = { title: "A Book", price: 12.99, isListed: true };
+// Product 별칭은 각 속성에 타입이 지정된 객체가 지정되어 있고 그 속성 중에는 isListed라는 속성이 존재하지 않기 때문에 에러가 발생한다.
+
+// 별칭을 지정할 때 객체와 문자열을 유니온 타입으로 지정할 수 있다.
+type User = { name: string } | string; // 두 타입을 유니온 타입으로 User라는 별칭으로 지정.
+let u1: User = { name: "Max" }; // User라는 별칭에 객체 타입 지정 후 u1이라는 객체 생성.
+u1 = "Michael"; // 위에서 객체 타입을 할당했던 u1 객체에 "Michael"이라는 문자열 할당.
