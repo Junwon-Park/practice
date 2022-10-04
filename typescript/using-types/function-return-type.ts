@@ -21,7 +21,18 @@ const add = (n1: number, n2: number): number => {
   return n1.toString() + n2.toString();
 };
 
-// 예제 4(함수 반환 타입 void, 반환 값 없음)
+// 예제 4
+// TS에서의 undefined는 타입 중 하나이다.
+// let someValue: undefined;는 유효한 undefined라는 타입의 변수 선언이다.
+// TS에서의 함수에서도 반환 값의 타입으로 undefined를 지정할 수 있다.
+// 하지만 TS에서 undefined는 하나의 타입이기 때문에 반환 값에 undefined라는 타입이 지정되어 있으면 실제 반환문(return문)에 undefined를 반환해야 한다.
+// 아래 처럼 함수의 반환 값 없이 return문만 존재하거나 undefined를 반환해야 한다.
+const add = (n1: number, n2: number): undefined => {
+  // return undefined; 또는
+  return;
+};
+
+// 예제 5(함수 반환 타입 void, 반환 값 없음)
 // add 함수의 반환 타입에 void라고 명시되어 있다.
 // 그 이유는 add 함수는 아무 것도 반환하지 않고 console.log()로 출력만 할 뿐이다.
 // 이렇게 아무 것도 반환하지 않는 함수의 타입을 void라고 한다.
