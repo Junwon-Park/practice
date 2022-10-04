@@ -1,3 +1,6 @@
+// 함수 타입
+// TS에서 함수 타입은 함수의 매개변수의 개수 및 타입, 반환 타입을 정의한다.
+
 const add = (n1: number, n2: number) => {
   return n1 + n2;
 };
