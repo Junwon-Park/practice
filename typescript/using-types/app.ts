@@ -1,32 +1,32 @@
-// unknown 타입
+// never Type
+/*never는 일반적으로 함수의 리턴 타입으로 사용됩니다. 
+함수의 리턴 타입으로 never가 사용될 경우, 항상 오류를 출력하거나 리턴 값을 절대로 내보내지 않음을 의미합니다. 
+이는 무한 루프(loop)에 빠지는 것과 같습니다. */
 
-let userInput: unknown;
-let userName: string;
+// 항상 오류 발생
+function invalid(message: string): never {
+  throw new Error(message);
+}
 
-// 예제 1(타입 검사 없이 unknown 타입의 변수에 할당)
-// unknown 타입의 userInput에 string 타입의 "Max"를 할당한 후 string 타입의 userName에 할당
-// unknown 타입은 any와 동일하게 어떤 타입이든 할당이 가능한 타입이다.
-// 하지만 결과는 Type 'unknown' is not assignable to type 'string'.에러 발생
-// 이 에러는 위에서 변수의 타입을 unknown -> any로 수정하면 사라진다.
-// unknown은 any와 동일하게 모든 타입을 할당할 수 있지만 any보다 제한적이다.
-userInput = 5;
-userInput = "Max";
-userName = userInput;
+// never 타입을 결과 추론(Inferred)
+function fail() {
+  return invalid("실패");
+}
 
-// 예제 2(타입 검사 후 unknown 타입의 변수에 할당)
-// 해결 방법은 if문으로 현재 unknown 타입의 변수의 추론된 타입을 검사하여 동일한 타입의 값을 할당하는 것이다.
-// userInput에는 현재 "Max"라는 string 타입의 값이 할당되어 있기 때문에 TS는 userInput이라는 unknown 타입의 변수는 현재 string 타입이라고 추론하고 있다.
-// 이 때, if문으로 엄격하게 추론하는 타입을 검사하고 원하는 타입과 동일하다면 해당 값을 할당할 수 있도록 한다.
-// any와 동일하게 어떤 타입이던 값을 할당할 수 있지만 값을 할당할 때 그냥 할당하는 것이 아니라 if문으로 타입을 엄격하게 검사한 후 동일한 타입의 값을 할당할 수 있도록 한다는 점에서 차이점이 있다.
-userInput = 5;
-userInput = "Max";
-if (typeof userInput === "string") userName = userInput;
+// 무한 루프
+function infiniteAnimate(): never {
+  while (true) {
+    infiniteAnimate();
+  }
+}
 
-// 예제 3(number 타입의 값 할당)
-// 현재 userInput의 값이 숫자 5이므로 TS는 해당 변수의 타입을 number로 추론하고 있다.
-// 마찬가지로 if문을 사용해서 타입을 엄격하게 검사한 후 동일한 타입의 값을 할당할 수 있다.
-let userName: number;
+// never 타입을 지정한 변수에 never가 아닌 타입은 할당할 수 없습니다.
+let never_type: never;
 
-userInput = "Max";
-userInput = 5;
-if (typeof userInput === "number") userName = userInput;
+// 오류 발생: 숫자 값을 never 타입 변수에 할당할 수 없습니다.
+never_type = 99;
+
+// 함수의 반환 값이 never 타입 이기 때문에 오류가 발생하지 않습니다.
+never_type = (function (): never {
+  throw new Error("ERROR");
+})();
