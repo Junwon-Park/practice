@@ -136,7 +136,13 @@ const getHexagram = (num, n) => {
     }
     if (triangleCount < 0) break;
   }
-  return result.slice(0, -1);
+  const resultRow = result.slice(0, -1);
+  let resultCol = "";
+
+  for (let j = 0; j < n; j++) {
+    resultCol += resultRow + "\n";
+  }
+  return resultCol;
 };
 console.log(getHexagram(7, 5));
 console.log(getHexagram(11, 5));
