@@ -1,32 +1,28 @@
 /**가로로 별 출력 */
-const getStar = (num) => {
-  let result;
+const getStar = (num) => "*".repeat(num);
 
-  result = "*".repeat(num);
-
-  return result;
-};
+/**가로로 공백 출력 */
+const getSpace = (num) => " ".repeat(num);
 
 /**입력받은 숫자만큼 크기의 삼각형 출력 */
 const getTriangle = (num) => {
-  let result = "";
+  let lines = [];
 
-  for (let i = 0; i < num - 1; i++) {
-    result += `${"*".repeat(i + 1)}\n`;
+  for (let i = 1; i <= num; i++) {
+    lines.push(getStar(i));
   }
-  result += `${"*".repeat(num)}`;
 
-  return result;
+  return lines.join("\n");
 };
 
 /**입력받은 숫자만큼 크기의 역삼각형 출력 */
 const getInvertedTriangle = (num) => {
   let result = "";
 
-  for (let i = num; i > 0; i--) {
-    if (i > 1) result += `${"*".repeat(i)}\n`;
-    else result += `${"*".repeat(i)}`;
+  for (let i = num; i > 1; i--) {
+    result += `${getStar(i)}\n`;
   }
+  result += `${getStar(1)}`;
 
   return result;
 };
@@ -37,10 +33,9 @@ const getIsoscelesTriangle = (num) => {
   let startCount = 1;
 
   for (let i = num - 1; i >= 0; i--) {
-    if (i > 0) {
-      result += `${" ".repeat(i)}${"*".repeat(startCount)}\n`;
-      startCount += 2;
-    } else result += `${" ".repeat(i)}${"*".repeat(startCount)}`;
+    result += `${getSpace(i)}${getStar(startCount)}`;
+    if (i > 0) result += "\n"; // else문이 없어도 된다.
+    startCount += 2;
   }
 
   return result;
@@ -48,24 +43,16 @@ const getIsoscelesTriangle = (num) => {
 
 /**다이아몬드 출력 */
 const getDiamond = (num) => {
-  let result = "";
-  let spaceCount = Math.floor(num / 2);
-  let startCount = 1;
-  let turn = 0;
+  const loopCount = num - Math.ceil(num / 2);
+  let spaceCount = 1;
+  let startCount = Math.ceil(num) - 2;
+  let result = `${getIsoscelesTriangle(Math.ceil(num / 2))}\n`;
 
-  for (let i = 0; i < num; i++) {
-    if (turn === 0) {
-      result += `${" ".repeat(spaceCount)}${"*".repeat(startCount)}\n`;
-      startCount += 2;
-      spaceCount--;
-    } else {
-      if (i < num - 1) {
-        result += `${" ".repeat(spaceCount)}${"*".repeat(startCount)}\n`;
-        startCount -= 2;
-        spaceCount++;
-      } else result += `${" ".repeat(spaceCount)}${"*".repeat(startCount)}`;
-    }
-    if (startCount === num) turn = 1;
+  for (let i = 0; i < loopCount; i++) {
+    result += `${getSpace(spaceCount)}${getStar(startCount)}`;
+    if (i < loopCount - 1) result += "\n";
+    startCount -= 2;
+    spaceCount++;
   }
 
   return result;

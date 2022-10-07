@@ -5,7 +5,7 @@ const {
   getIsoscelesTriangle,
   getDiamond,
   getHexagram,
-} = require("./ex1");
+} = require("./refactory");
 const input1 = Number(require("fs").readFileSync(__dirname + "/ex1.txt"));
 const input2 = Number(require("fs").readFileSync(__dirname + "/ex2.txt"));
 const input3 = Number(require("fs").readFileSync(__dirname + "/ex3.txt"));
@@ -57,7 +57,7 @@ describe("이등변 삼각형 출력", () => {
   });
 });
 
-describe("마름모 출력", () => {
+describe("다이아몬드 출력", () => {
   const star1 = ` *\n***\n *`;
   const star2 = `  *\n ***\n*****\n ***\n  *`;
 
