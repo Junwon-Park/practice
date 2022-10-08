@@ -49,11 +49,11 @@ describe("이등변 삼각형 출력", () => {
   const star2 = `    *\n   ***\n  *****\n *******\n*********`;
 
   test("예시 1", () => {
-    expect(getIsoscelesTriangle(input2)).toBe(star1);
+    expect(getIsoscelesTriangle(input2, "", 1)).toBe(star1);
   });
 
   test("예시 2", () => {
-    expect(getIsoscelesTriangle(input3)).toBe(star2);
+    expect(getIsoscelesTriangle(input3, "", 1)).toBe(star2);
   });
 });
 
@@ -75,10 +75,10 @@ describe("별 출력", () => {
   const star2 = `     *\n    ***\n   *****\n***********\n *********\n  *******\n *********\n***********\n   *****\n    ***\n     *`;
 
   test("예제 1", () => {
-    expect(getHexagram(7)).toBe(star1);
+    expect(getHexagram(7, 1, 1)).toBe(star1);
   });
 
   test("예제 2", () => {
-    expect(getHexagram(11)).toBe(star2);
+    expect(getHexagram(11, 1, 1)).toBe(star2);
   });
 });
