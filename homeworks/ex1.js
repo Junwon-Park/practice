@@ -162,6 +162,8 @@ const getHexagram = (num, n) => {
 
   return resultCol;
 };
+
+console.log(getHexagram(3, 3));
 console.log(getHexagram(7, 3));
 console.log(getHexagram(11, 5));
 

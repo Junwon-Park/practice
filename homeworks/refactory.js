@@ -1,141 +1,89 @@
-/**가로로 별 출력 */
-const getStar = (num) => "*".repeat(num);
+/**가로로 별 출력 num: 별의 개수(Hexagram에서는 입력 숫자), space: 공백 개수, direction: 별의 정렬 방향*/
+const getStar = (from, to, step, type, space, row) => {
+  let result = [];
+  let starCount = from;
+  let spaceCount = space;
 
-/**가로로 공백 출력 */
-const getSpace = (num) => " ".repeat(num);
+  if (from === to) return `${"*".repeat(starCount)}`.repeat(row);
+
+  if (type === "left" && from < to) {
+    while (starCount <= to) {
+      result.push("*".repeat(starCount));
+      starCount += step;
+    }
+  }
+  if (type === "left" && from > to) {
+    while (starCount >= to) {
+      result.push("*".repeat(starCount));
+      starCount -= step;
+    }
+  } else if (type === "center" && from < to) {
+    while (starCount <= to) {
+      result.push(
+        `${" ".repeat(spaceCount)}${"*".repeat(starCount)}${" ".repeat(
+          spaceCount
+        )}`.repeat(row)
+      );
+      starCount += step;
+      spaceCount--;
+    }
+  } else if (type === "center" && from > to) {
+    while (starCount >= to) {
+      result.push(
+        `${" ".repeat(spaceCount)}${"*".repeat(starCount)}${" ".repeat(
+          spaceCount
+        )}`.repeat(row)
+      );
+      starCount -= step;
+      spaceCount++;
+    }
+  }
+  return result.join("\n");
+};
 
 /**입력받은 숫자만큼 크기의 삼각형 출력 */
 const getTriangle = (num) => {
-  let lines = [];
-
-  for (let i = 1; i <= num; i++) {
-    lines.push(getStar(i));
-  }
-
-  return lines.join("\n");
+  return getStar(1, num, 1, "left", 0);
 };
 
 /**입력받은 숫자만큼 크기의 역삼각형 출력 */
 const getInvertedTriangle = (num) => {
-  let result = [];
-
-  for (let i = num; i > 0; i--) {
-    result.push(`${getStar(i)}`);
-  }
-
-  return result.join("\n");
+  return getStar(num, 1, 1, "left", 0);
 };
 
 /**입력받은 숫자만큼 크기의 이등변 삼각형 출력 */
-const getIsoscelesTriangle = (num, what, n) => {
-  // what은 헥사그램 때 사용
-  const result = [];
-  let startCount = 1;
-
-  if (what === "star") {
-    for (let i = num - 1; i >= 0; i--) {
-      result.push(
-        `${getSpace(i + num)}${getStar(startCount)}${getSpace(i + num)}`.repeat(
-          n
-        )
-      );
-      startCount += 2;
-    }
-  } else {
-    for (let i = num - 1; i >= 0; i--) {
-      result.push(`${getSpace(i)}${getStar(startCount)}`.repeat(n));
-      startCount += 2;
-    }
-  }
-
-  return result.join("\n");
+const getIsoscelesTriangle = (num) => {
+  return getStar(1, num + (num - 1), 2, "center", num - 1, 1);
 };
 
 /**다이아몬드 출력 */
 const getDiamond = (num) => {
-  const loopCount = num - Math.ceil(num / 2);
-  let spaceCount = 1;
-  let startCount = Math.ceil(num) - 2;
-  let result = [getIsoscelesTriangle(Math.ceil(num / 2), "", 1)];
+  let result = [getStar(1, num, 2, "center", Math.floor(num / 2), 1)]; // Top
 
-  for (let i = 0; i < loopCount; i++) {
-    result.push(`${getSpace(spaceCount)}${getStar(startCount)}`);
-    startCount -= 2;
-    spaceCount++;
-  }
+  result.push(getStar(num - 2, 1, 2, "center", 1, 1)); // Bottom
 
-  return result.join("\n");
-};
-
-// 별 출력하기
-
-/**별의 Body 생성 함수 */
-const makeBodyOfStar = (num, n) => {
-  let starCount = num;
-  let spaceCount = 0;
-  let isBodyTop = true;
-  let result = [];
-
-  for (let i = 0; i < (num - 1) / 2; i++) {
-    if (isBodyTop) {
-      result.push(
-        `${getSpace(spaceCount)}${getStar(starCount)}${getSpace(
-          spaceCount
-        )}`.repeat(n)
-      );
-      spaceCount++;
-      starCount -= 2;
-    } else {
-      result.push(
-        `${getSpace(spaceCount)}${getStar(starCount)}${getSpace(
-          spaceCount
-        )}`.repeat(n)
-      );
-      spaceCount--;
-      starCount += 2;
-    }
-    if (starCount === (num - 1) / 2 + 2) isBodyTop = false; // Turnning Point
-  }
-
-  return result.join("\n");
-};
-
-/**별의 Tail 생성 함수 */
-const makeTailOfStar = (num, n) => {
-  let startCount = (num - 1) / 2;
-  let spaceCount = Math.ceil((num - 1) / 2 / 2);
-  const result = [];
-
-  for (let i = 0; i < Math.ceil((num - 1) / 2 / 2); i++) {
-    result.push(
-      `${getSpace(spaceCount)}${getStar(startCount)}${getSpace(
-        spaceCount
-      )}`.repeat(n)
-    );
-    startCount -= 2;
-    spaceCount++;
-  }
   return result.join("\n");
 };
 
 /**입력받은 숫자만큼의 크기의 별을 입력받은 숫자 만큼의 개수만큼 가로, 세로 출력 */
-const getHexagram = (num, n, m) => {
+const getHexagram = (num, n, col) => {
   const star = [];
   const row = [];
   let result;
 
   // 별 만드는 부분
   // Head 만들기 규칙: num / 2의 결과에 반내림 후 2로 나눈 값을 반올림
+  star.push(getStar(1, (num - 1) / 2, 2, "center", (num - 1) / 2, n)); // Head
+  star.push(getStar(num, (num - 1) / 2 + 2, 2, "center", 0, n)); // Body top
+  star.push(getStar((num - 1) / 2 + 2 + 2, num, 2, "center", 1, n)); // Body bottom
   star.push(
-    getIsoscelesTriangle(Math.ceil(Math.floor(num / 2) / 2), "star", n)
-  ); // Head
-  star.push(makeBodyOfStar(num, n)); // Body
-  star.push(makeTailOfStar(num, n)); // Tail
+    getStar((num - 1) / 2, 1, 2, "center", Math.ceil((num - 1) / 2 / 2), n)
+  ); // Tail
 
   // 별 세로로 붙이는 부분
-  if (m) {
-    // m === Truthy
-    for (let i = 0; i < m; i++) {
+  if (col) {
+    // col === Truthy
+    for (let i = 0; i < col; i++) {
       row.push(star.join("\n"));
     }
     result = row;
@@ -144,8 +92,8 @@ const getHexagram = (num, n, m) => {
   return result.join("\n");
 };
 
-console.log(getHexagram(7, 3, 2));
-console.log(getHexagram(11, 5, 4));
+console.log(getHexagram(7, 10, 3));
+console.log(getHexagram(11, 10, 4));
 
 module.exports = {
   getStar,
