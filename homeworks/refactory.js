@@ -3,41 +3,41 @@ const getStar = (from, to, step, type, space) => {
   const result = [];
   let starCount = from;
   let spaceCount = space;
+  let loop = true;
 
   if (from === to) return `${"*".repeat(starCount)}`;
 
-  if (type === "left" && from < to) {
-    while (starCount <= to) {
+  if (type === "left") {
+    while (loop) {
       result.push("*".repeat(starCount));
-      starCount += step;
+      if (from < to) {
+        starCount += step;
+        loop = starCount <= to;
+      } else if (from > to) {
+        starCount -= step;
+        loop = starCount >= to;
+      }
     }
   }
-  if (type === "left" && from > to) {
-    while (starCount >= to) {
-      result.push("*".repeat(starCount));
-      starCount -= step;
-    }
-  } else if (type === "center" && from < to) {
-    while (starCount <= to) {
+  if (type === "center") {
+    while (loop) {
       result.push(
         `${" ".repeat(spaceCount)}${"*".repeat(starCount)}${" ".repeat(
           spaceCount
         )}`
       );
-      starCount += step;
-      spaceCount--;
-    }
-  } else if (type === "center" && from > to) {
-    while (starCount >= to) {
-      result.push(
-        `${" ".repeat(spaceCount)}${"*".repeat(starCount)}${" ".repeat(
-          spaceCount
-        )}`
-      );
-      starCount -= step;
-      spaceCount++;
+      if (from < to) {
+        starCount += step;
+        spaceCount--;
+        loop = starCount <= to;
+      } else if (from > to) {
+        starCount -= step;
+        spaceCount++;
+        loop = starCount >= to;
+      }
     }
   }
+
   return result.join("\n");
 };
 
