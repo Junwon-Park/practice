@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat xmlns="urn:apple:names:siri:visualcat:1.0" id="Weather#currentWeatherSnippet">
+  <meta name="category" value="Handled"/>
+  <meta name="description" value="A Visual CAT showing current conditions and hourly forecast"/>
+  <parameters>
+      <parameter name="city" type="dialog.String" description="Name of geographical location" sampleValue="Cupertino"/>
+      <parameter name="currentObservedTemperature" type="dialog.Temperature" description="Current temperature observation"/>
+      <parameter name="highLowTemperature" type="dialog.String" description="Formatted high/low temperature display" sampleValue="H: 60° L: 40°"/>
+      <parameter name="currentCondition" type="dialog.String" description="SF Symbols code for current weather condition" sampleValue="cloud.sun.fill"/>
+      <parameter name="currentConditionText" type="dialog.String" description="Localized description of current conditions" sampleValue="Partly Cloudy"/>
+      <parameter name="currentConditionDetail" type="dialog.String" description="Localized content for second line of current conditions" sampleValue="Chance of rain: 10%"/>
+      <parameter name="customViewData" type="dialog.String" description="Base64 encoded JSON-serialized data passed into the custom canvas for hourly forecast"/>
+      <parameter name="attribution" type="dialog.String" description="Data provider attribution" sampleValue="The Weather Channel"/>
+      <parameter name="command" type="dialog.String" description="Encoded SFCommand to execute on Tap"/>
+  </parameters>
+</cat>

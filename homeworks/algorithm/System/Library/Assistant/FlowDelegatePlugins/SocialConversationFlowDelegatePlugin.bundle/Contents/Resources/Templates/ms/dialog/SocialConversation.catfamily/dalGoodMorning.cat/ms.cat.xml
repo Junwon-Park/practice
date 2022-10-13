@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalGoodMorning" locale="ms" xmlns="urn:apple:names:siri:cat:1.4">
+	<conditions>
+		<condition name="not_homepod_and_has_user">
+			<and>
+				<expression name="device.isHomePod" op="eq" value="false"/>
+				<expression name="user" op="nonempty"/>
+			</and>
+		</condition>
+		<condition name="morning_or_early_morning">
+			<or>
+				<expression name="now.isMorning"/>
+				<expression name="now.isEarlyMorning"/>
+			</or>
+		</condition>
+		<condition name="has_been_used_in_last_2_hours">
+			<expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+		</condition>
+		<condition name="afternoon_and_has_been_used_in_last_2_hours">
+			<and>
+				<expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+				<expression name="now.isAfternoon"/>
+			</and>
+		</condition>
+	</conditions>
+	<all>
+		<first>
+			<random condition="morning_or_early_morning">
+				<dialog>Selamat pagi.</dialog>
+				<dialog condition="not_homepod_and_has_user">Selamat pagi, <var name="user"/>.</dialog>
+				<dialog><print>Selamat pagi kepada anda juga!</print><speak>Selamat pagi kepada anda juga!</speak></dialog>
+				<dialog>Selamat pagi kepada anda juga.</dialog>
+				<dialog>Selamat pagi kepada anda.</dialog>
+				<random condition="has_been_used_in_last_2_hours">
+					<dialog>Sama lah.</dialog>
+				</random>
+			</random>
+			<all>
+				<first>
+					<dialog condition="afternoon_and_has_been_used_in_last_2_hours">Selamat tengah hari.</dialog>
+					<random>
+						<random condition="not_homepod_and_has_user">
+							<dialog><print>Hi, <var name="user"/>.</print><speak>Hi <var name="user"/>.</speak></dialog>
+							<dialog><print>Helo, <var name="user"/>.</print><speak>Helo <var name="user"/>.</speak></dialog>
+							<dialog><print>Hai, <var name="user"/>.</print><speak>Hai <var name="user"/>.</speak></dialog>
+						</random>
+						<random>
+							<dialog>Hi.</dialog>
+							<dialog>Hai.</dialog>
+							<dialog>Helo.</dialog>
+							<dialog>Apa khabar.</dialog>
+						</random>
+					</random>
+				</first>
+				<random>
+					<dialog><print>Sekarang pukul <var name="now.timeDescriptive"/>.</print><speak>Sekarang pukul <var name="now.timeDescriptive"/>.</speak></dialog>
+					<dialog>Sekarang pukul <var name="now.timeDescriptive"/>.</dialog>
+				</random>
+			</all>
+		</first>
+	</all>
+	<phrases/>
+</cat>

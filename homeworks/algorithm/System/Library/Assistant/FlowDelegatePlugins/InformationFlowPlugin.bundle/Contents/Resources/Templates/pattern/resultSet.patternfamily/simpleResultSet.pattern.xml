@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pattern xmlns="urn:apple:names:siri:pattern:1.0" type="pattern.ResultSet" id="resultSet#simpleResultSet">
+
+    <parameter name="items" type="resultSet.ItemDetailed[]"/>
+
+    <settings>
+        <setting name="window" value="true"/>
+        <setting name="windowSize" value="2"/>
+        <setting name="promptType" value="'CONTINUATION'"/>
+    </settings>
+
+    <group name="WindowIntro">
+        <dialog id="resultSet#title"/>
+        <visual id="resultSet#primaryHeaderDetailed"/>
+    </group>
+
+    <group name="WindowPrompt">
+        <dialog id="resultSet#continue"/>
+    </group>
+
+    <group name="Conclusion">
+        <dialog id="resultSet#conclusion"/>
+    </group>
+
+    <group name="Item">
+        <dialog id="resultSet#items"/>
+        <visual id="resultSet#simpleItemList"/>
+    </group>
+
+    <group name="Attribution">
+        <dialog id="resultSet#attribution"/>
+        <visual id="resultSet#attribution"/>
+    </group>
+</pattern>

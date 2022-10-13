@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<schema version="1.0" xmlns="http://www.apple.com/metadata"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="http://www.apple.com/metadata file:///System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Resources/MetadataSchema.xsd">
+    <note>
+        Schema for additional attributes supplied by Font Importer
+    </note>
+    <attributes>
+        <attribute name="com_apple_ats_name_postscript" multivalued="true" type="CFString"/>
+        <attribute name="com_apple_ats_name_fond" multivalued="true" type="CFString"/>
+        <attribute name="com_apple_ats_name_family" multivalued="true" type="CFString"/>
+        <attribute name="com_apple_ats_name_style" multivalued="true" type="CFString"/>
+        <attribute name="com_apple_ats_name_full" multivalued="true" type="CFString"/>
+        <attribute name="com_apple_ats_names" multivalued="true" type="CFString"/>
+    </attributes>
+</schema>
+

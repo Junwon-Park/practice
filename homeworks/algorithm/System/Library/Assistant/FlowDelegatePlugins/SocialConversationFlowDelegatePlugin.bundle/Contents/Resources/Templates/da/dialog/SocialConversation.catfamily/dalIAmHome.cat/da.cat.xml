@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalIAmHome" locale="da" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>Velkommen hjem</dialog>
+		<dialog>Hjem kære hjem.</dialog>
+		<dialog>Det er sørme rigtigt.</dialog>
+		<dialog>Hjem er, hvor <var inflect="count('singular'),definiteness('definite')" name="device.deviceName"/> er.</dialog>
+	</random>
+</cat>

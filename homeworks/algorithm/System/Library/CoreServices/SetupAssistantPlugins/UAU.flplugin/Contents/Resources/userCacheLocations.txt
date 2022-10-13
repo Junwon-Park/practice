@@ -1,0 +1,13 @@
+~/Library/Application Support/Apple
+~/Library/Application Support/Directory
+~/Library/Application Support/Font Book
+~/Library/Application Support/iSync
+~/Library/Application Support/Front Row
+~/Library/Application Support/PreferenceSync
+~/Library/Caches/*
+~/Library/Internet Plug-Ins/JavaPluginCocoa.bundle
+~/Library/LaunchAgents/com.apple.imagent.plist
+~/Library/LaunchAgents/com.apple.marcoagent.plist
+~/Library/LaunchAgents/com.apple.apsd-ft.plist
+~/Library/LaunchAgents/com.apple.FTMonitor.plist
+~/Library/LaunchAgents/com.apple.AddressBook.MobileMeSharingAgent.plist

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><cat xmlns="urn:apple:names:siri:cat:1.4" id="SocialConversation#dalIAmHome" locale="th">
+
+  <random>
+    <dialog>ยินดีต้อนรับกลับบ้าน!</dialog>
+    <dialog>ถึงบ้านซะที เย่!</dialog>
+    <dialog>ดีเลยเนอะ ถึงบ้านซะที</dialog>
+    <dialog>โอ้บ้านเราแสนสุขใจ บ้านนั้นไซร้ต้องมี <var name="device"/></dialog>
+  </random>
+
+</cat>

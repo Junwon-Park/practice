@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><cat xmlns="urn:apple:names:siri:cat:1.4" id="SocialConversation#dalGoodNight" locale="th">
+
+  <conditions>
+    <condition name="condition_0">
+      <expression name="dialogState.usageCount" op="gt" value="20"/>
+    </condition>
+    <condition name="condition_1">
+      <and>
+        <expression name="dialogState.usageCount" op="gt" value="20"/>
+        <not>
+          <expression name="user" op="empty"/>
+        </not>
+      </and>
+    </condition>
+    <condition name="condition_2">
+      <and>
+        <or>
+          <expression name="dialogState.isFirstTime"/>
+          <not>
+            <expression name="dialogState.hoursSinceLastUse" op="le" value="1"/>
+          </not>
+        </or>
+        <or>
+          <or>
+            <expression name="now.isEvening"/>
+            <expression name="now.isNight"/>
+          </or>
+          <expression name="now.isLateNight"/>
+        </or>
+      </and>
+    </condition>
+    <condition name="condition_3">
+      <or>
+        <expression name="now.isLateNight"/>
+        <expression name="now.isNight"/>
+      </or>
+    </condition>
+  </conditions>
+ 
+  <first>
+    <dialog condition="condition_2">ราตรีสวัสดิ์</dialog>
+    <random>
+      <dialog>ราตรีสวัสดิ์</dialog>
+      <dialog>ราตรีสวัสดิ์นะ</dialog>
+      <dialog weight="3">กู๊ดไนท์</dialog>
+      <dialog><print>ฝ.ด. ฝันดีนะ</print><speak>ฝอดอ ฝันดีนะ</speak></dialog>
+      <dialog weight="0.5">กู๊ดไนท์ ฝันดีนะ</dialog>
+      <dialog condition="condition_3">ราตรีสวัสดิ์ นอนให้เต็มที่นะ</dialog>
+      <dialog condition="condition_0" weight="0.1">นอนเถอะนอนให้สบาย ตื่นขึ้นมาแล้วแรงกลับคืน ยืนแล้วเดินต่อไปตามทาง</dialog>
+      <dialog condition="condition_1" weight="0.2">นอนเถอะนอนให้สบาย ตื่นขึ้นมาแล้วแรงกลับคืน ยืนแล้วเดินต่อไปตามทาง<opt> <var name="user"/></opt></dialog>
+    </random>
+  </first>
+
+</cat>

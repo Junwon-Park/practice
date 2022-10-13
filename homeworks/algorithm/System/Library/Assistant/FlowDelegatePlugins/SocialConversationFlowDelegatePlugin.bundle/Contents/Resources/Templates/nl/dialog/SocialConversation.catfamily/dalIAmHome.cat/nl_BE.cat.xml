@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalIAmHome" locale="nl_BE" xmlns="urn:apple:names:siri:cat:1.4">
+    <random>
+        <dialog>Welkom thuis.</dialog>
+        <dialog>Oost west, thuis best.</dialog>
+        <dialog>Inderdaad.</dialog>
+        <dialog>Zoals <span inflect="definite"><var name="device.deviceName"/></span> thuis tikt, tikt <span inflect="definite"><var name="device.deviceName"/></span> nergens.</dialog>
+    </random>
+</cat>

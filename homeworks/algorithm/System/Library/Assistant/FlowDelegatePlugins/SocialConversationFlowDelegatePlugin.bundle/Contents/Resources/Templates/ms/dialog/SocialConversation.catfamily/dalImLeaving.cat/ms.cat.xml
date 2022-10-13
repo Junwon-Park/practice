@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalImLeaving" locale="ms" xmlns="urn:apple:names:siri:cat:1.4">
+	<all>
+		<random>
+			<dialog>Selamat tinggal!</dialog>
+			<dialog>Jumpa lagi<sub alias=""><opt>, <var name="user"/></opt></sub>…</dialog>
+			<dialog>OK. Saya akan tunggu di sini.</dialog>
+			<dialog>Semoga anda lekas pulang!</dialog>
+			<dialog>Selamat tinggal.</dialog>
+		</random>
+	</all>
+</cat>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat xmlns="urn:apple:names:siri:cat:2.0" id="resultSet#conclusion">
+  <meta name="category" value="Handled"/>
+  <meta name="description" value="Dialog to at the end of a Result Set"/>
+</cat>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>LimitLoadToSessionType</key>
+	<array>
+		<string>LoginWindow</string>
+		<string>Aqua</string>
+	</array>
+	<key>Label</key>
+	<string>com.apple.dt.xcodepreviewsapp</string>
+	<key>MachServices</key>
+	<dict>
+		<key>com.apple.dt.xcode-previews.systemservices</key>
+		<true/>
+		<key>com.apple.dt.xcode-previews.agent-pipe-services</key>
+		<true/>
+	</dict>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/System/Library/CoreServices/Xcode Previews.app/Contents/MacOS/Xcode Previews</string>
+		<string>-ApplePersistenceIgnoreStateQuietly</string>
+		<string>YES</string>
+		<string>-UIMacCatalystCreateInitialScene</string>
+		<string>NO</string>
+		<string>-UIMacCatalystLifecycleIsManaged</string>
+		<string>NO</string>
+	</array>
+	<key>EnableTransactions</key>
+	<true/>
+	<key>EnablePressuredExit</key>
+	<true/>
+	<key>ProcessType</key>
+	<string>App</string>
+</dict>
+</plist>

@@ -1,0 +1,21 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appID": "com.apple.CloudKit.ShareBear",
+        "components": [
+            { "/": "/pages/*" },
+            { "/": "/numbers/*" },
+            { "/": "/keynote/*" },
+            { "/": "/iclouddrive/*" },
+            { "/": "/share/*" },
+            { "/": "/notes/*" },
+            { "/": "/photos/*" },
+            { "/": "/reminders/*" },
+            { "/": "/v/*" }
+        ],
+        "alwaysEnabled": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalIAmHome" locale="he" xmlns="urn:apple:names:siri:cat:1.4">
+	<all>
+		<random>
+			<dialog>אין כמו בבית.</dialog>
+			<dialog>כיף להיות בבית.</dialog>
+			<dialog>כן, זה בהחלט הבית.</dialog>
+			<dialog>הבית הוא המקום שבו נמצא ה<var inflect="withConditionalHyphen" name="device.deviceName"/>.</dialog>
+		</random>
+	</all>
+</cat>

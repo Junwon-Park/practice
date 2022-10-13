@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalIAmHome" locale="ru" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>Добро пожаловать домой!</dialog>
+		<dialog>Родные стены!</dialog>
+		<dialog>Наконец‑то дома!</dialog>
+		<dialog>Точно, дома!</dialog>
+		<dialog>Дом — там, где <var name="device.deviceName"/>.</dialog>
+	</random>
+</cat>

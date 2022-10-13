@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalIAmHome" locale="fi" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>Tervetuloa kotiin!</dialog>
+		<dialog>Oma koti kullan kallis.</dialog>
+		<dialog>Kotisi on linnasi.</dialog>
+		<dialog>Koti on siellä, missä <var name="device.deviceName"/> on.</dialog>
+	</random>
+</cat>

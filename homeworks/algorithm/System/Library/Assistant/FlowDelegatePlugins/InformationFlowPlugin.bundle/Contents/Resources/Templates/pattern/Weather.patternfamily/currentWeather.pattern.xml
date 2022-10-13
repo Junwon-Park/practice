@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<pattern xmlns="urn:apple:names:siri:pattern:1.0" type="pattern.SimpleResult" id="weather#currentWeather">
+
+  <group name="Item">
+    <dialog id="Weather#currentWeatherDisplayDriven"/>
+    <visual id="Weather#currentWeatherSnippet" components="weather"/>
+  </group>
+
+</pattern>

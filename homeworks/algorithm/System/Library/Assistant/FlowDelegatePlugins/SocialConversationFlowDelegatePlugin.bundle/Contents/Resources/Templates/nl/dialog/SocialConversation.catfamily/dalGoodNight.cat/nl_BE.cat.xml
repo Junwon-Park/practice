@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><cat xmlns="urn:apple:names:siri:cat:1.4" id="SocialConversation#dalGoodNight" locale="nl_BE">
+
+  <conditions>
+    <condition name="condition_0">
+      <expression name="dialogState.usageCount" op="gt" value="20"/>
+    </condition>
+    <condition name="condition_1">
+      <and>
+        <expression name="dialogState.usageCount" op="gt" value="20"/>
+        <not>
+          <expression name="user" op="empty"/>
+        </not>
+      </and>
+    </condition>
+    <condition name="condition_2">
+      <and>
+        <or>
+          <expression name="dialogState.isFirstTime"/>
+          <not>
+            <expression name="dialogState.hoursSinceLastUse" op="le" value="1"/>
+          </not>
+        </or>
+        <or>
+          <or>
+            <expression name="now.isEvening"/>
+            <expression name="now.isNight"/>
+          </or>
+          <expression name="now.isLateNight"/>
+        </or>
+      </and>
+    </condition>
+    <condition name="condition_3">
+      <or>
+        <expression name="now.isLateNight"/>
+        <expression name="now.isNight"/>
+      </or>
+    </condition>
+  </conditions>
+ 
+  <first>
+    <dialog condition="condition_2">Een goede nacht.</dialog>
+    <random>
+      <dialog>Trusten.</dialog>
+      <dialog weight="3">Slaapwel.</dialog>
+      <dialog>Goedenacht</dialog>
+      <dialog weight="0.5">Slaapwel</dialog>
+      <dialog condition="condition_3">Slaap lekker.</dialog>
+      <dialog condition="condition_0" weight="0.1"> Slaap kindje slaap, daar buiten loopt een schaap.</dialog>
+      <dialog condition="condition_1" weight="0.2"> Slaap <var name="user"/> slaap, daar buiten loopt een schaap.</dialog>
+    </random>
+  </first>
+
+</cat>

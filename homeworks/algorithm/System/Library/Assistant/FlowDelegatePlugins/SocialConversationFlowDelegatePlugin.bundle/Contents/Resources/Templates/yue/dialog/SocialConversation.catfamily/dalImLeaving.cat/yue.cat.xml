@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalImLeaving" locale="yue" xmlns="urn:apple:names:siri:cat:1.4">
+	<all>
+		<random>
+			<dialog>Bye Bye！</dialog>
+			<dialog>迟啲见。</dialog>
+			<dialog>再见。</dialog>
+			<dialog>Bye Bye<sub alias=""><opt>，<var name="user"/></opt></sub>。</dialog>
+		</random>
+	</all>
+</cat>

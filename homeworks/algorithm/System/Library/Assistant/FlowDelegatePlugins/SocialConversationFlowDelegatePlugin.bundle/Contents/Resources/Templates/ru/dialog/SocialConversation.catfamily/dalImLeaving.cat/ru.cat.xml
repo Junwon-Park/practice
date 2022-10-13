@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalImLeaving" locale="ru" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>До свидания!</dialog>
+		<dialog>Надеюсь, до скорой встречи<sub alias=""><opt>, <var name="user"/></opt></sub>…</dialog>
+		<dialog>До встречи!</dialog>
+		<dialog>Удачи!</dialog>
+		<dialog>Хорошо, берегите себя.</dialog>
+	</random>
+</cat>

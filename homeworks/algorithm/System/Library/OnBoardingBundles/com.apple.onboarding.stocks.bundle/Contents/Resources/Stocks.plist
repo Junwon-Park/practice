@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ButtonTitle</key>
+	<string>BUTTON_TITLE</string>
+	<key>Content</key>
+	<array>
+		<dict>
+			<key>Text</key>
+			<string>SPLASH_SUMMARY</string>
+		</dict>
+		<dict>
+			<key>Text</key>
+			<string>FOOTER_TEXT</string>
+		</dict>
+	</array>
+	<key>ContentVersion</key>
+	<integer>3</integer>
+	<key>ShortTitle</key>
+	<string>SPLASH_SHORT_TITLE</string>
+	<key>SupportedPlatforms</key>
+	<array>
+		<string>iOS</string>
+		<string>watchOS</string>
+		<string>macOS</string>
+	</array>
+	<key>Title</key>
+	<string>SPLASH_TITLE</string>
+</dict>
+</plist>

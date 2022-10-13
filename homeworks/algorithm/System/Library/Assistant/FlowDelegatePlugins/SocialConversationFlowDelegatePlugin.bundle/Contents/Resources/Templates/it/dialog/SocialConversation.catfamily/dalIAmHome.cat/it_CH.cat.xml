@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalIAmHome" locale="it_CH" xmlns="urn:apple:names:siri:cat:1.4">
+    <all>
+        <random>
+            <dialog>Finalmente!</dialog>
+            <dialog>Casa dolce casa.</dialog>
+            <dialog>Certo, ti aspettavo.</dialog>
+            <dialog>Dove c'è <var name="device.deviceName"/>, c'è casa.</dialog>
+        </random>
+    </all>
+</cat>

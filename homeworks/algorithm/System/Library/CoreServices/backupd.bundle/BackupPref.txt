@@ -1,0 +1,1 @@
+BackuPref XBS project is being obsoleted in Star and these tools will be built out of the backupd XBS project.  This is a temporary file installed by the BackupPref project while it is awaiting obsoletion since XBS doesn't like projects that don't install anything.

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>STANDARD</key>
+	<string>on openPhotos(filepath)
+tell application &quot;iPhoto&quot;
+activate
+select photo library album
+set view to import tab
+set view to organize tab
+select (the first photo whose image path is filepath)
+set view to edit tab
+end tell
+end openPhotos</string>
+	<key>PHOTOS</key>
+	<string>on openPhotos(filepath)
+tell application &quot;Photos&quot;
+activate
+spotlight filepath
+end tell
+end openPhotos</string>
+	<key>VERSION5</key>
+	<string>on openPhotos(filepath)
+tell application &quot;iPhoto&quot;
+activate
+select photo library album
+set view to organize
+select (the first photo whose image path is filepath)
+set view to edit
+end tell
+end openPhotos</string>
+</dict>
+</plist>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat xmlns="urn:apple:names:siri:cat:2.0" id="resultSet#title">
+  <meta name="category" value="Handled"/>
+  <meta name="description" value="Dialog CAT with visualRef where params use variables"/>
+  <parameters>
+    <parameter name="group" type="dialog.String"/>
+  </parameters>
+</cat>

@@ -1,0 +1,21 @@
+#CAT-SCHEMA 1.0
+
+name: resultSet.ItemDetailed
+description: Item in a result set.
+
+properties:
+  text_1:
+    type: dialog.String
+    description: Primary Text
+  text_2:
+    type: dialog.String
+    description: Secondary Text
+  imageUrl:
+    type: dialog.String
+    description: URL of the image.
+  aceCommand:
+    type: dialog.String
+    description: Item tap action.
+  pegasus_id:
+    type: dialog.String
+    description: Pegasus ID for tap through.

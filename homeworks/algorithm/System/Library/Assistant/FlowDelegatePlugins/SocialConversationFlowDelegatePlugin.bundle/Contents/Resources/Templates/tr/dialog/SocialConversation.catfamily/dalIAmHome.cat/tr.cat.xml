@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalIAmHome" locale="tr" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>Eve hoş geldin!</dialog>
+		<dialog>Evim evim güzel evim.</dialog>
+		<dialog>Kesinlikle evdesin.</dialog>
+		<dialog>Ev, <span inflect="singular, genitive"><var name="device.deviceName"/>’</span> olduğu yerdir.</dialog>
+	</random>
+</cat>

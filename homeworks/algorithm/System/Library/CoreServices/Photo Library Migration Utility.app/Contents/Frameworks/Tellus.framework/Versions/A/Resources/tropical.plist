@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<array>
+		<dict>
+			<key>Class</key>  										<string>IPMapElement</string>
+			<key>TitleAlignment</key>							<string>Left</string>
+			<key>TitleBannerImage</key>						<string>Assets/Shared/Maps/Art/tropical-map-fin.png</string>
+			<key>TitleBannerImageWidth</key>				<real>35.52</real>
+			<key>TitleBannerImageHeight</key>				<real>10.32</real>
+			<key>TitleRadius</key>									<real>2</real>
+			<key>TitleInsetX</key>									<real>15</real>
+			<key>TitleInsetY</key>									<real>35</real>
+
+			<key>WaterStyle</key>
+			<dict>
+				<key>FillColor</key>									<string>211,236,242,1</string>
+				<key>FillTexture</key>								<string>Assets/Shared/Maps/Art/watercolor-black.png</string>
+				<key>FillTextureBlendMode</key>				<string>Multiply</string>
+				<key>FillTextureAlpha</key>						<real>0.05</real>
+				<key>FillTextureTileWidth</key>				<real>51.6</real>
+				<key>FillTextureTileHeight</key>				<real>51.6</real>
+			</dict>
+
+			<key>InlandWaterStyle</key>
+			<dict>
+				<key>FillColor</key>									<string>199,255,255,1</string>
+				<key>StrokeColor</key>							<string>199,255,255,1</string>
+				<key>StrokeWidth</key>							<real>0.1</real>
+			</dict>
+
+			<key>CompassElement</key>
+			<dict>
+				<key>Image</key>										<string>Assets/Shared/Maps/Art/oldworld-small-compass.png</string>
+				<key>Width</key>										<real>38.64</real>
+				<key>Height</key>									<real>55.68</real>
+				<key>CompassAlignment</key>				<string>Right</string>
+			</dict>
+
+			<key>LandStyle</key>
+			<dict>
+				<key>FillColor</key>									<string>228,224,211,1</string>
+				<key>FillTexture</key>								<string>Assets/Shared/Maps/Art/watercolor-black.png</string>
+				<key>FillTextureBlendMode</key>				<string>Multiply</string>
+				<key>FillTextureAlpha</key>						<real>0.05</real>
+				<key>FillTextureTileWidth</key>				<real>39</real>
+				<key>FillTextureTileHeight</key>				<real>39</real>
+				<key>InnerGlowColor</key>						<string>169,164,148,0.2</string>
+				<key>InnerGlowBlur</key>							<real>12</real>
+				<key>DropShadowColor</key>					<string>255,255,255,1</string>
+				<key>DropShadowBlur</key>						<real>80</real>
+				<key>DropShadowOffset</key>					<string>0,0</string>
+				<key>StrokeColor</key>							<string>186,184,176,0.4</string>
+				<key>StrokeWidth</key>							<real>0.75</real>
+				<key>TextStyle</key>								<string>Herculanum1417-MapRegions</string>
+				<key>TextColor</key>								<string>112,117,101,1</string>
+			</dict>
+
+			<key>VisitedLandStyle</key>
+			<dict>
+				<key>FillColor</key> 									<string>255,255,255,1</string>
+				<key>StartingGradientColor</key>				<string>215,241,125,1</string>
+				<key>EndingGradientColor</key>				<string>123,212,121,1</string>
+				<key>FillTexture</key>								<string>Assets/Shared/Maps/Art/watercolor-black.png</string>
+				<key>FillTextureBlendMode</key>				<string>Multiply</string>
+				<key>FillTextureAlpha</key>						<real>0.05</real>
+				<key>FillTextureTileWidth</key>				<real>39</real>
+				<key>FillTextureTileHeight</key>				<real>39</real>
+				<key>InnerGlowColor</key>						<string>52,165,131,0.18</string>
+				<key>InnerGlowBlur</key>							<real>20</real>
+				<key>DropShadowColor</key>					<string>255,255,255,1</string>
+				<key>DropShadowBlur</key>						<real>80</real>
+				<key>DropShadowOffset</key>					<string>0,0</string>
+				<key>TextStyle</key>								<string>Herculanum1417-MapRegions</string>
+				<key>TextColor</key>								<string>112,117,101,1</string>
+			</dict>
+
+			<key>TitleStyle</key>
+			<dict>
+				<key>TextStyle</key>								<string>Herculanum1822-MapTitle</string>
+				<key>TextColor</key>								<string>125,160,189,1</string>
+				<key>FillTexture</key>								<string>Assets/Shared/Maps/Art/watercolor-black.png</string>
+				<key>FillColor</key>									<string>255,255,255,1</string>
+				<key>FillTextureAlpha</key>						<real>0.05</real>
+				<key>FillTextureTileWidth</key>				<real>51.6</real>
+				<key>FillTextureTileHeight</key>				<real>51.6</real>
+				<key>FillTextureBlendMode</key>				<string>Multiply</string>
+				<key>InnerStrokeColor</key>					<string>184,234,229,1</string>
+				<key>InnerStrokeWidth</key>					<real>1.2</real>				
+				<key>OuterStrokeColor</key>					<string>144,194,211,1</string>
+				<key>OuterStrokeWidth</key>					<real>0.5</real>				
+				<key>InnerGlowColor</key>						<string>183,222,226,0.6</string>
+				<key>InnerGlowBlur</key>							<real>4</real>
+				<key>TextBackgroundPadding</key>			<real>8</real>
+			</dict>
+
+			<key>MarkerStyle</key>
+			<dict>
+				<key>FillColor</key>									<string>227,27,35,1</string>
+				<key>StrokeColor</key>							<string>255,255,255,1</string>
+				<key>Radius</key>									<real>3</real>
+				<key>StrokeWidth</key>							<string>1.5</string>
+				<key>TextStyle</key>								<string>Herculanum1113-MapMarkers</string>
+				<key>TextColor</key>								<string>0,0,0,1</string>
+			</dict>
+			
+			<key>MarkerConnectorStyle</key>
+			<dict>
+				<key>StrokeColor</key>							<string>227,27,35,1</string>
+				<key>StrokeWidth</key>							<real>1.5</real>
+			</dict>
+		</dict>
+	</array>
+</plist>

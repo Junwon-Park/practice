@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalGoodMorning" locale="tr" xmlns="urn:apple:names:siri:cat:1.4">
+	<conditions>
+		<condition name="not_homepod_and_has_user">
+			<and>
+				<expression name="device.isHomePod" op="eq" value="false"/>
+				<expression name="user" op="nonempty"/>
+			</and>
+		</condition>
+		<condition name="morning_or_early_morning">
+			<or>
+				<expression name="now.isMorning"/>
+				<expression name="now.isEarlyMorning"/>
+			</or>
+		</condition>
+		<condition name="has_been_used_in_last_2_hours">
+			<expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+		</condition>
+		<condition name="afternoon_and_has_been_used_in_last_2_hours">
+			<and>
+				<expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+				<expression name="now.isAfternoon"/>
+			</and>
+		</condition>
+	</conditions>
+	<all>
+		<first>
+			<random condition="morning_or_early_morning">
+				<dialog>Günaydın.</dialog>
+				<dialog condition="not_homepod_and_has_user">Günaydın <var name="user"/>.</dialog>
+				<dialog>Sana da günaydın.</dialog>
+				<dialog>Benden de sana günaydın.</dialog>
+				<random condition="has_been_used_in_last_2_hours">
+					<dialog>Sana da.</dialog>
+					<dialog>Aynen.</dialog>
+				</random>
+			</random>
+			<all>
+				<first>
+					<dialog condition="afternoon_and_has_been_used_in_last_2_hours">Tünaydın.</dialog>
+					<random>
+						<random condition="not_homepod_and_has_user">
+							<dialog>Selam <var name="user"/>.</dialog>
+							<dialog>Merhaba <var name="user"/>.</dialog>
+							<dialog>Hey <var name="user"/>.</dialog>
+						</random>
+						<random>
+							<dialog>Selam.</dialog>
+							<dialog>Hey, selam.</dialog>
+							<dialog>Merhaba.</dialog>
+							<dialog>Hey, merhaba.</dialog>
+						</random>
+					</random>
+				</first>
+				<random>
+					<dialog>Saat <var name="now.timeDescriptive"/> bu arada.</dialog>
+					<dialog>Bu arada, saat <var name="now.timeDescriptive"/>.</dialog>
+				</random>
+			</all>
+		</first>
+	</all>
+	<phrases/>
+</cat>

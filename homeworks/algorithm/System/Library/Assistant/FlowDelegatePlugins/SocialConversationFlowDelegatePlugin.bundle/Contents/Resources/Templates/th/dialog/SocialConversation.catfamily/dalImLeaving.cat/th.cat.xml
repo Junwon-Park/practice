@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalImLeaving" locale="th" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>โอเค เทคแคร์นะ</dialog>
+		<dialog>ไว้เจอกันอีก<opt> <var name="user"/></opt>…</dialog>
+		<dialog>โอเค เดี๋ยวไว้เจอกันอีกนะ</dialog>
+		<dialog>โอเค แล้วพบกันใหม่</dialog>
+		<dialog>บ๊ายบาย</dialog>
+	</random>
+</cat>

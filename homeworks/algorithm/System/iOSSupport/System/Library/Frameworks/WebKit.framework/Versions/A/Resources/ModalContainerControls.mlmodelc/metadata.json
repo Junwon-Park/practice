@@ -1,0 +1,53 @@
+[
+  {
+    "metadataOutputVersion" : "3.0",
+    "outputSchema" : [
+      {
+        "isOptional" : "0",
+        "formattedType" : "String",
+        "type" : "String",
+        "name" : "label",
+        "shortDescription" : "Text label"
+      }
+    ],
+    "modelParameters" : [
+
+    ],
+    "author" : "Apple Inc.",
+    "specificationVersion" : 3,
+    "isUpdatable" : "0",
+    "availability" : {
+      "macOS" : "10.14",
+      "tvOS" : "12.0",
+      "watchOS" : "5.0",
+      "iOS" : "12.0",
+      "macCatalyst" : "12.0"
+    },
+    "modelType" : {
+      "name" : "MLModelType_textClassifier"
+    },
+    "inputSchema" : [
+      {
+        "isOptional" : "0",
+        "formattedType" : "String",
+        "type" : "String",
+        "name" : "text",
+        "shortDescription" : "Input text"
+      }
+    ],
+    "classLabels" : [
+      "negative",
+      "neutral",
+      "positive",
+      "other"
+    ],
+    "generatedClassName" : "ModalContainerControls",
+    "userDefinedMetadata" : {
+      "com.apple.createml.app.tag" : "84.0.0.1",
+      "com.apple.createml.version" : "13.0.0",
+      "com.apple.createml.app.version" : "3.0",
+      "com.apple.coreml.model.preview.type" : "textClassifier"
+    },
+    "method" : "predict"
+  }
+]

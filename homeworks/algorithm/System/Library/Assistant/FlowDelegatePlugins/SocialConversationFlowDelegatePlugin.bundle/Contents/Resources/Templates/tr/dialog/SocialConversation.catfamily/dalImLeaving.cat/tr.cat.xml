@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalImLeaving" locale="tr" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>Güle güle!</dialog>
+		<dialog>Görüşürüz<opt> <var name="user"/></opt>…</dialog>
+		<dialog>Tamam, buralar bana emanet.</dialog>
+		<dialog>Umarım çabuk dönersin!</dialog>
+		<dialog>Şimdilik hoşça kal.</dialog>
+	</random>
+</cat>

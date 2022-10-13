@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>LowEndRenderers</key>
+	<array>
+		<dict>
+			<key>NoCAKey</key>
+			<true/>
+			<key>IdentifierKey</key>
+			<integer>140290</integer>
+		</dict>
+	</array>
+	<key>LowEndCards</key>
+	<array>
+		<dict>
+			<key>FilterInputVersion0Key</key>
+			<true/>
+			<key>IdentifierKey</key>
+			<string>ATI Radeon 9600</string>
+		</dict>
+		<dict>
+			<key>FilterInputVersion0Key</key>
+			<true/>
+			<key>IdentifierKey</key>
+			<string>ATI Radeon 9800</string>
+		</dict>
+		<dict>
+			<key>FilterInputVersion0Key</key>
+			<true/>
+			<key>IdentifierKey</key>
+			<string>ATI Radeon X800</string>
+		</dict>
+		<dict>
+			<key>FilterInputVersion0Key</key>
+			<true/>
+			<key>IdentifierKey</key>
+			<string>ATI Radeon X600</string>
+		</dict>
+		<dict>
+			<key>FilterInputVersion0Key</key>
+			<true/>
+			<key>IdentifierKey</key>
+			<string>NVIDIA GeForce FX 5200 Ultra OpenGL Engine</string>
+		</dict>
+		<dict>
+			<key>FilterInputVersion0Key</key>
+			<true/>
+			<key>IdentifierKey</key>
+			<string>NVIDIA NV34MAP OpenGL Engine</string>
+		</dict>
+		<dict>
+			<key>FilterInputVersion0Key</key>
+			<true/>
+			<key>IdentifierKey</key>
+			<string>Intel GMA 950</string>
+		</dict>
+		<dict>
+			<key>FilterInputVersion0Key</key>
+			<true/>
+			<key>IdentifierKey</key>
+			<string>Intel GMA 965</string>
+		</dict>
+		<dict>
+			<key>FilterInputVersion0Key</key>
+			<true/>
+			<key>IdentifierKey</key>
+			<string>Intel GMA X3100</string>
+		</dict>
+		<dict>
+			<key>IdentifierKey</key>
+			<string>NVIDIA GeForce 7300</string>
+			<key>UseCPURendererKey</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>IdentifierKey</key>
+			<string>NVIDIA GeForce 7300</string>
+			<key>UseCPURendererForPageLayoutKey</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>IdentifierKey</key>
+			<string>NVIDIA Quadro FX 4500</string>
+			<key>UseCPURendererForPageLayoutKey</key>
+			<true/>
+		</dict>
+	</array>
+</dict>
+</plist>

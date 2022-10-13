@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><cat xmlns="urn:apple:names:siri:cat:1.4" id="SocialConversation#dalImLeaving" locale="da">
+
+  <random>
+    <dialog>Farvel!</dialog>
+    <dialog><print>På gensyn<opt>, <var name="user"/></opt>…</print><speak>På gensyn…</speak></dialog>
+    <dialog>OK. Jeg holder skansen imens.</dialog>
+    <dialog>Jeg håber, du er tilbage snart!</dialog>
+    <dialog>Tak for denne gang.</dialog>
+  </random>
+
+</cat>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalGoodNight" locale="ar" xmlns="urn:apple:names:siri:cat:1.4">
+	<conditions>
+		<condition name="no_Canned_in_past_hour_and_evening_night_late_night">
+			<and>
+				<expression name="dialogState.familyHoursSinceLastUse" op="gt" value="1"/>
+				<or>
+					<expression name="now.isNight"/>
+					<expression name="now.isLateNight"/>
+					<expression name="now.isEvening"/>
+				</or>
+			</and>
+		</condition>
+		<condition name="night_or_late_night">
+			<or>
+				<expression name="now.isNight"/>
+				<expression name="now.isLateNight"/>
+			</or>
+		</condition>
+		<condition name="used_more_than_20_times">
+			<expression name="dialogState.usageCount" op="gt" value="20"/>
+		</condition>
+	</conditions>
+	<phrases/>
+	<first>
+		<dialog condition="no_Canned_in_past_hour_and_evening_night_late_night">تصبح على خير.</dialog>
+		<random>
+			<dialog>ليلة سعيدة.</dialog>
+			<dialog>عمت مساءً.</dialog>
+			<dialog>وأنت من أهل الخير.</dialog>
+			<dialog>وأنت من أهل الخير.</dialog>
+			<dialog condition="night_or_late_night">نومًا هنيئًا.</dialog>
+			<dialog condition="used_more_than_20_times">تصبحي على خير أيتها الغرفة. تصبح على خير أيها القمر.</dialog>
+			<dialog condition="used_more_than_20_times"><print>تصبح على خير أيها القمر. تصبح على خير، يا <var name="user"/>.</print><speak>تصبح على خير أيها القمر. تصبح على خير يا <var name="user"/>.</speak></dialog>
+		</random>
+	</first>
+</cat>

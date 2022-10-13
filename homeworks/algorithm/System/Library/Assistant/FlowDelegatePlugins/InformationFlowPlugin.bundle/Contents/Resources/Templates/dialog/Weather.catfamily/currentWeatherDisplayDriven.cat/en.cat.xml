@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat xmlns="urn:apple:names:siri:cat:2.0" id="Weather#currentWeatherDisplayDriven" locale="en">
+  <conditions>
+    <condition name="userInRequestLocation">
+      <expression name="isUserInRequestedLocation" op="eq" value="true"/>
+    </condition> 
+    <condition name="userInRequestUSstate">
+      <expression name="isUserInRequestedUSState" op="eq" value="true"/>
+    </condition>
+    <condition name="userNotInRequestCityAndRequestLocationInUS">
+      <and>
+        <expression name="isUserInRequestedLocation" op="eq" value="false"/>
+        <expression name="isRequestedLocationInUS" op="eq" value="true"/>
+      </and>
+    </condition>
+    <condition name="userNotInRequestCityAndRequestLocationNotInUS">
+      <and>
+        <expression name="isUserInRequestedLocation" op="eq" value="false"/>
+        <expression name="isRequestedLocationInUS" op="eq" value="false"/>
+      </and>
+    </condition>
+    <condition name="isDAQIScale">
+      <expression name="aqiScaleName" op="eq" value="'DAQI'"/>
+    </condition>
+    <condition name="isEPAScale">
+      <expression name="aqiScaleName" op="eq" value="'EPA'"/>
+    </condition>
+    <condition name="isHJ6332012Scale">
+      <expression name="aqiScaleName" op="eq" value="'HJ6332012'"/>
+    </condition>
+    <condition name="isICARSScale">
+      <expression name="aqiScaleName" op="eq" value="'ICARS'"/>
+    </condition>
+    <condition name="isIMECAScale">
+      <expression name="aqiScaleName" op="eq" value="'IMECA'"/>
+    </condition>
+    <condition name="isNAQIScale">
+      <expression name="aqiScaleName" op="eq" value="'NAQI'"/>
+    </condition>
+    <condition name="isUBAScale">
+      <expression name="aqiScaleName" op="eq" value="'UBA'"/>
+    </condition>
+    <condition name="isUBABreezometerScale">
+      <expression name="aqiScaleName" op="eq" value="'UBA_BREEZOMETER'"/>
+    </condition>
+    <condition name="speakAirQualityCategoryAndIndex">
+      <and>
+        <expression name="speakAirQualityIndexInDialog" op="eq" value="true"/>
+        <expression name="speakAirQualityAlert" op="eq" value="true"/>
+        <expression name="aqiCategoryIndex" op="defined"/>
+        <expression name="airQualityIndex" op="defined"/>
+      </and>
+    </condition>
+    <condition name="speakAirQualityCategoryOnlyDAQI">
+      <and>
+        <expression name="speakAirQualityIndexInDialog" op="eq" value="false"/>
+        <expression name="speakAirQualityAlert" op="eq" value="true"/>
+        <expression name="aqiScaleName" op="eq" value="'daqi'"/>
+        <expression name="aqiCategoryIndex" op="defined"/>
+      </and>
+    </condition>
+    <condition name="speakAirQualityCategoryOnly">
+      <and>
+        <expression name="speakAirQualityIndexInDialog" op="eq" value="false"/>
+        <expression name="speakAirQualityAlert" op="eq" value="true"/>
+        <expression name="aqiScaleName" op="ne" value="'daqi'"/>
+        <expression name="aqiCategoryIndex" op="defined"/>
+      </and>
+    </condition>
+  </conditions>
+  <phrases>
+    <first phrase="temperaturePhrase">
+      <text>
+        <print><var name="currentObservedTemperature.longSpoken"/></print>
+        <speak><var name="currentObservedTemperature.mediumSpoken"/></speak>
+      </text>
+    </first>
+    <first phrase="cityOnly">
+      <text condition="userInRequestUSstate">
+        <var name="city"/>
+      </text>
+    </first>
+    <first phrase="cityState">
+      <text condition="userNotInRequestCityAndRequestLocationInUS">
+        <print><var name="city"/>, <var name="state"/></print>
+        <speak><var name="city"/> <var name="stateLong"/></speak>
+      </text>
+    </first>
+    <first phrase="cityCountry">
+      <text condition="userNotInRequestCityAndRequestLocationNotInUS">
+        <print><var name="city"/>, <var name="country"/></print>
+        <speak><var name="city"/> <var name="country"/></speak>
+      </text>
+    </first>        
+    <switch phrase="currentCondition" value="currentObservedCondition">
+      <text case="'hurricane'">There’s a hurricane right now and it’s <phrase name="temperaturePhrase"/></text>
+      <text case="'tornado'">There’s a tornado right now and it’s <phrase name="temperaturePhrase"/></text>
+      <text case="'tropicalStorm'">There’s a tropical storm right now and it’s <phrase name="temperaturePhrase"/></text>
+      <text case="'blizzard'">There’s a blizzard right now and it’s <phrase name="temperaturePhrase"/></text>
+      <text case="'hail'">It’s hailing right now and <phrase name="temperaturePhrase"/></text>
+      <text case="'thunderstorms'">There’s a thunderstorm right now and it’s <phrase name="temperaturePhrase"/></text>
+      <text case="'sleet'">It’s currently sleeting and <phrase name="temperaturePhrase"/></text>
+      <text case="'snow'">It’s currently snowing and <phrase name="temperaturePhrase"/></text>
+      <text case="'blowingsnow'">It’s currently snowing and <phrase name="temperaturePhrase"/></text>
+      <text case="'rain'">It’s currently raining and <phrase name="temperaturePhrase"/></text>
+      <text case="'smoke'">It’s currently smoky and <phrase name="temperaturePhrase"/></text>
+      <text case="'dust'">It’s currently dusty and <phrase name="temperaturePhrase"/></text>
+      <text case="'wind'">It’s currently windy and <phrase name="temperaturePhrase"/></text>
+      <text case="'fog'">It’s currently foggy and <phrase name="temperaturePhrase"/></text>
+      <text case="'haze'">It’s currently hazy and <phrase name="temperaturePhrase"/></text>
+      <text case="'cloudy'">It’s currently cloudy and <phrase name="temperaturePhrase"/></text>
+      <text case="'mixedCloudy'">It’s currently mostly cloudy and <phrase name="temperaturePhrase"/></text>
+      <text case="'partlyCloudy'">It’s currently partly cloudy and <phrase name="temperaturePhrase"/></text>
+      <text case="'mixedClear'">It’s currently mostly clear and <phrase name="temperaturePhrase"/></text>
+      <text case="'clear'">It’s currently clear and <phrase name="temperaturePhrase"/></text>
+      <text>It’s <phrase name="temperaturePhrase"/></text>
+    </switch>
+    <first phrase="CategoryName">
+      <first condition="isDAQIScale">
+        <switch value="aqiCategoryIndex">
+          <text case="1">low</text>
+          <text case="2">low</text>
+          <text case="3">low</text>
+          <text case="4">moderate</text>
+          <text case="5">moderate</text>
+          <text case="6">moderate</text>
+          <text case="7">high</text>
+          <text case="8">high</text>
+          <text case="9">high</text>
+          <text case="10">very high</text>
+        </switch>
+      </first>
+      <first condition="isEPAScale">
+        <switch value="aqiCategoryIndex">
+          <text case="1">good</text>
+          <text case="2">moderate</text>
+          <text case="3">unhealthy for sensitive groups</text>
+          <text case="4">unhealthy</text>
+          <text case="5">very unhealthy</text>
+          <text case="6">hazardous</text>
+        </switch>
+      </first>
+      <first condition="isHJ6332012Scale">
+        <switch value="aqiCategoryIndex">
+          <text case="1">excellent</text>
+          <text case="2">good</text>
+          <text case="3">lightly polluted</text>
+          <text case="4">moderately polluted</text>
+          <text case="5">heavily polluted</text>
+          <text case="6">severely polluted</text>
+        </switch>
+      </first>
+      <first condition="isICARSScale">
+        <switch value="aqiCategoryIndex">
+          <text case="1">good</text>
+          <text case="2">acceptable</text>
+          <text case="3">poor</text>
+          <text case="4">very poor</text>
+          <text case="5">extremely poor</text>
+        </switch>
+      </first>
+      <first condition="isIMECAScale">
+        <switch value="aqiCategoryIndex">
+          <text case="1">good</text>
+          <text case="2">regular</text>
+          <text case="3">bad</text>
+          <text case="4">very bad</text>
+          <text case="5">extremely bad</text>
+          <text case="6">dangerous</text>
+        </switch>
+      </first>
+      <first condition="isNAQIScale">
+        <switch value="aqiCategoryIndex">
+          <text case="1">good</text>
+          <text case="2">satisfactory</text>
+          <text case="3">moderate</text>
+          <text case="4">poor</text>
+          <text case="5">very poor</text>
+          <text case="6">severe</text>
+        </switch>
+      </first>
+      <first condition="isUBAScale">
+        <switch value="aqiCategoryIndex">
+          <text case="1">very good</text>
+          <text case="2">good</text>
+          <text case="3">satisfactory</text>
+          <text case="4">sufficient</text>
+          <text case="5">bad</text>
+          <text case="6">very bad</text>
+        </switch>
+      </first>
+      <first condition="isUBABreezometerScale">
+        <switch value="aqiCategoryIndex">
+          <text case="1">very good</text>
+          <text case="2">good</text>
+          <text case="3">moderate</text>
+          <text case="4">poor</text>
+          <text case="5">very poor</text>
+        </switch>
+      </first>
+    </first>
+    <first phrase="currentConditionAndTemperatureSentence">
+      <text condition="userInRequestLocation"><phrase name="currentCondition"/></text>
+      <text condition="userInRequestUSstate"><phrase name="currentCondition"/> in <var name="city"/></text>
+      <text condition="userNotInRequestCityAndRequestLocationInUS"><phrase name="currentCondition"/> in <phrase name="cityState"/></text>
+      <text condition="userNotInRequestCityAndRequestLocationNotInUS"><phrase name="currentCondition"/> in <phrase name="cityCountry"/></text>
+      <text><phrase name="currentCondition"/></text>
+    </first>
+    <first phrase="airQualityAlertSentence">
+        <text condition="speakAirQualityCategoryOnlyDAQI">, with <phrase name="CategoryName"/> air pollution</text>
+        <text condition="speakAirQualityCategoryOnly">, with air quality that’s considered <phrase name="CategoryName"/></text>
+        <text condition="speakAirQualityCategoryAndIndex">. The air quality is considered <phrase name="CategoryName"/>, at <var name="airQualityIndex"/></text>
+        <text></text>
+    </first>
+  </phrases>
+  <first>
+    <dialog><phrase name="currentConditionAndTemperatureSentence"/><phrase name="airQualityAlertSentence"/>.</dialog>
+  </first>
+</cat>

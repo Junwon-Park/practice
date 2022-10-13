@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalImLeaving" locale="ko" xmlns="urn:apple:names:siri:cat:1.4">
+	<conditions>
+		<condition name="user_isUsingNickname_set">
+            <expression name="user.nickname" op="nonempty"/>
+		</condition>
+	</conditions>
+	<phrases>
+		<first phrase="phrase_0">
+			<text condition="user_isUsingNickname_set"/>
+			<text>님</text>
+		</first>
+	</phrases>
+	<random>
+		<dialog>나중에 봬요!</dialog>
+		<dialog>안녕히 가세요<sub alias=""><opt>, <var name="user"/><phrase name="phrase_0"/></opt></sub>…</dialog>
+		<dialog>알겠습니다. 제가 이 자리를 지킬게요.</dialog>
+		<dialog>곧 돌아오실 거라 믿어요!</dialog>
+		<dialog>나중에 봬요.</dialog>
+	</random>
+</cat>

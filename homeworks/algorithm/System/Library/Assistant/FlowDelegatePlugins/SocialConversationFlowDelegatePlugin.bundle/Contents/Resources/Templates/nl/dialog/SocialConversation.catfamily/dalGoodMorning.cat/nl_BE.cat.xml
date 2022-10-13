@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><cat xmlns="urn:apple:names:siri:cat:1.4" id="SocialConversation#dalGoodMorning" locale="nl_BE">
+
+  <conditions>
+    <condition name="condition_0">
+      <and>
+        <not>
+          <expression name="device.isHomePod"/>
+        </not>
+        <not>
+          <expression name="user" op="empty"/>
+        </not>
+      </and>
+    </condition>
+    <condition name="condition_2">
+      <and>
+        <expression name="now.isAfternoon"/>
+        <expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+      </and>
+    </condition>
+    <condition name="condition_3">
+      <or>
+        <expression name="now.isMorning"/>
+        <expression name="now.isEarlyMorning"/>
+      </or>
+    </condition>
+    <condition name="dialogState_getHasDucBeenRecentlyUsed2_set">
+      <expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+    </condition>
+  </conditions>
+ 
+  <phrases>
+    <random phrase="phrase_0">
+      <text>Goeiemorgen.</text>
+      <text condition="condition_0">Goeiemorgen, <var name="user"/>.</text>
+      <text>Jij ook een goedemorgen too!</text>
+      <text>En jij ook een goede morgen.</text>
+      <text>En goedemorgen.</text>
+      <text condition="dialogState_getHasDucBeenRecentlyUsed2_set"><phrase name="phrase_2"/></text>
+    </random>
+    <random phrase="phrase_1">
+      <text><print>HeyHey, <var name="user"/>.</print></text>
+      <text><print>HalloHallo, <var name="user"/>.</print></text>
+      <text><print>HéHé, <var name="user"/>.</print></text>
+    </random>
+    <random phrase="phrase_2">
+      <text>Van hetzelfde.</text>
+      <text>Idem.</text>
+    </random>
+    <random phrase="phrase_3">
+      <text condition="condition_0"><phrase name="phrase_1"/></text>
+      <text><phrase name="phrase_6"/></text>
+    </random>
+    <first phrase="phrase_4">
+      <text condition="condition_2">Goeiemiddag.</text>
+      <text><phrase name="phrase_3"/></text>
+    </first>
+    <random phrase="phrase_5">
+      <text>Het is nu trouwens <var name="now.timeDescriptive"/>.</text>
+      <text>Trouwens, het is nu <var name="now.timeDescriptive"/>.</text>
+    </random>
+    <random phrase="phrase_6">
+      <text>Hey.</text>
+      <text>Hé, hoi.</text>
+      <text>Hallo.</text>
+      <text>Hallo daar.</text>
+      <text>Hé, hallo.</text>
+    </random>
+  </phrases>
+
+
+  <first>
+    <dialog condition="condition_3"><phrase name="phrase_0"/></dialog>
+    <dialog><opt><phrase name="phrase_4"/></opt><opt><phrase name="phrase_5"/></opt></dialog>
+  </first>
+
+</cat>

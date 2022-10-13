@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalGoodMorning" locale="ko" xmlns="urn:apple:names:siri:cat:1.4">
+	<conditions>
+		<condition name="user_isUsingNickname_set">
+			<expression name="user.nickname" op="nonempty"/>
+		</condition>
+		<condition name="not_homepod_and_has_user">
+			<and>
+				<expression name="device.isHomePod" op="eq" value="false"/>
+				<expression name="user" op="nonempty"/>
+			</and>
+		</condition>
+		<condition name="morning_or_early_morning">
+			<or>
+				<expression name="now.isMorning"/>
+				<expression name="now.isEarlyMorning"/>
+			</or>
+		</condition>
+		<condition name="has_been_used_in_last_2_hours">
+			<expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+		</condition>
+		<condition name="afternoon_and_has_been_used_in_last_2_hours">
+			<and>
+				<expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+				<expression name="now.isAfternoon"/>
+			</and>
+		</condition>
+	</conditions>
+	<phrases>
+		<first phrase="phrase_1">
+			<text condition="user_isUsingNickname_set"/>
+			<text>님</text>
+		</first>
+		<random phrase="phrase_2">
+			<text><print>안녕하세요안녕하세요, <var name="user"/><phrase name="phrase_1"/>.</print></text>
+			<text><print>반가워요반가워요, <var name="user"/><phrase name="phrase_1"/>.</print></text>
+			<text><print>오셨네요오셨네요, <var name="user"/><phrase name="phrase_1"/>.</print></text>
+		</random>
+	</phrases>
+	<first>
+		<random condition="morning_or_early_morning">
+			<dialog>좋은 아침입니다.</dialog>
+			<dialog condition="not_homepod_and_has_user">좋은 아침이에요, <var name="user"/><phrase name="phrase_1"/>.</dialog>
+			<dialog>굿모닝!</dialog>
+			<dialog>좋은 아침이네요.</dialog>
+			<dialog>좋은 아침이에요.</dialog>
+			<random condition="has_been_used_in_last_2_hours">
+				<dialog>반사할게요.</dialog>
+				<dialog>안녕하세요.</dialog>
+			</random>
+		</random>
+		<all>
+			<first>
+				<dialog condition="afternoon_and_has_been_used_in_last_2_hours">좋은 오후네요.</dialog>
+				<random>
+					<random condition="not_homepod_and_has_user">
+						<dialog>안녕하세요<sub alias="">,</sub> <var name="user"/><phrase name="phrase_1"/>.</dialog>
+						<dialog>반가워요<sub alias="">,</sub> <var name="user"/><phrase name="phrase_1"/>.</dialog>
+						<dialog>오셨네요<sub alias="">,</sub> <var name="user"/><phrase name="phrase_1"/>.</dialog>
+					</random>
+					<random>
+						<dialog>안녕하세요.</dialog>
+						<dialog>반가워요.</dialog>
+						<dialog>반갑습니다.</dialog>
+						<dialog>어서오세요.</dialog>
+					</random>
+				</random>
+			</first>
+			<random>
+				<dialog>참고로, 지금 시간은 <var name="now.timeDescriptive"/>입니다.</dialog>
+				<dialog>참고로, 현재 시간은 <var name="now.timeDescriptive"/>입니다.</dialog>
+			</random>
+		</all>
+	</first>
+</cat>

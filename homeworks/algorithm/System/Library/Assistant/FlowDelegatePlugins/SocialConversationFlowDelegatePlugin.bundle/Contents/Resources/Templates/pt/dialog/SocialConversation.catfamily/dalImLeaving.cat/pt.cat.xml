@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<cat id="SocialConversation#dalImLeaving" locale="pt" xmlns="urn:apple:names:siri:cat:1.4">
+	<all>
+		<random>
+			<dialog>Até logo!</dialog>
+			<dialog>Tchau tchau<sub alias=""><opt>, <var name="user"/></opt></sub>…</dialog>
+			<dialog>OK, eu seguro as pontas por aqui.</dialog>
+			<dialog>Espero que volte logo!</dialog>
+			<dialog>Até breve.</dialog>
+		</random>
+	</all>
+</cat>

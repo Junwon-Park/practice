@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalImLeaving" locale="he" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>להתראות!</dialog>
+		<dialog><print>להתראות<opt>, <var name="user"/></opt>…</print><speak>להתראות…</speak></dialog>
+		<dialog>אוקיי, אני אשמור פה על העניינים בינתיים.</dialog>
+		<dialog>נתראה בקרוב!</dialog>
+		<dialog>ביי בינתיים.</dialog>
+	</random>
+</cat>

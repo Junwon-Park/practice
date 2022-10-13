@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat xmlns="urn:apple:names:siri:visualcat:1.0" id="resultSet#simpleItemList">
+    <meta name="category" value="Handled"/>
+    <meta name="description" value="A Visual CAT for the items list of a ResultSet"/>
+    <parameters>
+        <parameter name="items" type="resultSet.ItemDetailed[]"/>
+    </parameters>
+    <response>
+        <hide-redacted-elements>false</hide-redacted-elements>
+        <sections list="items" iterator="item">
+            <level-of-detail>CONTENT</level-of-detail>
+            <level-of-detail>CAPTION</level-of-detail>
+            <is-hidden-on-idioms>true</is-hidden-on-idioms>
+            <idioms>CAR</idioms>
+            <component-list>
+                <value>
+                    <simple-item-detailed>
+                        <text-1>
+                            <text-elements>
+                                <value>
+                                    <plain><var name="item.text_1"/></plain>
+                                </value>
+                            </text-elements>
+                        </text-1>
+                        <text-2 condition="item.text_2">
+                            <text-elements>
+                                <value>
+                                    <plain><var name="item.text_2"/></plain>
+                                </value>
+                            </text-elements>
+                        </text-2>
+                        <thumbnail>
+                            <visuals>
+                                <value>
+                                    <image>
+                                        <sources>
+                                            <value>
+                                                <url>
+                                                    <source><var name="item.imageUrl"/></source>
+                                                </url>
+                                            </value>
+                                        </sources>
+                                    </image>
+                                </value>
+                            </visuals>
+                        </thumbnail>
+                        <action>
+                            <actions>
+                                <command>
+                                    <value>
+                                        <ace-command><var name="item.aceCommand"/></ace-command>
+                                    </value>
+                                    <is-navigation>true</is-navigation>
+                                </command>
+                                <text-elements>
+                                    <value>
+                                        <plain><var name="item.text_1"/></plain>
+                                    </value>
+                                </text-elements>
+                            </actions>
+                        </action>
+                    </simple-item-detailed>
+                </value>
+            </component-list>
+        </sections>
+    </response>
+</cat>

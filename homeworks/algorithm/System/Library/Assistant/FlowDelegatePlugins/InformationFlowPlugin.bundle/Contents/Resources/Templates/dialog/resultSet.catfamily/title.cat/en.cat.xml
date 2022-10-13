@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat xmlns="urn:apple:names:siri:cat:2.0" id="resultSet#title" locale="en">
+    <conditions>
+        <condition name="isFirstWindow">
+            <expression name="isFirstWindow" op="eq" value="true"/>
+        </condition>
+        <condition name="lastItems">
+            <expression name="nextWindowItemCount" op="le" value="windowSize"/>
+        </condition>
+    </conditions>
+    <first>
+        <dialog spokenOnly="true" condition="isFirstWindow">
+            <content><transform mode="capitalize"><var name="topic" inflect="genitive"/></transform> include:</content>
+            <caption>Here are <var name="topic"/>:</caption>
+        </dialog>
+    </first>
+</cat>

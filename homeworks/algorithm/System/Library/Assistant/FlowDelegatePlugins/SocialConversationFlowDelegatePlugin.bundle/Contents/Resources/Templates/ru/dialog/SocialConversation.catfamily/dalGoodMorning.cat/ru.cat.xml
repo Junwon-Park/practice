@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalGoodMorning" locale="ru" xmlns="urn:apple:names:siri:cat:1.4">
+	<conditions>
+		<condition name="not_homepod_and_has_user">
+			<and>
+				<expression name="device.isHomePod" op="eq" value="false"/>
+				<expression name="user" op="nonempty"/>
+			</and>
+		</condition>
+		<condition name="morning_or_early_morning">
+			<or>
+				<expression name="now.isMorning"/>
+				<expression name="now.isEarlyMorning"/>
+			</or>
+		</condition>
+		<condition name="has_been_used_in_last_2_hours">
+			<expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+		</condition>
+		<condition name="afternoon_and_has_been_used_in_last_2_hours">
+			<and>
+				<expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+				<expression name="now.isAfternoon"/>
+			</and>
+		</condition>
+	</conditions>
+	<phrases>
+		<random phrase="phrase_0">
+			<text>Доброе утро.</text>
+			<text condition="morning_or_early_morning">Доброе утро, <var name="user"/>.</text>
+			<text>И вам доброго утра!</text>
+			<text>И вас тоже с добрым утром.</text>
+			<text>Вам тоже доброго утра.</text>
+			<text condition="has_been_used_in_last_2_hours"><phrase name="phrase_2"/></text>
+		</random>
+		<random phrase="phrase_1">
+			<text><print>ПриветПривет, <var name="user"/>.</print></text>
+			<text><print>ЗдравствуйтеЗдравствуйте, <var name="user"/>.</print></text>
+			<text><print>ПриветствуюПриветствую, <var name="user"/>.</print></text>
+		</random>
+		<random phrase="phrase_2">
+			<text>И вам тоже.</text>
+			<text>Взаимно.</text>
+		</random>
+		<random phrase="phrase_5">
+			<text><print>Сейчас <var name="now.timeDescriptive"/>Сейчас <var name="now.timeDescriptive"/>, между прочим.</print></text>
+			<text>Между прочим, сейчас <var name="now.timeDescriptive"/>.</text>
+		</random>
+		<random phrase="phrase_6">
+			<text>Здравствуйте.</text>
+			<text>Приветствую.</text>
+			<text>Мое почтение.</text>
+			<text>Добрый.</text>
+		</random>
+	</phrases>
+	<all>
+		<first>
+			<random condition="morning_or_early_morning" phrase="phrase_0">
+				<dialog>Доброе утро.</dialog>
+				<dialog condition="not_homepod_and_has_user">Доброе утро, <var name="user"/>.</dialog>
+				<dialog>И вам доброго утра!</dialog>
+				<dialog>И вас тоже с добрым утром.</dialog>
+				<dialog>Вам тоже доброго утра.</dialog>
+				<random condition="has_been_used_in_last_2_hours" phrase="phrase_2">
+					<dialog>И вам тоже.</dialog>
+					<dialog>Взаимно.</dialog>
+				</random>
+			</random>
+			<all>
+				<first>
+					<dialog condition="afternoon_and_has_been_used_in_last_2_hours">Добрый день.</dialog>
+					<random condition="not_homepod_and_has_user" phrase="phrase_1">
+						<dialog><print>,Привет, <var name="user"/>.</print><speak>Привет <var name="user"/>.</speak></dialog>
+						<dialog><print>Здравствуйте, <var name="user"/>.</print><speak>Здравствуйте <var name="user"/>.</speak></dialog>
+						<dialog><print>Приветствую, <var name="user"/>.</print><speak>Приветствую <var name="user"/>.</speak></dialog>
+					</random>
+					<random phrase="phrase_6">
+						<dialog>Здравствуйте.</dialog>
+						<dialog>Приветствую.</dialog>
+						<dialog>Мое почтение.</dialog>
+						<dialog>Добрый.</dialog>
+						<dialog>Привет!</dialog>
+					</random>
+				</first>
+				<random phrase="phrase_5">
+					<dialog>Сейчас <var name="now.timeDescriptive"/>, между прочим.</dialog>
+					<dialog>Кстати, сейчас <var name="now.timeDescriptive"/>.</dialog>
+				</random>
+			</all>
+		</first>
+	</all>
+</cat>

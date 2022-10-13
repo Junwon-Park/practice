@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalGoodNight" locale="ru" xmlns="urn:apple:names:siri:cat:1.4">
+	<conditions>
+		<condition name="no_Canned_in_past_hour_and_evening_night_late_night">
+			<and>
+				<expression name="dialogState.familyHoursSinceLastUse" op="gt" value="1"/>
+				<or>
+					<expression name="now.isNight"/>
+					<expression name="now.isLateNight"/>
+					<expression name="now.isEvening"/>
+				</or>
+			</and>
+		</condition>
+		<condition name="night_or_late_night">
+			<or>
+				<expression name="now.isNight"/>
+				<expression name="now.isLateNight"/>
+			</or>
+		</condition>
+		<condition name="used_more_than_20_times">
+			<expression name="dialogState.usageCount" op="gt" value="20"/>
+		</condition>
+	</conditions>
+	<all>
+		<first>
+			<dialog condition="no_Canned_in_past_hour_and_evening_night_late_night">Спокойной ночи.</dialog>
+			<random>
+				<dialog>Спокойной.</dialog>
+				<dialog>Доброй ночи.</dialog>
+				<dialog>И вам спокойной ночи.</dialog>
+				<dialog>Приятных снов.</dialog>
+				<dialog>Хорошего сна.</dialog>
+				<dialog condition="night_or_late_night">Сладких снов.</dialog>
+				<dialog condition="night_or_late_night">Спи, моя радость, усни.</dialog>
+				<dialog condition="used_more_than_20_times">Тем, кто ложится спать, спокойного сна.</dialog>
+				<dialog condition="used_more_than_20_times" weight="0.5">Споки-ноки.</dialog>
+			</random>
+		</first>
+	</all>
+</cat>

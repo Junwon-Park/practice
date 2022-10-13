@@ -1,0 +1,34 @@
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+html {
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    background: none !important;
+}
+
+/* from the Store - fixed the red scroll track */
+::-webkit-scrollbar-track:disabled {
+    background: none !important;
+}
+
+/* from the Store - altered to bring the base of the scrollbar up */
+::-webkit-scrollbar-track:vertical {
+    margin-top: -8px;
+    margin-bottom: 8px !important;
+}
+
+/* These are hacks to avoid customers using the company name as an address field  */
+.companyName-field {
+    display: none !important;
+}
+
+.companyName {
+    display: none !important;
+}
+/* End company name hacks */

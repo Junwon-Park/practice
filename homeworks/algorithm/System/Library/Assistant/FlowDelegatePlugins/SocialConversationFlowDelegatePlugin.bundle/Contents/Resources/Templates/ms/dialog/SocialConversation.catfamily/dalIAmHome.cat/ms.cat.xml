@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalIAmHome" locale="ms" xmlns="urn:apple:names:siri:cat:1.4">
+	<all>
+		<random>
+			<dialog>Selamat pulang!</dialog>
+			<dialog>Rumahku syurgaku.</dialog>
+			<dialog>Ya, anda berada di rumah.</dialog>
+			<dialog>Rumah ialah di mana <var name="device.deviceName"/> berada.</dialog>
+		</random>
+	</all>
+</cat>

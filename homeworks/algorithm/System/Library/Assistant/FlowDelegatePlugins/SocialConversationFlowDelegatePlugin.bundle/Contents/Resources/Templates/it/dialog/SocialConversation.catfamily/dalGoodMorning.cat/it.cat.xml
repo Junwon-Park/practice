@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalGoodMorning" locale="it" xmlns="urn:apple:names:siri:cat:2.0">
+	<conditions>
+		<condition name="not_homepod_and_has_user">
+			<and>
+				<expression name="device.isHomePod" op="eq" value="false"/>
+				<expression name="user" op="nonempty"/>
+			</and>
+		</condition>
+		<condition name="morning_or_early_morning">
+			<or>
+				<expression name="now.isMorning"/>
+				<expression name="now.isEarlyMorning"/>
+			</or>
+		</condition>
+		<condition name="has_been_used_in_last_2_hours">
+			<expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+		</condition>
+		<condition name="afternoon_and_has_been_used_in_last_2_hours">
+			<and>
+				<expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+				<expression name="now.isAfternoon"/>
+			</and>
+		</condition>
+		<condition name="arePrintIsSpeak">
+			<or>
+				<and>
+					<expression name="now.hourOfDay" op="eq" value="13"/>
+					<not>
+						<or>
+							<expression name="now.minuteOfHour" op="eq" value="40"/>
+							<expression name="now.minuteOfHour" op="eq" value="45"/>
+							<expression name="now.minuteOfHour" op="eq" value="50"/>
+							<expression name="now.minuteOfHour" op="eq" value="55"/>
+						</or>
+					</not>
+				</and>
+				<and>
+					<expression name="now.hourOfDay" op="eq" value="23"/>
+					<or>
+						<expression name="now.minuteOfHour" op="eq" value="40"/>
+						<expression name="now.minuteOfHour" op="eq" value="45"/>
+						<expression name="now.minuteOfHour" op="eq" value="50"/>
+						<expression name="now.minuteOfHour" op="eq" value="55"/>
+					</or>
+				</and>
+			</or>
+		</condition>
+	</conditions>
+	<all>
+		<first>
+			<random condition="morning_or_early_morning">
+				<dialog>Buongiorno.</dialog>
+				<dialog condition="not_homepod_and_has_user">Buongiorno, <var name="user"/>.</dialog>
+				<dialog>Buongiorno anche a te!</dialog>
+				<dialog>Buondì!</dialog>
+				<dialog>Anche a te.</dialog>
+				<random condition="has_been_used_in_last_2_hours">
+					<dialog>Buongiorno anche a te.</dialog>
+					<dialog>Anche a te.</dialog>
+				</random>
+			</random>
+			<all>
+				<first>
+					<dialog condition="afternoon_and_has_been_used_in_last_2_hours">Buon pomeriggio.</dialog>
+					<random>
+						<random condition="not_homepod_and_has_user">
+							<dialog>Ciao, <var name="user"/>.</dialog>
+							<dialog>Ehilà, <var name="user"/>.</dialog>
+						</random>
+						<random>
+							<dialog>Ciao.</dialog>
+							<dialog>Ehilà.</dialog>
+						</random>
+					</random>
+				</first>
+				<first>
+					<random condition="arePrintIsSpeak">
+						<dialog>
+							<print>Sono <var name="now.timeDescriptiveWithPrefix"/>, comunque.</print>
+							<speak>È <var name="now.timeDescriptiveWithPrefix"/>, comunque.</speak>
+						</dialog>
+						<dialog>
+							<print>Volevo solo ricordarti che sono <var name="now.timeDescriptiveWithPrefix"/>, comunque.</print>
+							<speak>Volevo solo ricordarti che è <var name="now.timeDescriptiveWithPrefix"/>, comunque.</speak>
+						</dialog>
+					</random>
+					<random>
+						<dialog>Sono <var name="now.timeDescriptiveWithPrefix"/>, comunque.</dialog>
+						<dialog>Volevo solo ricordarti che sono <var name="now.timeDescriptiveWithPrefix"/>, comunque.</dialog>
+					</random>
+				</first>
+			</all>
+		</first>
+	</all>
+	<phrases/>
+</cat>

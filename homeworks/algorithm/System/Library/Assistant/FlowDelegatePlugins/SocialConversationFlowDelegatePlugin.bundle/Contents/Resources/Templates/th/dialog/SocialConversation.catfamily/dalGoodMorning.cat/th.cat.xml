@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><cat xmlns="urn:apple:names:siri:cat:1.4" id="SocialConversation#dalGoodMorning" locale="th">
+
+  <conditions>
+    <condition name="condition_0">
+      <and>
+        <expression name="dialogState.usageCount" op="ge" value="100"/>
+        <expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+      </and>
+    </condition>
+    <condition name="condition_1">
+      <and>
+        <expression name="dialogState.hoursSinceLastUse" op="le" value="2"/>
+        <expression name="now.isAfternoon"/>
+      </and>
+    </condition>
+    <condition name="condition_4">
+      <and>
+        <not>
+          <expression name="device.isHomePod"/>
+        </not>
+        <not>
+          <expression name="user" op="empty"/>
+        </not>
+      </and>
+    </condition>
+    <condition name="condition_5">
+      <or>
+        <expression name="now.isMorning"/>
+        <expression name="now.isEarlyMorning"/>
+      </or>
+    </condition>
+    <condition name="condition_6">
+      <and>
+        <not>
+          <expression name="dialogState.hoursSinceLastUse" op="le" value="5"/>
+        </not>
+        <not>
+          <expression name="now.isEarlyMorning"/>
+        </not>
+      </and>
+    </condition>
+    <condition name="now_morning_set">
+      <expression name="now.isMorning"/>
+    </condition>
+  </conditions>
+ 
+  <phrases>
+    <first phrase="phrase_0">
+      <text condition="now_morning_set"><phrase name="phrase_1"/></text>
+      <text>หวัดดี มีอะไรให้ฉันช่วยบ้าง</text>
+    </first>
+    <random phrase="phrase_1">
+      <text>อรุณสวัสดิ์ วันนี้มีอะไรให้ฉันช่วยบ้าง</text>
+      <text>สวัสดีตอนเช้า มีอะไรให้ฉันช่วยไหม</text>
+      <text condition="condition_4">อรุณสวัสดิ์<opt> <var name="user"/></opt>มีอะไรให้ฉันช่วยบ้าง</text>
+    </random>
+    <random phrase="phrase_2">
+      <text>เช่นกันนะ</text>
+      <text>สวัสดีเช่นกันนะ</text>
+    </random>
+    <random phrase="phrase_3">
+      <text><phrase name="phrase_5"/></text>
+      <text><phrase name="phrase_4"/></text>
+      <text condition="condition_0" weight="0.1"><phrase name="phrase_2"/></text>
+    </random>
+    <random phrase="phrase_4">
+      <text>อรุณสวัสดิ์เช่นกันนะ</text>
+      <text>หวัดดีตอนเช้าเช่นกันนะ</text>
+    </random>
+    <random phrase="phrase_5">
+      <text>อรุณสวัสดิ์</text>
+      <text>สวัสดีตอนเช้าเช่นกันนะ</text>
+    </random>
+  </phrases>
+
+
+  <first>
+    <dialog condition="condition_6"><phrase name="phrase_0"/></dialog>
+    <dialog condition="condition_5"><phrase name="phrase_3"/></dialog>
+    <random>
+      <dialog>หวัดดี</dialog>
+      <dialog>สวัสดี</dialog>
+      <dialog>หวัดดีนะ</dialog>
+      <dialog>สวัสดีนะ</dialog>
+      <dialog condition="condition_1">สวัสดีตอนบ่าย</dialog>
+    </random>
+  </first>
+
+</cat>

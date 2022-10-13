@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat xmlns="urn:apple:names:siri:visualcat:1.0" id="resultSet#primaryHeaderDetailed">
+    <meta name="category" value="Handled"/>
+    <meta name="description" value="A visual CAT using PrimaryHeader_Detailed"/>
+    <parameters>
+        <parameter name="text_1" type="dialog.String"/>
+        <parameter name="text_2" type="dialog.String"/>
+        <parameter name="imageUrl" type="dialog.String"/>
+    </parameters>
+    <response>
+        <hide-redacted-elements>false</hide-redacted-elements>
+        <sections>
+            <level-of-detail>CONTENT</level-of-detail>
+            <level-of-detail>CAPTION</level-of-detail>
+            <is-hidden-on-idioms>false</is-hidden-on-idioms>
+            <component-list>
+                <value>
+                    <primary-header-detailed>
+                        <text-1>
+                            <text-elements>
+                                <value>
+                                    <plain><var name="text_1"/></plain>
+                                </value>
+                            </text-elements>
+                        </text-1>
+                        <text-3>
+                            <lines>
+                                <text-elements>
+                                    <value>
+                                        <plain><var name="text_2"/></plain>
+                                    </value>
+                                </text-elements>
+                            </lines>
+                        </text-3>
+                        <thumbnail>
+                            <visuals>
+                                <value>
+                                    <image>
+                                        <sources>
+                                            <value>
+                                                <url>
+                                                    <source><var name="imageUrl"/></source>
+                                                </url>
+                                            </value>
+                                        </sources>
+                                    </image>
+                                </value>
+                            </visuals>
+                        </thumbnail>
+                    </primary-header-detailed>
+                </value>
+            </component-list>
+        </sections>
+    </response>
+</cat>

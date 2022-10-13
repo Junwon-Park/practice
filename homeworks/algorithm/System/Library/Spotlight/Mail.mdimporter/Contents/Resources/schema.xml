@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<schema version="1.0" xmlns="http://www.apple.com/metadata"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="http://www.apple.com/metadata file:///System/Library/Frameworks/CoreServices.framework/Frameworks/Metadata.framework/Resources/MetadataSchema.xsd">
+    <attributes>
+        <attribute name="com_apple_mail_attachmentNames" type="CFString" multivalued="true"/>
+        <attribute name="com_apple_mail_attachmentTypes" type="CFString" multivalued="true"/>
+        <attribute name="com_apple_mail_attachmentSpecificTypes" type="CFString" multivalued="true"/>
+        <attribute name="com_apple_mail_attachmentKinds" type="CFString" multivalued="true"/>
+        <attribute name="com_apple_mail_dateReceived" type="CFDate" multivalued="false"/>
+        <attribute name="com_apple_mail_dateLastViewed" type="CFDate" multivalued="false"/>
+        <attribute name="com_apple_mail_read" type="CFBoolean" multivalued="false"/>
+        <attribute name="com_apple_mail_flagged" type="CFBoolean" multivalued="false"/>
+        <attribute name="com_apple_mail_flagColor" type="CFNumber" multivalued="false"/>
+        <attribute name="com_apple_mail_repliedTo" type="CFBoolean" multivalued="false"/>
+        <attribute name="com_apple_mail_priority" type="CFNumber" multivalued="false"/>
+        <attribute name="com_apple_mail_messageID" type="CFString" multivalued="false"/>
+        <attribute name="kMDItemEmailConversationID" type="CFString" multivalued="false"/>
+    </attributes>
+
+    <types>
+        <type name="com.apple.mail.emlx">
+            <note>
+                Custom mail attributes
+            </note>
+            <allattrs>
+                com_apple_mail_attachmentNames
+                com_apple_mail_attachmentTypes
+                com_apple_mail_attachmentSpecificTypes
+                com_apple_mail_attachmentKinds
+                com_apple_mail_dateReceived
+                com_apple_mail_dateLastViewed
+                com_apple_mail_read
+                com_apple_mail_flagColor
+                com_apple_mail_flagged
+                com_apple_mail_repliedTo
+                com_apple_mail_priority
+                com_apple_mail_messageID
+                kMDItemEmailConversationID
+            </allattrs>
+            <displayattrs>
+                com_apple_mail_attachmentNames
+                com_apple_mail_attachmentTypes
+                com_apple_mail_dateReceived
+                com_apple_mail_dateLastViewed
+                com_apple_mail_read
+                com_apple_mail_flagColor
+                com_apple_mail_flagged
+                com_apple_mail_repliedTo
+                com_apple_mail_priority
+                com_apple_mail_messageID
+            </displayattrs>
+        </type>
+    </types>
+</schema>

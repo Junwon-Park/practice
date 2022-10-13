@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>backupPath</key>
+		<string>~/Documents</string>
+		<key>RAWPlusJPEGFilterType</key>
+		<integer>1</integer>
+		<key>unlocalizedName</key>
+		<string>importCustomPresetName</string>
+	</dict>
+</array>
+</plist>

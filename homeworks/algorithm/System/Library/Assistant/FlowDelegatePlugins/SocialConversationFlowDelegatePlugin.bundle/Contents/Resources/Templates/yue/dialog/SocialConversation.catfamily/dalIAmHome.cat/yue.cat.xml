@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalIAmHome" locale="yue" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>欢迎！</dialog>
+		<dialog>在家千日好！</dialog>
+		<dialog>番咗嚟嗱！</dialog>
+		<dialog>你屋企即系<var name="device"/>嘅屋企。</dialog>
+		<dialog>欢迎返嚟！</dialog>
+		<dialog>欢迎返嚟屋企！</dialog>
+	</random>
+</cat>

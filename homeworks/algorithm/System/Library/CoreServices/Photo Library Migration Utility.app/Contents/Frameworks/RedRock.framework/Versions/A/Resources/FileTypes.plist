@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Audio.Obsolete</key>
+	<array>
+		<string>WAV</string>
+		<string>SND</string>
+		<string>AIFF</string>
+		<string>AIF</string>
+		<string>AIFC</string>
+		<string>MP3</string>
+		<string>M4A</string>
+		<string>M4P</string>
+		<string>WMA</string>
+	</array>
+	<key>Image.Obsolete</key>
+	<array>
+		<string>JPG</string>
+		<string>JP2</string>
+		<string>JPEG</string>
+		<string>GIF</string>
+		<string>PNG</string>
+		<string>PDF</string>
+		<string>PSD</string>
+		<string>BMP</string>
+		<string>MPO</string>
+	</array>
+	<key>Video.Obsolete</key>
+	<array>
+		<string>MOV</string>
+		<string>AVI</string>
+		<string>QT</string>
+		<string>WMV</string>
+		<string>M4V</string>
+		<string>MP4</string>
+		<string>MPG</string>
+	</array>
+	<key>Other</key>
+	<array/>
+	<key>Raw.Obsolete</key>
+	<array>
+		<string>CR2</string>
+		<string>CRW</string>
+		<string>DNG</string>
+		<string>MRW</string>
+		<string>NEF</string>
+		<string>SRF</string>
+		<string>TIF</string>
+		<string>TIFF</string>
+		<string>ORF</string>
+		<string>PEF</string>
+		<string>RAW</string>
+		<string>RAF</string>
+		<string>ARW</string>
+	</array>
+	<key>Accessory.Obsolete</key>
+	<array>
+		<string>THM</string>
+		<string>RKVERSION</string>
+		<string>RKFILE</string>
+		<string>RKMASTER</string>
+	</array>
+</dict>
+</plist>

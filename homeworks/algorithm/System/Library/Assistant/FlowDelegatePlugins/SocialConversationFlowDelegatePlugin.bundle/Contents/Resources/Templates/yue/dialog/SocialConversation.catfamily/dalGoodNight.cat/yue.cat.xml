@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalGoodNight" locale="yue" xmlns="urn:apple:names:siri:cat:1.4">
+	<conditions>
+		<condition name="used_more_than_20_times">
+			<expression name="dialogState.usageCount" op="gt" value="20"/>
+		</condition>
+		<condition name="night_or_late_night">
+			<or>
+				<expression name="now.isNight"/>
+				<expression name="now.isLateNight"/>
+			</or>
+		</condition>
+	</conditions>
+	<all>
+		<first>
+			<random>
+				<dialog>晚安。</dialog>
+				<dialog>早唞喇。</dialog>
+				<dialog weight="3">早唞。</dialog>
+				<dialog>Bye bye！</dialog>
+				<dialog condition="night_or_late_night">你都好好休息喇。</dialog>
+				<dialog condition="used_more_than_20_times" weight="0.1">沉睡中的主角怎会怕寂寞，早唞喇。</dialog>
+			</random>
+		</first>
+	</all>
+</cat>

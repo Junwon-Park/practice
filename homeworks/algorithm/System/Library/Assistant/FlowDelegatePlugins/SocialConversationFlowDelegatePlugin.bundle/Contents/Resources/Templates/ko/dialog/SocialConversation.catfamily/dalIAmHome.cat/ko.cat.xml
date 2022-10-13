@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalIAmHome" locale="ko" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>어서 오세요!</dialog>
+		<dialog>홈 스위트 홈.</dialog>
+		<dialog>드디어 도착하셨네요.</dialog>
+		<dialog><var inflect="subject" name="device.deviceName"/> 있는 곳에 집이 있죠.</dialog>
+	</random>
+</cat>

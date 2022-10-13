@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalImLeaving" locale="nl" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>Dag!</dialog>
+		<dialog>Tot ziens<sub alias=""><opt>, <var name="user"/></opt></sub>…</dialog>
+		<dialog>Oké, ik zal intussen het fort bewaken.</dialog>
+		<dialog>Ik hoop dat je snel terug bent!</dialog>
+		<dialog>Hopelijk ben je snel terug!</dialog>
+	</random>
+</cat>

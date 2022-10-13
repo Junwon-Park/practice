@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat xmlns="urn:apple:names:siri:cat:1.0" id="Weather#currentWeatherDisplayDriven">
+    <meta name="description" value="Current Weather state a location"/>
+    <meta name="category" value="Handled"/>
+    <parameters>
+        <parameter name="currentObservedTemperature" type="dialog.Temperature" description="Current temperature"/>
+        <parameter name="currentObservedCondition" type="dialog.String" description="Current observation condition"/>
+        <parameter name="isUserInRequestedLocation" type="dialog.Boolean" description="True if user is in Intent location"/>
+        <parameter name="isRequestedLocationInUS" type="dialog.Boolean" description="True if Intent location is in US"/>
+        <parameter name="isUserInRequestedUSState" type="dialog.Boolean" description="True if user is in Intent US state"/>
+        <parameter name="country" type="dialog.String" description="Intent location's country"/>
+        <parameter name="state" type="dialog.String" description="Intent location's US state 2-character code"/>
+        <parameter name="stateLong" type="dialog.String" description="Intent location's US state (full name)"/>
+        <parameter name="city" type="dialog.String" description="Intent location's city"/>
+        <parameter name="aqiCategoryIndex" type="dialog.Number" description="Category index used to map to category name"/>
+        <parameter name="airQualityIndex" type="dialog.Number" description="Air quality index value"/>
+        <parameter name="aqiScaleName" type="dialog.String" description="AQI scale name"/>
+        <parameter name="speakAirQualityIndexInDialog" type="dialog.Boolean" description="Indicates if air quality index should be included in dialog"/>
+        <parameter name="speakAirQualityAlert" type="dialog.Boolean" description="Speak Air Quality Alert"/>
+    </parameters>
+</cat>

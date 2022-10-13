@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalGoodNight" locale="da" xmlns="urn:apple:names:siri:cat:1.4">
+	<conditions>
+		<condition name="no_Canned_in_past_hour_and_evening_night_late_night">
+			<and>
+				<expression name="dialogState.familyHoursSinceLastUse" op="gt" value="1"/>
+				<or>
+					<expression name="now.isNight"/>
+					<expression name="now.isLateNight"/>
+					<expression name="now.isEvening"/>
+				</or>
+			</and>
+		</condition>
+		<condition name="night_or_late_night">
+			<or>
+				<expression name="now.isNight"/>
+				<expression name="now.isLateNight"/>
+			</or>
+		</condition>
+		<condition name="used_more_than_20_times">
+			<expression name="dialogState.usageCount" op="gt" value="20"/>
+		</condition>
+	</conditions>
+	<first>
+		<dialog condition="no_Canned_in_past_hour_and_evening_night_late_night">Godnat.</dialog>
+		<random>
+			<dialog>Nat-nat.</dialog>
+			<dialog>Sov godt.</dialog>
+			<dialog>Godnat.</dialog>
+			<dialog><print>Go'nat.</print><speak>Go nat.</speak></dialog>
+			<dialog condition="night_or_late_night">Sov sødt.</dialog>
+			<dialog condition="used_more_than_20_times">Godnat, værelse. Godnat, måne.</dialog>
+		</random>
+		<dialog condition="used_more_than_20_times"><print>Godnat, måne. Godnat, <var name="user"/>.</print><speak>Godnat, måne. Godnat,<var name="user"/>.</speak></dialog>
+	</first>
+</cat>

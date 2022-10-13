@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalGoodNight" locale="ko" xmlns="urn:apple:names:siri:cat:1.4">
+	<conditions>
+		<condition name="user_isUsingNickname_set">
+            <expression name="user.nickname" op="nonempty"/>
+		</condition>
+		<condition name="no_Canned_in_past_hour_and_evening_night_late_night">
+			<and>
+				<expression name="dialogState.familyHoursSinceLastUse" op="gt" value="1"/>
+				<or>
+					<expression name="now.isNight"/>
+					<expression name="now.isLateNight"/>
+					<expression name="now.isEvening"/>
+				</or>
+			</and>
+		</condition>
+		<condition name="night_or_late_night">
+			<or>
+				<expression name="now.isNight"/>
+				<expression name="now.isLateNight"/>
+			</or>
+		</condition>
+		<condition name="used_more_than_20_times">
+			<expression name="dialogState.usageCount" op="gt" value="20"/>
+		</condition>
+	</conditions>
+	<phrases>
+		<first phrase="phrase_0">
+			<text condition="user_isUsingNickname_set"/>
+			<text>님</text>
+		</first>
+	</phrases>
+	<first>
+		<dialog condition="no_Canned_in_past_hour_and_evening_night_late_night">안녕히 주무세요.</dialog>
+		<random>
+			<dialog>안녕히 주무세요.</dialog>
+			<dialog>좋은 꿈 꾸세요.</dialog>
+			<dialog>좋은 밤 되세요.</dialog>
+			<dialog>잘 자요.</dialog>
+			<dialog condition="night_or_late_night">푹 주무세요.</dialog>
+			<dialog condition="used_more_than_20_times">잘 자요, 내 방. 잘 자요, 달님.</dialog>
+			<dialog condition="used_more_than_20_times">잘 자요, 달님. 안녕히 주무세요, <var name="user"/><phrase name="phrase_0"/>.</dialog>
+		</random>
+	</first>
+</cat>

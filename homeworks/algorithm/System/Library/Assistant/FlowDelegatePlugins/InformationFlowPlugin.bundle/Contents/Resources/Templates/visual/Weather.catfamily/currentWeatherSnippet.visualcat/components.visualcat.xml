@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat xmlns="urn:apple:names:siri:visualcat:1.0" id="Weather#currentWeatherSnippet">
+  <response>
+    <sections id="weather">
+      <level-of-detail>CONTENT</level-of-detail>
+      <level-of-detail>CAPTION</level-of-detail>
+      <idioms>MAC</idioms>
+      <idioms>PHONE</idioms>
+      <is-hidden-on-idioms>false</is-hidden-on-idioms>
+      <component-list>
+        <value>
+            <summary-item-short-number>
+                <number>
+                  <text-elements>
+                    <value>
+                      <plain><var name="currentObservedTemperature.value"/></plain>
+                    </value>
+                  </text-elements>
+                </number>
+
+                <text-1>
+                  <text-elements>
+                    <value>
+                      <plain><var name="highLowTemperature"/></plain>
+                    </value>
+                  </text-elements>
+                </text-1>
+
+                <text-2>
+                  <text-elements>
+                    <value>
+                      <plain><var name="city"/></plain>
+                    </value>
+                  </text-elements>
+                </text-2>
+
+                <text_3>
+                  <lines>
+                    <text-elements>
+                        <value>
+                            <plain><var name="currentConditionText"/></plain>
+                        </value>
+                    </text-elements>
+                    <text-elements>
+                        <value>
+                            <plain><var name="currentConditionDetail"/></plain>
+                        </value>
+                    </text-elements>
+                  </lines>
+                </text_3>
+
+                <text_4>
+                  <lines>
+                    <text-elements>
+                        <value>
+                            <plain><var name="attribution"/></plain>
+                        </value>
+                    </text-elements>
+                  </lines>
+                </text_4>
+
+                <thumbnail>
+                  <visuals>
+                    <value>
+                      <image>
+                        <sources>
+                          <value>
+                            <symbol>
+                              <name><var name="currentCondition"/></name>
+                            </symbol>
+                          </value>
+                        </sources>
+                      </image>
+                    </value>
+                  </visuals>
+                </thumbnail>
+
+                <action>
+                  <actions>
+                    <command>
+                      <value>
+                        <sf_command><var name="command"/></sf_command>
+                      </value>
+                    </command>
+                  </actions>
+                </action>
+
+
+            </summary-item-short-number>
+        </value>
+      </component-list>
+    </sections>
+
+  </response>
+</cat>
+

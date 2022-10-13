@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat xmlns="urn:apple:names:siri:cat:2.0" id="resultSet#attribution" locale="en">
+  <visual>
+    <param name="text_1">Images from Wikipedia</param>      
+  </visual>
+</cat>

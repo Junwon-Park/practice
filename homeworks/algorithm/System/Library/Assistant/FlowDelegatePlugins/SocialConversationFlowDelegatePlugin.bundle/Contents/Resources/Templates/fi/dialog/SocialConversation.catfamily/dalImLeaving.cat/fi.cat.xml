@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalImLeaving" locale="fi" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>Moi!</dialog>
+		<dialog>Näkemiin!</dialog>
+		<dialog weight="1.2">Selvä, pidä huolta itsestäsi.</dialog>
+		<dialog>Hei hei!</dialog>
+		<dialog>Toivottavasti palaat pian!</dialog>
+		<dialog>Seuraavaan kertaan.</dialog>
+		<dialog>Selvä, minä pidän putiikkia pystyssä.</dialog>
+		<dialog>Näkemiin, ja pidä huolta itsestäsi!</dialog>
+		<dialog>Heippa.</dialog>
+	</random>
+</cat>

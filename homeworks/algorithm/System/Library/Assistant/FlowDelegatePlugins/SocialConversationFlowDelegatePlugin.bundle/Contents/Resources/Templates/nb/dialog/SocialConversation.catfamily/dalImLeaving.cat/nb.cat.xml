@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalImLeaving" locale="nb" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>Ha det!</dialog>
+		<dialog>Snakkes senere!</dialog>
+		<dialog>Greit, jeg har kontrollen her.</dialog>
+		<dialog>Håper du kommer tilbake snart!</dialog>
+		<dialog>Ha det fint!</dialog>
+	</random>
+</cat>

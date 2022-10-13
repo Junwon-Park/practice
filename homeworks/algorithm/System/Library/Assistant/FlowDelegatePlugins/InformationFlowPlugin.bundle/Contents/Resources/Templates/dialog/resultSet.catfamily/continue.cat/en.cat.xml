@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat xmlns="urn:apple:names:siri:cat:2.0" id="resultSet#continue" locale="en">
+    <conditions>
+        <condition name="lastOneItem">
+            <expression name="nextWindowItemCount" op="eq" value="1"/>
+        </condition>
+        <condition name="lastItems">
+            <expression name="nextWindowItemCount" op="lt" value="windowSize"/>
+        </condition>
+    </conditions>
+    <first>
+        <dialog spokenOnly="true" condition="lastOneItem">
+            <content>Would you like to hear the last item?</content>
+            <caption></caption>
+        </dialog>
+        <dialog spokenOnly="true" condition="lastItems">
+            <content>Would you like to hear the last <var name="nextWindowItemCount"/> items?</content>
+            <caption></caption>
+        </dialog>
+        <dialog spokenOnly="true">
+            <content>Would you like to hear the next <var name="nextWindowItemCount"/> items?</content>
+            <caption></caption>
+        </dialog>
+    </first>
+</cat>

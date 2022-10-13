@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat xmlns="urn:apple:names:siri:cat:2.0" id="resultSet#items" locale="en">
+  <all>
+    <dialog spokenOnly="true">
+        <content><var name="items" list="and" itemformat="{text_1}"/></content>
+      <caption></caption>
+    </dialog>
+  </all>
+</cat>

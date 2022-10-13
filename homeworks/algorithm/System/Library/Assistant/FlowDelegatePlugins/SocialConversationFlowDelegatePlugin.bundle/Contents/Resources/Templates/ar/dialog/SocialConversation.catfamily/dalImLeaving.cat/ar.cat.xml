@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalImLeaving" locale="ar" xmlns="urn:apple:names:siri:cat:1.4">
+	<conditions/>
+	<phrases/>
+	<random>
+		<dialog>مع السلامة!</dialog>
+		<dialog>إلى اللقاء<sub alias=""><opt>، ‏<var name="user"/></opt></sub>…</dialog>
+		<dialog>حسنًا، تصحبك السلامة.</dialog>
+		<dialog>أتمنى أن تعود سريعًا!</dialog>
+		<dialog>سلام مؤقت.</dialog>
+	</random>
+</cat>

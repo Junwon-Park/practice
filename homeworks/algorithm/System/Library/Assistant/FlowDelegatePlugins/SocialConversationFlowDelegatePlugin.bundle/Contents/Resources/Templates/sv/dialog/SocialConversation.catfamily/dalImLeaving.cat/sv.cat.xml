@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<cat id="SocialConversation#dalImLeaving" locale="sv" xmlns="urn:apple:names:siri:cat:1.4">
+	<random>
+		<dialog>Hejdå!</dialog>
+		<dialog>På återseende<opt>, <var name="user"/></opt>…</dialog>
+		<dialog>OK. Jag håller ställningarna här så länge.</dialog>
+		<dialog>OK, vi ses…</dialog>
+		<dialog>OK, hoppas att du kommer tillbaka snart!</dialog>
+		<dialog>Hej så länge!</dialog>
+	</random>
+</cat>
