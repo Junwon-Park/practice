@@ -24,7 +24,7 @@ console.log(combineValues(8, 8)); // TS에서는 최종적으로 combineValues�
 // Function 타입이 지정된 변수에는 함수가 할당되어야 한다.
 let combineValues: Function; // combineValues 변수에 함수 타입 지정
 combineValues = add; // add는 함수이기 때문에 Function 타입인 combineValues 변수에 할당할 수 있다.
-// combineValues = 5; // 5는 number 타입이기 때문에 당연히 빨간 줄이 생기고 실행하면 에러가 발생한다.
+// ? combineValues = 5; // 5는 number 타입이기 때문에 당연히 빨간 줄이 생기고 실행하면 에러가 발생한다.
 console.log(combineValues(8, 8));
 
 // 예제 3(void 함수 할당)
@@ -44,5 +44,5 @@ console.log(combineValues(8, 8));
 // 이렇게 지정하면 아무런 값도 반환하지 않는 함수(void)인 printResult를 할당한 부분에 빨간 줄이 생긴다.
 let combineValues: (a: number, b: number) => number;
 combineValues = add; // add 함수는 위에 지정한 함수 타입과 일치하기 때문에 정상 동작한다.
-combineValues = printResult; // printResult는 void 함수이기 때문에 만약 printResult 함수를 할당하려고 한다면 let Variable: (a: number) => void라고 함수의 타입을 지정해야 한다.
+combineValues = printResult; // printResult는 void 함수이기 때문에 만약 printResult 함수를 할당하려고 한다면 let Variable: (a: number) => void라고 함수의 타입을 지정해야 한다. -> let Variable에는 지정한 타입의 함수를 할당한 것이라고 타입스크립트에게 알려주는 것이다.
 console.log(combineValues(8, 8));

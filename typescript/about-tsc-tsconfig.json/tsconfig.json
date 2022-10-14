@@ -28,10 +28,10 @@
     /* Modules */
     "module": "commonjs" /* Specify what module code is generated. */,
     "rootDir": "./src" /* Specify the root folder within your source files. */,
-    // ? rootDir 옵션은 컴파일을 시작할 디렉토리를 지정하는 것이다.
+    // ? rootDir 옵션은 컴파일을 시작할 디렉토리를 지정하는 것이다.(지정한 디렉토리 부터 시작하여 해당 디렉토리의 하위 디렉토리를 모두 포함한다.)
     // ? 지정하지 않으면 기본 값으로 프로젝트 최상단의 디렉토리(프로젝트 디렉토리)가 기준이 된다.
     // ? 그러면 프로젝트 디렉토리에 존재하는 모든 ts 파일을 컴파일한다.
-    // ? 위 처럼 ./src 디렉토리를 지정해 놓으면 ./src 에 위치한 ts 파일만 컴파일 한다.
+    // ? 위 처럼 ./src 디렉토리를 지정해 놓으면 ./src 에 위치한 모든 하위 디렉토리까지 포함한 범위에서의 ts 파일만 컴파일 한다.
     // ? 아래에 include 옵션에 /src/app.ts 등과 같이 지정한 것과 동일하다.
     // "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
     // "baseUrl": "./",                                  /* Specify the base directory to resolve non-relative module names. */

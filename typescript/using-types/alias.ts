@@ -1,4 +1,4 @@
-// 타입 알리어스(Type Alias, 타입 별칭)
+// 타입 알리어스(Type Alias, 타입 별칭) -> 사용자 지정 타입
 // 타입 알리어스를 사용하면 더 가독성 좋은 코드를 작성할 수 있고, 별칭을 변수 처럼 작성하기 때문에 변수 처럼 재사용 할 수 있다.
 
 type Combinable = number | string; // TS에서는 타입 알리어스를 사용하기 위한 type 키워드를 지원한다.
@@ -6,6 +6,8 @@ type Combinable = number | string; // TS에서는 타입 알리어스를 사용�
 // 위 처럼 유니온 타입을 사용하는 경우 type 키워드를 사용하여 둘 이상의 타입을 가진 유티온 타입을 Combinable이라는 별칭으로 사용할 수 있다.
 type ConversionDexcriptor = "as-number" | "as-text";
 // 위 처럼 리터럴 타입의 유니온 타입에도 동일하게 타입 알리어스를 사용할 수 있다.
+// 여러 타입을 지정하고 그 것을 재사용하는 것은 귀찮은 작업이다.
+// ! 위 처럼 여러 타입들을 하나의 별칭으로 지정해서 변수 처럼 재사용하는 것이 더 편리하다. 이 것이 타입 별칭의 장점이다.
 
 const combine = (
   input1: Combinable, // 기존의 유니온 타입(number | string)을 Combinable이라는 별칭으로 대체했다.
