@@ -12,6 +12,7 @@ import {
 import { Board, BoardStatus } from './board.model';
 import { BoardsService } from './boards.service'; // 이 컨트롤러에 종속성 주입할 서비스 import
 import { CreateBoarDto } from './dto/create-board.dto';
+import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
 
 @Controller('boards') // localhost:3000/boards
 export class BoardsController {
@@ -64,7 +65,7 @@ export class BoardsController {
   @Patch('/:id/status')
   updateBoardStatus(
     @Param('id') id: string,
-    @Body('status') status: BoardStatus,
+    @Body('status', BoardStatusValidationPipe) status: BoardStatus,
   ): Board {
     return this.boardsService.updateBoardStatus(id, status);
   }
