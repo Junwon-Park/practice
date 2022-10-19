@@ -24,7 +24,8 @@ import { BoardsService } from './boards.service';
   controllers: [BoardsController],
   providers: [BoardsService],
   // provider란, Nest의 기본 개념이다.
-  // ! 대부분의 기본 Nest의 클래스는 Service, Repository, Factory, Helper 등의 provider로 취급될 수 있다.
+  // ! 대부분의 기본 Nest의 클래스는 Service, Repository, Factory, Helper 등의 provider로써 취급될 수 있다.
+  // NestJS에서 Service, Repository, Factory, Helper 등을 통틀어 provider라고 한다.
   // ! provider의 주요 아이디어는 종속성으로써 주입할 수 있다는 것이다.
 })
 export class BoardsModule {}
