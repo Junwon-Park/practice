@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Board, BoardStatus } from './board.model';
 import { v1 as uuid } from 'uuid'; // uuid 라이브러리의 v1 버전을 사용할 건데 이름을 uuid로 사용하도록 import 한 것이다.(유니크한 값을 만들어주는 라이브러리)
 import { CreateBoarDto } from './dto/create-board.dto';
@@ -31,11 +31,20 @@ export class BoardsService {
   }
 
   getBoardById(id: string): Board {
-    return this.boards.find((board) => board.id === id);
+    const found = this.boards.find((board) => board.id === id);
+
+    if (!found) throw new NotFoundException(`Can't find Board with id ${id}`);
+    // new NotFoundException() 인스턴스는 NestJS에 내장된 인스턴스이다.
+    // 값이 없을 때, 404 Not Found 혹은 404 지정한 메세지를 반환하도록 해주는 예외처리 인스턴스이다.
+    // 요청에 들어온 id를 찾지 못한 경우(해당 id를 가진 게시물이 없는 경우)에 대한 예외 처리를 해준 것이다.
+
+    return found;
   }
 
   deleteBoardById(id: string): void {
-    this.boards = this.boards.filter((board) => board.id !== id);
+    const found = this.getBoardById(id);
+
+    this.boards = this.boards.filter((board) => board.id !== found.id);
   }
 
   updateBoardStatus(id: string, status: BoardStatus): Board {

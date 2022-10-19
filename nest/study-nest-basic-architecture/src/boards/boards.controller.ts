@@ -6,6 +6,8 @@ import {
   Param,
   Patch,
   Post,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { Board, BoardStatus } from './board.model';
 import { BoardsService } from './boards.service'; // 이 컨트롤러에 종속성 주입할 서비스 import
@@ -36,6 +38,9 @@ export class BoardsController {
   // }
 
   @Post()
+  @UsePipes(ValidationPipe) // @UsePipes는 NestJS에서 제공하는 Handler level의 파이프를 사용할 수 있는 데코레이터이다.
+  // ValidationPipe는 NestJS 내장 유효성 검사 파이프이다.
+  // 이 핸들러에서 CreateBoarDto를 사용하기 때문에 여기에 Handler level의 유효성 검사 파이프를 등록하면 CreateBoarDto에 넣어준 유효성 검사를 수행한 뒤 핸들러로 넘겨준다.
   createBoard(
     // POST 요청일 때, 요청의 Body에 접근하기 위해서 @Body 데코레이터를 사용한다.
     @Body() createBoarDto: CreateBoarDto, // !  Body에 들어온 필드가 DTO에 정의된 필드와 동일하다면 이를 인식하여 받을 수 있다.
