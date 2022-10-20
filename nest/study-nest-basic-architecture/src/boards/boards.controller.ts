@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   UsePipes,
@@ -53,12 +54,32 @@ export class BoardsController {
   @Post()
   @UsePipes(ValidationPipe)
   createBoard(@Body() createBoarDto: CreateBoarDto): Promise<Board> {
+    // 비동기 작업 후 결과 값인 Board 타입의 객체를 반환하기 때문에 Promise<Board>가 반환 타입이다.
     return this.boardsService.createBoard(createBoarDto);
+  }
+
+  @Get()
+  getAllBaords(): Promise<Board[]> {
+    return this.boardsService.getAllBaords();
   }
 
   @Get('/:id')
   getBoardById(@Param('id') id: number): Promise<Board> {
     return this.boardsService.getBoardById(id);
+  }
+
+  @Delete('/:id')
+  deleteBoard(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    // Service에서 비동기 작업을 했기 때문에 Pormise 타입을 반환하지만 console.log()만 짹고 반환 값은 없기 때문에 반환 타입이 void 타입의 Promise이다.
+    return this.boardsService.deleteBoard(id); // ? Promise<void>인데 왜 return??, 서비스에서도 반환 타입 Promise<void>인데 반환 값 없음.
+  }
+
+  @Patch('/:id/status')
+  updateBoardStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('status', BoardStatusValidationPipe) status: BoardStatus,
+  ): Promise<Board> {
+    return this.boardsService.updateBoardStatus(id, status);
   }
   //   @Get('/:id') // localhost:3000/boards?id=아이디 값
   //   createBoardById(@Param('id') id: string): Board {

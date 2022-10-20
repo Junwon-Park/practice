@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConsoleLogger, Injectable, NotFoundException } from '@nestjs/common';
 import { BoardStatus } from './board.status.enum';
 import { v1 as uuid } from 'uuid'; // uuid 라이브러리의 v1 버전을 사용할 건데 이름을 uuid로 사용하도록 import 한 것이다.(유니크한 값을 만들어주는 라이브러리)
 import { CreateBoarDto } from './dto/create-board.dto';
@@ -15,18 +15,13 @@ export class BoardsService {
   constructor(private boardRepository: BoardRepository) {} // 이 서비스에서 BoardRepository를 사용할 수 있도록 종속성 주입(@Injectable)
   // ! 레포지토리를 사용하기 위해 종속성 주입을 한 것이고 이렇게 종속성 주입을 해서 사용하기 위해 레포지토리는 @Injectable() 데코레이터로 감싸줘야 하는 것이다.
 
-  async createBoard(createBoardDto: CreateBoarDto): Promise<Board> {
-    const { title, description } = createBoardDto;
+  createBoard(createBoardDto: CreateBoarDto): Promise<Board> {
+    // Entity Repository에서 DB 작업을 처리해서 서비스로 넘겨주는 Repository Pattern을 적용한 메서드
+    return this.boardRepository.createBoard(createBoardDto);
+  }
 
-    const board = this.boardRepository.create({
-      title,
-      description,
-      status: BoardStatus.PUBLIC,
-    });
-
-    await this.boardRepository.save(board);
-
-    return board;
+  async getAllBaords(): Promise<Board[]> {
+    return await this.boardRepository.find();
   }
 
   async getBoardById(id: number): Promise<Board> {
@@ -35,6 +30,24 @@ export class BoardsService {
     if (!found) throw new NotFoundException(`Can't find Board with id ${id}`);
 
     return found;
+  }
+
+  async deleteBoard(id: number): Promise<void> {
+    const result = await this.boardRepository.delete(id);
+
+    if (result.affected === 0)
+      throw new NotFoundException(`Can't find with id ${id}`);
+
+    console.log(result);
+  }
+
+  async updateBoardStatus(id: number, status: BoardStatus): Promise<Board> {
+    const board = await this.getBoardById(id); // DB에 있는 해당 id를 가진 데이터
+    board.status = status; // 해당 데이터의 특정 필드의 값을 변경
+
+    await this.boardRepository.save(board); // 필드의 값을 변경한 해당 데이터 그 상태로 원래 위치에 저장
+
+    return board;
   }
 
   //   getAllBoards(): Board[] {
