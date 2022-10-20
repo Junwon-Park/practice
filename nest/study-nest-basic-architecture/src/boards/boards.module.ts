@@ -17,12 +17,16 @@
 // 스펙 파일은 TDD(Jest) 파일이다.
 // ! 생성된 서비스 모듈은 컨트롤러와 마찬가지로 @Moudle() 데코레이터에 등록되는데, service라는 속성 이름이 아닌 providers라는 속성에 등록된다.
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Board } from './board.entity';
+import { BoardRepository } from './board.repository';
 import { BoardsController } from './boards.controller';
 import { BoardsService } from './boards.service';
 
 @Module({
+  imports: [TypeOrmModule.forFeature([Board])], // Board 모듈에 TypeORM에 사용될 Board repository를 등록하여 사용할 수 있도록 했다.
   controllers: [BoardsController],
-  providers: [BoardsService],
+  providers: [BoardsService, BoardRepository],
   // provider란, Nest의 기본 개념이다.
   // ! 대부분의 기본 Nest의 클래스는 Service, Repository, Factory, Helper 등의 provider로써 취급될 수 있다.
   // NestJS에서 Service, Repository, Factory, Helper 등을 통틀어 provider라고 한다.

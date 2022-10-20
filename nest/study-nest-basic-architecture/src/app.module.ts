@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm'; // NestJS에서 제공하는 TypeORM 라이브러리
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BoardsModule } from './boards/boards.module';
@@ -11,7 +11,7 @@ import { typeORMConfig } from './configs/typeorm.config';
 @Module({
   // 모듈을 등록하는 부분
   imports: [
-    TypeOrmModule.forRoot(typeORMConfig), // @nestjs/typeorm 라이브러리의 TypeOrmModule 모듈의 forRoot() 메서드에 typeORM 구성 요소를 정리한 typeORMConfig를 등록하여 이 프로젝트에서 TypeORM을 사용할 수 있도록 한다.
+    TypeOrmModule.forRoot(typeORMConfig), // @nestjs/typeorm 라이브러리의 TypeOrmModule 모듈의 forRoot() 메서드에 typeORM 구성 요소를 정리한 typeORMConfig를 등록하여 이 프로젝트에서 설정한 구성으로 TypeORM을 사용할 수 있도록 한다.
     BoardsModule,
   ], // 이 부분에 앞으로 생성되는 모듈이 등록된다.
   controllers: [AppController],

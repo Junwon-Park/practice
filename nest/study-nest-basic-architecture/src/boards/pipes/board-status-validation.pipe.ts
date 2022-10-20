@@ -1,5 +1,5 @@
 import { BadRequestException, PipeTransform } from '@nestjs/common';
-import { BoardStatus } from '../board.model';
+import { BoardStatus } from '../board.status.enum';
 // 커스텀 파이프 구현
 // NestJS에서 기본적으로 제공하는 빌트인 파이프 외에 커스텀 파이프를 직접 구현하여 사용할 수 있다.
 

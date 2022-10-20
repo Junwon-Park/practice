@@ -1,7 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Board, BoardStatus } from './board.model';
+import { BoardStatus } from './board.status.enum';
 import { v1 as uuid } from 'uuid'; // uuid 라이브러리의 v1 버전을 사용할 건데 이름을 uuid로 사용하도록 import 한 것이다.(유니크한 값을 만들어주는 라이브러리)
 import { CreateBoarDto } from './dto/create-board.dto';
+import { BoardRepository } from './board.repository';
+import { Board } from './board.entity';
 
 // ? Service는 컨트롤러에서 유효성 체크를 하거나 데이터베이스에 아이템을 생성하는 등의 작업을 처리한다.
 
@@ -10,47 +12,60 @@ import { CreateBoarDto } from './dto/create-board.dto';
 // ! 그렇기 때문에 다른 모듈에서 이 서비스를 종속성 주입하여 사용하려면 @Injectable() 데코레이터로 감싸주어야 한다.
 // ! 서비스는 NestJS에서 provider이고 provider는 종속성으로 주입할 수 있어야 하기 때문에 서비스 명령어로 서비스를 생성하면 자동으로 @Injectable() 데코레이터로 감싸진다.
 export class BoardsService {
-  private boards: Board[] = [];
+  constructor(private boardRepository: BoardRepository) {} // 이 서비스에서 BoardRepository를 사용할 수 있도록 종속성 주입(@Injectable)
+  // ! 레포지토리를 사용하기 위해 종속성 주입을 한 것이고 이렇게 종속성 주입을 해서 사용하기 위해 레포지토리는 @Injectable() 데코레이터로 감싸줘야 하는 것이다.
 
-  getAllBoards(): Board[] {
-    return this.boards;
-  }
+  async createBoard(createBoardDto: CreateBoarDto): Promise<Board> {
+    const { title, description } = createBoardDto;
 
-  createBoard(createBoarDto: CreateBoarDto): Board {
-    const { title, description } = createBoarDto;
-
-    const board: Board = {
-      id: uuid(), // 유니크한 값을 생성하기 위해 uuid 라이브러리 사용
+    const board = this.boardRepository.create({
       title,
       description,
-      status: BoardStatus.PUBLIC, // enum 타입 사용
-    };
+      status: BoardStatus.PUBLIC,
+    });
 
-    this.boards.push(board);
-    return board; // 생성한 게시물을 클라이언트에 응답으로 보내주기 위해 게시물을 컨트롤러로 반환한다.
+    await this.boardRepository.save(board);
+
+    return board;
   }
 
-  getBoardById(id: string): Board {
-    const found = this.boards.find((board) => board.id === id);
+  async getBoardById(id: number): Promise<Board> {
+    const found = await this.boardRepository.findOne({ where: { id } });
 
     if (!found) throw new NotFoundException(`Can't find Board with id ${id}`);
-    // new NotFoundException() 인스턴스는 NestJS에 내장된 인스턴스이다.
-    // 값이 없을 때, 404 Not Found 혹은 404 지정한 메세지를 반환하도록 해주는 예외처리 인스턴스이다.
-    // 요청에 들어온 id를 찾지 못한 경우(해당 id를 가진 게시물이 없는 경우)에 대한 예외 처리를 해준 것이다.
 
     return found;
   }
 
-  deleteBoardById(id: string): void {
-    const found = this.getBoardById(id);
-
-    this.boards = this.boards.filter((board) => board.id !== found.id);
-  }
-
-  updateBoardStatus(id: string, status: BoardStatus): Board {
-    const board = this.getBoardById(id);
-    board.status = status;
-
-    return board;
-  }
+  //   getAllBoards(): Board[] {
+  //     return this.boards;
+  //   }
+  //   createBoard(createBoarDto: CreateBoarDto): Board {
+  //     const { title, description } = createBoarDto;
+  //     const board: Board = {
+  //       id: uuid(), // 유니크한 값을 생성하기 위해 uuid 라이브러리 사용
+  //       title,
+  //       description,
+  //       status: BoardStatus.PUBLIC, // enum 타입 사용
+  //     };
+  //     this.boards.push(board);
+  //     return board; // 생성한 게시물을 클라이언트에 응답으로 보내주기 위해 게시물을 컨트롤러로 반환한다.
+  //   }
+  //   getBoardById(id: string): Board {
+  //     const found = this.boards.find((board) => board.id === id);
+  //     if (!found) throw new NotFoundException(`Can't find Board with id ${id}`);
+  //     // new NotFoundException() 인스턴스는 NestJS에 내장된 인스턴스이다.
+  //     // 값이 없을 때, 404 Not Found 혹은 404 지정한 메세지를 반환하도록 해주는 예외처리 인스턴스이다.
+  //     // 요청에 들어온 id를 찾지 못한 경우(해당 id를 가진 게시물이 없는 경우)에 대한 예외 처리를 해준 것이다.
+  //     return found;
+  //   }
+  //   deleteBoardById(id: string): void {
+  //     const found = this.getBoardById(id);
+  //     this.boards = this.boards.filter((board) => board.id !== found.id);
+  //   }
+  //   updateBoardStatus(id: string, status: BoardStatus): Board {
+  //     const board = this.getBoardById(id);
+  //     board.status = status;
+  //     return board;
+  //   }
 }
