@@ -60,6 +60,7 @@ export class BoardsController {
 
   @Get()
   getAllBaords(): Promise<Board[]> {
+    // Board 타입의 요소를 가진 배열 타입의 Promise 반환
     return this.boardsService.getAllBaords();
   }
 
