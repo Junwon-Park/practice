@@ -7,9 +7,11 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { Board } from './board.entity';
 import { BoardStatus } from './board.status.enum';
 import { BoardsService } from './boards.service'; // 이 컨트롤러에 종속성 주입할 서비스 import
@@ -17,6 +19,9 @@ import { CreateBoarDto } from './dto/create-board.dto';
 import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
 
 @Controller('boards') // localhost:3000/boards
+@UseGuards(AuthGuard()) // 여기에 @UseGuards() 미들웨어를 등록해서 컨트롤러 레벨에서 인증 작덥을 먼저 수행하도록 한다.
+// Guards(@UseGuards()), Pipes(@UsePipes()), Filters, Interceptors 등 중간에서 작업을 처리해주는 것을 Express의 미들웨어와 동일하게 미들웨어라고 한다.
+// 토큰이 증되지 않으면 에러를 뱉어서 컨트롤러 내부 로직으로 넘어갈 수 없다.
 export class BoardsController {
   //   // boards 모듈의 컨트롤러 클래스
   //   // 이 내부에 boards 모듈의 컨트롤러의 핸들러(Handler)를 작성해준댜.

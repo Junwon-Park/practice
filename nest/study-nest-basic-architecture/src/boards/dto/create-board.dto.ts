@@ -3,6 +3,10 @@ import { IsNotEmpty } from 'class-validator';
 // DTO는 계층간 데이터 교환을 위한 객체이다.
 // Interface 또는 Class를 사용해서 정의할 수 있지만 NestJS에서는 Class를 사용하는 것을 권장하고 있다.
 // DTO를 사용하는 이유는 데이터 유효성을 체크하는데 효율적이며, 더 안정적인 코드를 만들어준다. 타입스크립트의 타입으로도 사용된다.
+// CreateBoarDto는 Board라는 도메인의 데이터를 주고 받을 때, Board 생성에 필요한 데이터만을 주고받을 수 있는 데이터 전송 객체(DTO)이다.
+// 아렇게 DTO를 사용하면 통신에 필요한 속성만 노출하고 도메인의 모든 속성의 노출을 방지할 수 있다.
+// DTO는 통신에 필요한 도메인의 속성만을 제공하고 비즈니스 로직은 가지지 않는다.
+
 export class CreateBoarDto {
   // 이 클래스는 게시물을 생성하는데 사용되는 필드와 타입을 정의한 DTO이다.
   // Controller와 Service에서 사용된다.

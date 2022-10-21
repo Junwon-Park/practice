@@ -18,13 +18,18 @@
 // ! 생성된 서비스 모듈은 컨트롤러와 마찬가지로 @Moudle() 데코레이터에 등록되는데, service라는 속성 이름이 아닌 providers라는 속성에 등록된다.
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from 'src/auth/auth.module';
 import { Board } from './board.entity';
 import { BoardRepository } from './board.repository';
 import { BoardsController } from './boards.controller';
 import { BoardsService } from './boards.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Board])], // Board 모듈에 TypeORM에 사용될 Board repository를 등록하여 사용할 수 있도록 했다.
+  imports: [
+    TypeOrmModule.forFeature([Board]), // Board 모듈에 TypeORM에 사용될 Board repository를 등록하여 사용할 수 있도록 했다.
+    AuthModule, // boards 모듈에서에서 auth 모듈에 등록된 passport의 AuthGuard() 메서드를 사용하기 위해 AuthModule을 import 한다.(이러면 auth.module.ts의 모듈에 등록된 모든 모듈을 거기에 설정된 구성대로 사용할 수 있다.)
+    // 인증된 사용자만 게시물을 받을 수 있도록 컨트롤러에서 컨트롤러 레벨의 @UseGuard() 데코레이터를 추가해서 Passport의 AuthGuard()를 등록할 것이다.
+  ],
   controllers: [BoardsController],
   providers: [BoardsService, BoardRepository],
   // provider란, Nest의 기본 개념이다.
