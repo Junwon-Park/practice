@@ -15,7 +15,7 @@ import { JwtStrategy } from './jwt.strategy';
     JwtModule.register({
       // 이 모듈에 JWT 사용을 위한 등록
       // JWT와 Passport는 Auth 모듈에만 필요하기 때문에 app.module.ts가 아닌 auth.module.ts의 imports에 등록한다.
-      // 토큰 생성을 위한 옵션도 함께 지정한다.
+      // 토큰 생성을 위한 옵션도 함께 설정한다.
       secret: 'Secret1234',
       signOptions: {
         expiresIn: 3600, // 1h
