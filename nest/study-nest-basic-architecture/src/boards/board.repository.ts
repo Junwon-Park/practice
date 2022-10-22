@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { User } from 'src/auth/user.entity';
 import { Repository, DataSource } from 'typeorm';
 import { Board } from './board.entity';
 import { BoardStatus } from './board.status.enum';
@@ -15,7 +16,7 @@ export class BoardRepository extends Repository<Board> {
   }
 
   // 서비스의 createBoard() 메서드에서 처리할 DB 작업을 처리하는 메서드 -> 서비스의 DB 작업을 Repository에서 처리하고 결과를 서비스로 반환하는 설계 패턴을 레포지토리 패턴이라고 한다.
-  async createBoard(createBoardDto: CreateBoarDto): Promise<Board> {
+  async createBoard(createBoardDto: CreateBoarDto, user: User): Promise<Board> {
     const { title, description } = createBoardDto;
 
     const board = this.create({
@@ -23,6 +24,7 @@ export class BoardRepository extends Repository<Board> {
       title,
       description,
       status: BoardStatus.PUBLIC,
+      user,
     });
 
     await this.save(board); // create() 메서드로 생성한 게시물을 save() 메서드로 저장해줘야 한다.

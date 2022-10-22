@@ -25,8 +25,8 @@ export class User extends BaseEntity {
 
   @OneToMany(
     // 이렇게 양쪽에 OneToMany-ManyToOne으로 지정해 놓으면 one인 쪽의 id(PK)를 Many인 쪽에 새로운 컬럼이 자동으로 생성(userId, FK)되 해당 컬럼에서 참조하게 된다.
-    (type) => Board, // 상대 엔티티 타입이다.
-    (board) => board.user, // 상대 엔티티(board)에서 이 엔티티(user)에 어떻게 접근할 수 있는 지 정의한 것이다.
+    (type) => Board, // 상대 엔티티 타입이다.(참조 관계인 상대 엔티티의 타입)
+    (board) => board.user, // 상대 엔티티(board)에서 이 엔티티(user)에 어떻게 접근할 수 있는 지 정의한 것이다.(여기의 board 파라미터의 타입은 첫 번째 파라미터인 type에 지정한 Board 타입이다.)
     // 상대에도 이 엔티티에 접근하는 방법을 정의해주지 않으면 에러가 난다.(정의해주면 에러는 사라진다.)
     { eager: true }, // eager: true는 관계를 맺은 두 엔티티 중 상대의 연관된 모든 데이터를 가져온다는 의미이다.
     // 여기에서는 유저가 작성한 모든 게시물(Board)을 가져오도록 한 것이다.
@@ -35,5 +35,8 @@ export class User extends BaseEntity {
     // Left join 개념으로 보면 이 값을 true로 지정한 쪽이 Left가 된다.
     // 상대 엔티티에서는 이 값을 false로 하거나 아에 옵션을 지정하지 않으면 된다.
   )
-  boards: Board[];
+  boards: Board[]; // 관계 데코레이터가 붙은 필드는 실제 DB에 생성되지는 않는다.
+  // 이 필드는 TypeORM 내부적으로 동작하며 User는 여러 개의 게시물을 작성할 수 있기 때문에 배열로 지정한 것이다.
+  // 반대로 Board 엔티티에서는 Board는 한 명의 User만 가질 수 있기 떄문에(게시물을 작성한 User는 한 명 뿐) 배열이 아닌 User 타입으로 지정한다.(1(User) : N(Board))
+  // ! 이 필드는 TypeORM 내부적으로 JOIN 쿼리 떄 사용된다.
 }

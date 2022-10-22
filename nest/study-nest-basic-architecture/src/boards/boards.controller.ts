@@ -12,6 +12,8 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { User } from 'src/auth/user.entity';
 import { Board } from './board.entity';
 import { BoardStatus } from './board.status.enum';
 import { BoardsService } from './boards.service'; // 이 컨트롤러에 종속성 주입할 서비스 import
@@ -20,8 +22,11 @@ import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe'
 
 @Controller('boards') // localhost:3000/boards
 @UseGuards(AuthGuard()) // 여기에 @UseGuards() 미들웨어를 등록해서 컨트롤러 레벨에서 인증 작덥을 먼저 수행하도록 한다.
+// ! AuthGuard()는 등록된 전략을 찾아가게 되는데, Boards 모듈에는 등록된 전략이 없다.
+// ! 여기에서는 AuthModule에 생성되어 등록된 JWT 전략을 그 대로 사용할 것이기 때문에 해당 전략이 등록된 AuthModule을 imports 하면 AuthModule에서 exports에 등록한 모듈을 사용할 수 있다.
+// ! 그리고 여기에서 AuthGuard()를 통과했기 때문에 아래 컨트롤러로 들어가는 요청 객체에는 User 객체가 포함되어 있다.(@GetUser() 데코레이터 사용 가능)
 // Guards(@UseGuards()), Pipes(@UsePipes()), Filters, Interceptors 등 중간에서 작업을 처리해주는 것을 Express의 미들웨어와 동일하게 미들웨어라고 한다.
-// 토큰이 증되지 않으면 에러를 뱉어서 컨트롤러 내부 로직으로 넘어갈 수 없다.
+// AuthGuard()를 통해 Passport로 토큰이 인증되지 않으면 에러를 뱉어서 컨트롤러 내부 로직으로 넘어갈 수 없다.
 export class BoardsController {
   //   // boards 모듈의 컨트롤러 클래스
   //   // 이 내부에 boards 모듈의 컨트롤러의 핸들러(Handler)를 작성해준댜.
@@ -58,15 +63,19 @@ export class BoardsController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  createBoard(@Body() createBoarDto: CreateBoarDto): Promise<Board> {
+  createBoard(
+    @Body() createBoarDto: CreateBoarDto,
+    @GetUser() user: User,
+    // 데코레이터는 생성한 모듈에서 exports에 등록하지 않아도 경로로 바로 import 할 수 있다.
+  ): Promise<Board> {
     // 비동기 작업 후 결과 값인 Board 타입의 객체를 반환하기 때문에 Promise<Board>가 반환 타입이다.
-    return this.boardsService.createBoard(createBoarDto);
+    return this.boardsService.createBoard(createBoarDto, user);
   }
 
   @Get()
-  getAllBaords(): Promise<Board[]> {
+  getAllBaords(@GetUser() user: User): Promise<Board[]> {
     // Board 타입의 요소를 가진 배열 타입의 Promise 반환
-    return this.boardsService.getAllBaords();
+    return this.boardsService.getAllBaords(user);
   }
 
   @Get('/:id')
@@ -75,9 +84,12 @@ export class BoardsController {
   }
 
   @Delete('/:id')
-  deleteBoard(@Param('id', ParseIntPipe) id: number): Promise<void> {
+  deleteBoard(
+    @Param('id', ParseIntPipe) id: number,
+    @GetUser() user: User,
+  ): Promise<void> {
     // Service에서 비동기 작업을 했기 때문에 Pormise 타입을 반환하지만 console.log()만 짹고 반환 값은 없기 때문에 반환 타입이 void 타입의 Promise이다.
-    return this.boardsService.deleteBoard(id); // ? Promise<void>인데 왜 return??, 서비스에서도 반환 타입 Promise<void>인데 반환 값 없음.
+    return this.boardsService.deleteBoard(id, user); // ? 서비스에서 최종적으로 반환하는 값이 없기 때문(서비스에서도 반환 타입은 Promise<void>
   }
 
   @Patch('/:id/status')

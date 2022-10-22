@@ -48,7 +48,9 @@ export class UserRepository extends Repository<User> {
     if (user && (await bcrypt.compare(password, user.password))) {
       // user가 DB에 존재하고 bcrypt 인증이 true라면 로그인 성공
       const payload = { username };
+
       const accessToken = await this.jwtService.sign(payload);
+
       return { accessToken };
     } else throw new UnauthorizedException('Login is Failed'); // 401 Unauthorized + 메세지 반환
   }
