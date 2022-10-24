@@ -6,7 +6,7 @@ export const typeORMConfig: TypeOrmModuleOptions = {
   host: 'localhost',
   port: 3306,
   username: 'root',
-  database: 'test_board',
+  database: 'board_server',
   entities: [__dirname + '/../**/*.entity.{js,ts}'], // Entity 파일 위치 -> **/: 모든 디렉토리의, *.entity: 모든이름.entity. 이라는 이름의 {js,ts}: 확장자가 js 또는 ts인 파일
   synchronize: true,
 };
