@@ -1,4 +1,5 @@
-import { LoginDto } from './../../dto/authUser.dto';
+import { AuthToken } from './../../common/util/authToken.util';
+import { LoginDto, CheckCertifiedDto } from './../../dto/authUser.dto';
 import { SignupDto } from '../../dto/authUser.dto';
 import { UsersService } from './users.service';
 import { Body, Controller, Logger, Post, Res } from '@nestjs/common';
@@ -9,8 +10,14 @@ export class UsersController {
   // Loggers
   private signupLogger = new Logger('User controllers Signup');
   private loginLogger = new Logger('User controllers Login');
+  private checkCertifiedLogger = new Logger(
+    'User Controllers Check certified user',
+  );
 
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly authToken: AuthToken,
+  ) {}
 
   // Methods
   @Post('signup')
@@ -65,8 +72,37 @@ export class UsersController {
     if (this.usersService.login(loginDto).isSucceeded) {
       return this.usersService.login(loginDto);
     } else {
-      res.cookie('Authorization', null, { maxAge: 0 }); // ? maxAge: 0은 아에 쿠키를 없애버린다.
+      res.cookie('Authorization', null, { maxAge: 0 }); // maxAge: 0은 아에 쿠키를 없애버린다.
       res.status(401).json(this.usersService.login(loginDto));
+    }
+  }
+
+  @Post('auth/additional')
+  checkCertifiedUser(
+    @Body() checkCertifiedDto: CheckCertifiedDto,
+    @Res() res: Response,
+  ) {
+    this.checkCertifiedLogger.log(checkCertifiedDto);
+
+    if (!this.usersService.checkCertifiedUser(checkCertifiedDto).isSucceeded)
+      res
+        .status(401)
+        .json(this.usersService.checkCertifiedUser(checkCertifiedDto));
+    else {
+      const { userLoginId, userPassword } = checkCertifiedDto;
+      res.cookie(
+        'Authorization',
+        {
+          authKey: this.authToken.createAtuhKey(userLoginId, userPassword), // Sub auth key 생성
+        },
+        {
+          httpOnly: true,
+          sameSite: 'none',
+          maxAge: 24 * 60 * 60 * 1000, // 1d
+        },
+      );
+
+      res.json(this.usersService.checkCertifiedUser(checkCertifiedDto));
     }
   }
 }

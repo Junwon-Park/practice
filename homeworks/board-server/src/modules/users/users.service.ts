@@ -1,11 +1,8 @@
-import { LoginDto } from './../../dto/authUser.dto';
+import { AuthToken } from './../../common/util/authToken.util';
+import { LoginDto, CheckCertifiedDto } from './../../dto/authUser.dto';
 import { SignupDto } from '../../dto/authUser.dto';
 import { User } from './user.model';
-import {
-  ConflictException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UsersService {
@@ -24,6 +21,9 @@ export class UsersService {
     },
   ];
 
+  constructor(private authToken: AuthToken) {}
+
+  /**회원가입 기능 */
   signup(signupDto: SignupDto): { isSucceeded: boolean; Message: string } {
     const {
       userLoginId,
@@ -65,6 +65,7 @@ export class UsersService {
     }
   }
 
+  /**로그인 기능 */
   login(loginDto: LoginDto): {
     userInfo: {
       userId: number;
@@ -117,6 +118,44 @@ export class UsersService {
         isSucceeded: false,
         Message: 'Signin is failed',
       };
+    }
+  }
+
+  /**회원 인증 기능 */
+  checkCertifiedUser(checkCertifiedDto: CheckCertifiedDto): {
+    isSucceeded: boolean;
+    Message: string;
+  } {
+    const { userLoginId, userPassword, Authorization } = checkCertifiedDto;
+
+    const certifiedUser: User = this.users.filter((user) => {
+      if (
+        user.userLoginId === userLoginId &&
+        user.userPassword === userPassword
+      )
+        return user;
+    })[0];
+
+    // userLoginId, userPassword 인증 성공 여부
+    if (!certifiedUser)
+      return { isSucceeded: false, Message: 'Authentication is failed' };
+    else {
+      // 토큰 복호화
+      const decodedAccessToken = this.authToken.decodeAccessToken(
+        Authorization.accessToken,
+      );
+
+      // 복호화된 토큰으로 유저 인증
+      const accessTokenCertifiedUser = this.users.filter((user) => {
+        return user.userLoginId === decodedAccessToken;
+      })[0];
+
+      // 토큰 인증 성공 여부
+      if (!accessTokenCertifiedUser)
+        return { isSucceeded: false, Message: 'Authentication is failed' };
+      else {
+        return { isSucceeded: true, Message: 'Authentication is succeeded' };
+      }
     }
   }
 }
