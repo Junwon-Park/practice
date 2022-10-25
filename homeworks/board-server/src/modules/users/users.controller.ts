@@ -57,7 +57,7 @@ export class UsersController {
     };
     isSucceeded: Boolean;
     Message: string;
-  } | void {
+  } {
     const { userLoginId } = loginDto;
 
     this.loginLogger.log(userLoginId);
@@ -65,7 +65,7 @@ export class UsersController {
     if (this.usersService.login(loginDto).isSucceeded) {
       return this.usersService.login(loginDto);
     } else {
-      res.cookie('Authorization', null);
+      res.cookie('Authorization', null, { maxAge: 0 }); // ? maxAge: 0은 아에 쿠키를 없애버린다.
       res.status(401).json(this.usersService.login(loginDto));
     }
   }
