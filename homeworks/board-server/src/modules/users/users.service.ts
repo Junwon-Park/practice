@@ -1,5 +1,11 @@
-import { AuthToken } from './../../common/util/authToken.util';
-import { LoginDto, CheckCertifiedDto } from './../../dto/authUser.dto';
+import { AuthToken } from '../../common/utils/authToken.util';
+import {
+  LoginDto,
+  CheckCertifiedDto,
+  EditPasswordDto,
+  EditMyInfoDto,
+  DeleteMineDto,
+} from './../../dto/authUser.dto';
 import { SignupDto } from '../../dto/authUser.dto';
 import { User } from './user.model';
 import { ConflictException, Injectable } from '@nestjs/common';
@@ -157,5 +163,142 @@ export class UsersService {
         return { isSucceeded: true, Message: 'Authentication is succeeded' };
       }
     }
+  }
+
+  /**비밀번호 수정 기능 */
+  editPassword(
+    editPasswordDto: EditPasswordDto,
+    authorization: { authKey: string; accessToken: string },
+  ): {
+    isSucceeded: boolean;
+    Message: string;
+  } {
+    const { authKey, accessToken } = authorization;
+
+    const decodedAccessToken: string =
+      this.authToken.decodeAccessToken(accessToken);
+
+    const decodedAuthKey: {
+      userLoginId: string;
+      userPassword: string;
+    } = this.authToken.decodeAuthKey(authKey);
+
+    const certifiedByKeys: User[] = this.users.filter((user) => {
+      if (
+        user.userLoginId === decodedAccessToken &&
+        user.userLoginId === decodedAuthKey.userLoginId &&
+        user.userPassword === decodedAuthKey.userPassword
+      )
+        return user;
+    });
+
+    if (certifiedByKeys.length === 0) {
+      return {
+        isSucceeded: false,
+        Message: 'Modify account password is failed',
+      };
+    } else {
+      const { userPassword } = editPasswordDto;
+
+      this.users.forEach((user) => {
+        if (user.userId === certifiedByKeys[0].userId)
+          user.userPassword = userPassword;
+      });
+
+      return {
+        isSucceeded: true,
+        Message: 'Modify account password is succeeded',
+      };
+    }
+  }
+
+  editMyInfo(
+    editMyInfoDto: EditMyInfoDto,
+    authKey: string,
+  ):
+    | {
+        userInfo: {
+          userLoginId: string;
+          userName: string;
+          userAddress: string;
+          userEmail: string;
+        };
+        isSucceeded: boolean;
+        Message: string;
+        userLastModifiedDate: Date;
+      }
+    | { isSucceeded: boolean; Message: string } {
+    const decodedAuthKey: {
+      userLoginId: string;
+      userPassword: string;
+    } = this.authToken.decodeAuthKey(authKey);
+
+    const {
+      userName,
+      userAddress,
+      userCellPhoneNumber,
+      userEmail,
+      Authorization,
+    } = editMyInfoDto;
+
+    const decodedAccessToken = this.authToken.decodeAccessToken(
+      Authorization.accessToken,
+    );
+
+    const authenticatedUser = this.users.filter((user) => {
+      return user.userLoginId === decodedAccessToken;
+    })[0];
+
+    if (!authenticatedUser) {
+      return {
+        isSucceeded: false,
+        Message: 'Modify user information is failed',
+      };
+    } else {
+      const { userLoginId, userPassword } = decodedAuthKey;
+
+      if (
+        !(
+          authenticatedUser.userLoginId === userLoginId &&
+          authenticatedUser.userPassword === userPassword
+        )
+      ) {
+        return {
+          isSucceeded: false,
+          Message: 'Modify user information is failed',
+        };
+      } else {
+        authenticatedUser.userName = userName;
+        authenticatedUser.userAddress = userAddress;
+        authenticatedUser.userCellPhoneNumber = userCellPhoneNumber;
+        authenticatedUser.userEmail = userEmail;
+        authenticatedUser.userLastModifiedDate = new Date();
+
+        return {
+          userInfo: {
+            userLoginId: authenticatedUser.userLoginId,
+            userName: authenticatedUser.userName,
+            userAddress: authenticatedUser.userAddress,
+            userEmail: authenticatedUser.userEmail,
+          },
+          isSucceeded: true,
+          Message: 'Modify user infomation is succeeded',
+          userLastModifiedDate: authenticatedUser.userLastModifiedDate,
+        };
+      }
+    }
+  }
+
+  deleteMine(deleteMineDto: DeleteMineDto):
+    | {
+        isSucceeded: boolean;
+        Message: string;
+        userDeletedDate: Date;
+      }
+    | {
+        isSucceeded: boolean;
+        Message: string;
+      } {
+    return;
   }
 }
