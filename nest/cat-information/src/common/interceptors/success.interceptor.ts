@@ -7,7 +7,7 @@ import {
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-@Injectable() // Controller level에 @UseInterceptors()로 인터셉터 등록
+@Injectable() // Controller에 의존성 주입하여 Controller level에 @UseInterceptors()로 인터셉터 등록
 export class SuccessInterceptor implements NestInterceptor {
   // Interceptor는 NestInterceptor 인터페이스를 구현하여 생성한다.
   // NestInterceptor 인터페이스에는 intercept()라는 메서드가 존재하고 해당 메서드를 구현하여 해당 인터셉터의 기능을 완성한다.
