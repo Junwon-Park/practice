@@ -33,9 +33,11 @@ import { JwtStrategy } from './jwt.strategy';
   controllers: [AuthController], // controllers 속성에 등록하면 이 모듈(auth)에 컨트롤러로 등록할 수 있다.
   providers: [AuthService, UserRepository, JwtStrategy],
   // proviers 속성에 등록하면 이 모듈(auth 모듈) 내에서 사용할 수 있다.
-  // 왜냐하면 프로바이더에 등록된 모듈은 기본적으로 캠슐화(모듈 레벨에서의 캡슐화(이 모듈 내에서만 사용 가능)) 되기 때문에 모듈 내에서 프로바이더에 등록되었다고 해서 외부 모듈에서 프로바이더를 사용할 수 없다.
+  // ! 왜냐하면 프로바이더에 등록된 모듈은 기본적으로 캠슐화(모듈 레벨에서의 캡슐화(이 모듈 내에서만 사용 가능)) 되기 때문에 모듈 내에서 프로바이더에 등록되었다고 해서 외부 모듈에서 프로바이더를 사용할 수 없다.
   // 외부 모듈에서 프로바이더를 사용하려면 사용하고자 하는 프로바이더를 exports에 등록해서 외부에 내보내야 한다.
   exports: [JwtStrategy, PassportModule], // exports 속성에 등록하면 다른 모듈에서도 import 해서 사용할 수 있다.
+  // ! NestJS에서 providers는 기본적으로 캡슐화 되어있기 때문에 외부 모듈에서 import 하려면 provider가 속한 모듈에서 export 해줘야 한다.
+  // 그리고 나서 외부 모듈에서 해당 모듈을 imports에 등록하여 providers에 등록하면 해당 외부 모듈에서 이 모듈이 exports 하는 providers를 의존성 주입하여 사용할 수 있다.
   // 인증된 유저만 게시물을 요청할 수 있도록 하는 부분에서 Passport를 사용하기 위해 Boards 모듈에서 JwtStrategy(Boards 모듈에서도 이 전략 사용)와 PassportModule(Boards 모듈에서도 PassportModule를 사용)
   // exports에 등록한 모듈은 외부 모듈에서 imports에 AuthModule을 등록하면 사용할 수 있다.
 })

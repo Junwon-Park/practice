@@ -1,6 +1,6 @@
-import { ConsoleLogger, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { BoardStatus } from './board.status.enum';
-import { v1 as uuid } from 'uuid'; // uuid 라이브러리의 v1 버전을 사용할 건데 이름을 uuid로 사용하도록 import 한 것이다.(유니크한 값을 만들어주는 라이브러리)
+// import { v1 as uuid } from 'uuid'; // uuid 라이브러리의 v1 버전을 사용할 건데 이름을 uuid로 사용하도록 import 한 것이다.(유니크한 값을 만들어주는 라이브러리)
 import { CreateBoarDto } from './dto/create-board.dto';
 import { BoardRepository } from './board.repository';
 import { Board } from './board.entity';
@@ -59,6 +59,7 @@ export class BoardsService {
     return board;
   }
 
+  //  // DB 적용 전 기존 코드
   //   getAllBoards(): Board[] {
   //     return this.boards;
   //   }

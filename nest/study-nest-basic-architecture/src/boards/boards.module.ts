@@ -31,6 +31,10 @@ import { BoardsService } from './boards.service';
     // AuthModule에서 exports에 등록한 모듈을 imports한 것이다.
     // 이제 AuthModule에서 exports에 등록한 JwtStrategy, PassportModule 모듈을 사용할 수 있다.
     // ! 즉, PassportMdule의 AuthGuard()를 사용할 수 있고 AuthGuard()는 JwtStrategy를 사용하기 때문에 이 둘이 필요하다.
+    // ! 사실 JwtStrategy, PassportModule을 위에서 파일로 import해서 providers에 등록하면 동일하게 의존성 주입하여 사용할 수 있다.
+    // ! 하지만 그런 패턴은 모든 모듈을 따로 파일을 import해서 providers에 등록해야 하기 때문에 가독성도 않좋아지고 관리하기 힘들어진다.
+    // ! 그리고 AuthModule에 정의된 모듈을 외부 모듈에서 AuthModule과 전혀 상관 없이 AuthModule의 내부 모듈을 가져다 사용하는 것은 단일책임 원칙에도 위배되기 때문에
+    // ! 모듈 내에서 exports에 등록하여 사용할 외부 모듈에서 해당 모듈을 imports에 등록하여 해당 모듈이 expots하는 모듈을 사용할 수 있도록 하는 패턴이 좋은 패턴이다.
   ],
   controllers: [BoardsController],
   providers: [BoardsService, BoardRepository],
