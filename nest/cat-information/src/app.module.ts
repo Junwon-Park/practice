@@ -11,8 +11,8 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
     ConfigModule.forRoot(), // 이 모듈을 imports에 등록해줘야 프로젝트에서 .env를 사용할 수 있다.
     CatsModule,
     MongooseModule.forRoot(process.env.MONGODB_URI, {
-      useNewUrlParser: true, // mongodb url을 읽을 수 있도록 설정합니다.
-      useUnifiedTopology: true, // 최신 mongodb 드라이버 엔진을 사용하도록 설정합니다. (안정적인 연결을 유지할 수 없는 경우를 제외하고 이 옵션을 true로 설정해야 합니다.)
+      useNewUrlParser: true, // mongodb url을 읽을 수 있도록 설정한다.
+      useUnifiedTopology: true, // 최신 mongodb 드라이버 엔진을 사용하도록 설정한다. (안정적인 연결을 유지할 수 없는 경우를 제외하고 이 옵션을 true로 설정해야 한다.)
     }), // NestJS에서 몽구스를 사용해서 몽고DB를 사용하려면 몽구스 모듈의 forRoot() 메서드의 첫 번째 인자로 연결할 DB의 URI를 넣는다.
     // 두 번째 인자로는 몽고DB의 옵션을 설정한다.
   ],
