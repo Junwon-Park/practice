@@ -1,7 +1,9 @@
+import { CatRequestDto } from './dto/cats.request.dto';
 import { SuccessInterceptor } from './../common/interceptors/success.interceptor';
 import { HttpExceptionFilter } from '../common/exceptions/http-exception.filter';
 import { CatsService } from './cats.service';
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -40,6 +42,13 @@ export class CatsController {
   getOneCat(@Param('id', ParseIntPipe) id: number) {
     // id가 number type인지 검증하는 파이프 등록(number 타입이 아닐 시, 400 Bad Request)
     return 'One cat API';
+  }
+
+  @Post('/signup')
+  async signUp(@Body() body: CatRequestDto) {
+    console.log(body);
+
+    return await this.catsService.singUp(body);
   }
 
   @Post()

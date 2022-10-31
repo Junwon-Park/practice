@@ -9,8 +9,11 @@ import { Request, Response } from 'express';
 @Catch(HttpException) // HttpExeption 객체를 캐치하는 데코레이터
 // @UseFilters() 데코레이터의 인자로 Filter를 등록해 사용할 수 있다.
 // ! @UseFilters() 데코레이터가 붙은 함수에서 발생한 예외처리 객체가 해당 필터의 @Catch() 데코레이터에 등록된 예외처리 객체라면 그 것을 캐치한다.
-// 또는 main.ts에 app.useGlobalFilters()의 인자로 해당 필터의 인스턴스(new HttpExceptionFilter)를 등록하여 Glbal level로 등록할 수도 있다.
+// 또는 main.ts에 app.useGlobalFilters()의 인자로 해당 필터의 인스턴스(new HttpExceptionFilter)를 등록하여 Global level로 등록할 수도 있다.
 export class HttpExceptionFilter implements ExceptionFilter {
+  // -
+  // ! ExceptionFilter는 필터로 등록된 위치에서 Exception이 발생하는 것을 캐치하여 클라이언트에게 보낼 에러 메세지를 구현할 수 있다.
+
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -23,9 +26,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
     if (typeof errorMessage === 'string') {
       // errorMessage가 string인 경우는 직접 작성한 에러 예외처리의 경우이고, 그렇지 않은 경우는 직접 작성한 에러 예외처리가 아닌 NestJS에서 자체적으로 발생시킨 예외처리의 경우이다.
       // NestJS 자체에서 발생한 예외처리의 에러 메세지는 객체(Object)의 형태이다.
+      // ! 용도에 맞게 커스텀 가능하다.
       response.status(status).json({
         // 최종 응답 형태이다.
-        // 용도에 맞게 커스텀 가능하다.
+        succeeded: false,
         statusCode: status,
         timestamp: new Date().toISOString(),
         path: request.url,
@@ -33,6 +37,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       });
     } else {
       response.status(status).json({
+        succeeded: false,
         statusCode: status,
         timestamp: new Date().toISOString(),
         path: request.url,
