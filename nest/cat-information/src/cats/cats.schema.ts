@@ -11,7 +11,7 @@ const options: SchemaOptions = {
 export class Cat extends Document {
   // 이 Cat이라는 클래스가 Mongoose에서 하나의 Document가 될 Schema이기 때문에 mongoose의 Document 클래스를 상속받는다.
 
-  // 각 Prop(Field)에 대해 @Prop() 데코레이터를 붙여서 Prop임을 정의한다.
+  // 각 Prop(Field)에 대해 @Prop() 데코레이터를 붙여서 Prop(Field)임을 정의한다.
   // @Prop() 데코레이터의 인자로 옵션 객체를 대입해서 해당 Prop에 대한 제약 사항 옵션을 정의할 수 있다.
   @Prop({
     required: true, // 반드시 값이 있어야 한다는 옵션(RDBMS의 Not Null과 같다.)이다.
