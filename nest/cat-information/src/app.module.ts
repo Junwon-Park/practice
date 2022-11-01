@@ -1,4 +1,3 @@
-import { Cat, CatSchema } from './cats/cats.schema';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config'; // NestJS에서 환경변수(.env 모듈)를 사용할 수 있도룩 지원해주는 라이브러리
 import { MongooseModule } from '@nestjs/mongoose'; // NestJS에서 제공하는 몽구스 설치
@@ -7,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,7 +16,7 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
       useUnifiedTopology: true, // 최신 mongodb 드라이버 엔진을 사용하도록 설정한다. (안정적인 연결을 유지할 수 없는 경우를 제외하고 이 옵션을 true로 설정해야 한다.)
     }), // NestJS에서 몽구스를 사용해서 몽고DB를 사용하려면 몽구스 모듈의 forRoot() 메서드의 첫 번째 인자로 연결할 DB의 URI를 넣는다.
     // 두 번째 인자로는 몽고DB의 옵션을 설정한다.
-    CatsModule,
+    CatsModule, AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -5,6 +5,7 @@ import { IsEmail, IsNotEmpty, IsString } from 'class-validator'; // 스키마에
 
 const options: SchemaOptions = {
   timestamps: true, // 이 옵션을 활성화(true) 해주면 이 스키마에 대한 Document가 MongoDB의 Collection에 생성될 때 자동으로 updatedAt과 createdAt을 생성하여 함께 저장한다.
+  versionKey: false, // 몽고디비에 도큐먼트를 생성하면 기본적으로 생성되는 __v 필드를 비활성화 한다.
 };
 
 @Schema(options) // 이 클래스를 스키마로 정의하는 데코레이터, 인자로 스키마 옵션 객체를 대입할 수 있다.

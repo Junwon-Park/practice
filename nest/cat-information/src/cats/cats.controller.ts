@@ -1,3 +1,5 @@
+import { LoginRequestDto } from './../auth/dto/login.request.dto';
+import { AuthService } from './../auth/auth.service';
 import { CatRequestDto } from './dto/cats.request.dto';
 import { SuccessInterceptor } from './../common/interceptors/success.interceptor';
 import { HttpExceptionFilter } from '../common/exceptions/http-exception.filter';
@@ -22,7 +24,10 @@ import {
 @UseInterceptors(SuccessInterceptor) // 컨트롤러 레벨에서 인터셉터 등록
 @UseFilters(HttpExceptionFilter) // 아래 함수(핸들러)에서 여기에 등록된 예외처리 객체외 동일한 예외처리 객체가 발동되면 이 필터에서 캐치한다.
 export class CatsController {
-  constructor(private readonly catsService: CatsService) {}
+  constructor(
+    private readonly catsService: CatsService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Get()
   getAllCat() {
@@ -46,14 +51,12 @@ export class CatsController {
 
   @Post('/signup')
   async signUp(@Body() body: CatRequestDto) {
-    console.log(body);
-
     return await this.catsService.singUp(body);
   }
 
-  @Post()
-  createCat() {
-    return 'Create cat API';
+  @Post('login')
+  logIn(@Body() loginData: LoginRequestDto) {
+    return this.authService.jwtLogIn(loginData);
   }
 
   @Put(':id')
