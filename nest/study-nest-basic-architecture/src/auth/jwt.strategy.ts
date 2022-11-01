@@ -23,6 +23,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       // 요청의 헤더에 있는 Bearer token을 추출한다.
       // ! 그렇기 때문에 요청을 보낼 때 토큰을 Bearer Token으로 보내야 한다.
+      ignoreExpiration: false, //  false라면 JWT가 만료되지 않았음을 보증하는 책임을 Passport 모듈에 위임함을 의미한다. 이것은 만약 만료된 JWT를 받았을 경우, request는 거부되고 401 Unauthorized response를 보낼 것이다.
+      // true로 설정하면 이 검증을 passport에 위임하지 않는다는 의미이기 때문에 만료된 JWT를 받아도 에러가 발생하지 않고 request도 거부되지 않는다. 즉, JWT 검증을 직접 하려는 경우 true로 설정한다.
+      // 여기에서는 passport가 JWT를 검증하도록 하기 위해 false로 설정한다.
     });
   }
 

@@ -38,5 +38,5 @@ export class User extends BaseEntity {
   boards: Board[]; // 관계 데코레이터가 붙은 필드는 실제 DB에 생성되지는 않는다.
   // 이 필드는 TypeORM 내부적으로 동작하며 User는 여러 개의 게시물을 작성할 수 있기 때문에 배열로 지정한 것이다.
   // 반대로 Board 엔티티에서는 Board는 한 명의 User만 가질 수 있기 떄문에(게시물을 작성한 User는 한 명 뿐) 배열이 아닌 User 타입으로 지정한다.(1(User) : N(Board))
-  // ! 이 필드는 TypeORM 내부적으로 JOIN 쿼리 떄 사용된다.
+  // ! 이 필드는 TypeORM 내부적으로 JOIN 쿼리 떄 사용된다.(실제 DB에는 존재하지 않는 필드이다.)
 }
