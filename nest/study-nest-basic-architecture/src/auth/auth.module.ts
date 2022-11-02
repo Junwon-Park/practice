@@ -14,12 +14,14 @@ import { JwtStrategy } from './jwt.strategy';
   imports: [
     // imports 속성에 등록하면 외부에서 불러온 라이브러리와 모듈을 이 모듈(auth)에서 사용할 수 있다.
     TypeOrmModule.forFeature([User]), // User entity TypeORM 모듈 등록
+    // .forFeature() 메서드는 대상을 지정하는 메서드이다.
     JwtModule.register({
       // 이 모듈에 JWT 사용을 위한 등록
       // register() 메서드는 적용할 옵션을 설정할 떄 사용하는 메서드이다.
       // JWT와 Passport는 Auth 모듈에만 필요하기 때문에 app.module.ts가 아닌 auth.module.ts의 imports에 등록한다.
       // 토큰 생성을 위한 옵션도 함께 설정한다.
-      secret: 'Secret1234',
+      // 토큰이 생성될 때 이 옵션이 사용된다.
+      secret: 'Secret1234', // ! 처음 토큰 생성 시 사용될 Salt(JwtStrategy의 secret으로 복호화 하므로 두 값은 동일해야 한다.)
       signOptions: {
         expiresIn: 3600, // 1h
       },
@@ -28,6 +30,7 @@ import { JwtStrategy } from './jwt.strategy';
       // 이 모듈에 Passport 사용을 위한 등록
       // register() 메서드는 적용할 옵션을 설정할 떄 사용하는 메서드이다.
       defaultStrategy: 'jwt', // 이 Passport의 기본 전략을 JWT passport로 등록
+      // 기본 전략이 jwt이기 때문에 @nestjs/passport의 AuthGuard()의 인자로 전략을 지정하지 않아도 jwt 전략으로 동작한다.
     }),
   ],
   controllers: [AuthController], // controllers 속성에 등록하면 이 모듈(auth)에 컨트롤러로 등록할 수 있다.

@@ -10,6 +10,8 @@ import { UserRepository } from './user.repository';
 @Injectable() // 다른 곳에 주입해서 사용하기 위한 데코레이터
 // 이 데코레이터가 붙어 있는 모듈은 providers에 등록해야 사용 가능하며, 외부 모듈에서 사용하려면 exports에 등록하여 외부 모듈에서 imports 해서 사용할 수 있다.
 export class JwtStrategy extends PassportStrategy(Strategy) {
+  // 생성된 토큰은 이 클래스에서 복호화 및 인증한다.
+  // 즉, @UseGuards()에 등록하는 AuthGuard()가 호출되면 이 모듈이 실행되는 것이다.
   // NestJS에서 Passport 라이브러리를 사용하기 위한 PassportStrategy() 메서드에 passport-jwt 전략인 Strategy 객체를 넣어 종속받는다.
   // 컨트롤러의 핸들러에 @UseGuards() 데코레이터에 AuthGuard()를 대입한 데코레이터를 추가해주면 해당 핸들러로 들어온 요청은 이 객체로 들어오게 된다.
   // ! PassportStrategy()의 인자로 넣은 전략을 보고 동일한 전략인 Passport를 찾아오게 된다.
