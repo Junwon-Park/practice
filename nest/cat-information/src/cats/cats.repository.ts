@@ -26,4 +26,8 @@ export class CatsRepository {
   async findCatByEmail(email: string): Promise<Cat | null> {
     return await this.catModel.findOne({ email });
   }
+
+  async findCatByIdWithoutPassword(catId: string): Promise<Cat | null> {
+    return await this.catModel.findById(catId).select('-password'); // 쿼리 메서드 수행 후 select() 메서드를 사용해서 인자로 -password를 주면 쿼리 메서드 수행 결과에서 password 필드만 제외하는 작업 수행 후 반환한다.
+  }
 }

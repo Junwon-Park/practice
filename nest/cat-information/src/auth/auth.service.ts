@@ -7,7 +7,7 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
   constructor(
     private readonly catsRepository: CatsRepository,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: JwtService, // ! auth.module.ts의 @module() 데코레이터의 imports에 등록한 JwtModule에서 제공하고 있기 때문에 의존성 주입이 가능하게 된다.
   ) {}
 
   async jwtLogIn(loginData: LoginRequestDto): Promise<{ token: string }> {

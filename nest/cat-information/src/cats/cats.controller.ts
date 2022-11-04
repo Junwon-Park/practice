@@ -1,3 +1,4 @@
+import { JwtAuthGuard } from './../auth/jwt/jwt.guard';
 import { LoginRequestDto } from './../auth/dto/login.request.dto';
 import { AuthService } from './../auth/auth.service';
 import { CatRequestDto } from './dto/cats.request.dto';
@@ -9,16 +10,15 @@ import {
   Controller,
   Delete,
   Get,
-  HttpException,
-  HttpStatus,
-  Param,
-  ParseIntPipe,
   Patch,
   Post,
   Put,
+  Req,
   UseFilters,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { Request } from 'express';
 
 @Controller('cats')
 @UseInterceptors(SuccessInterceptor) // 컨트롤러 레벨에서 인터셉터 등록
@@ -43,10 +43,12 @@ export class CatsController {
     return 'All cats API';
   }
 
-  @Get(':id')
-  getOneCat(@Param('id', ParseIntPipe) id: number) {
-    // id가 number type인지 검증하는 파이프 등록(number 타입이 아닐 시, 400 Bad Request)
-    return 'One cat API';
+  @Get('/auth')
+  @UseGuards(JwtAuthGuard) // 이 부분에서 JwtStrategy가 수행되고 반환 값이 핸들러의 인자로 들어가게 된다.
+  getCurrentCat(@Req() req: Request) {
+    console.log('here auth');
+
+    return req.user;
   }
 
   @Post('/signup')
