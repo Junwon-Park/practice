@@ -1,4 +1,4 @@
-import { LoggingInterceptor } from './interceptors/logging.interceptor';
+import { SuccessInterceptor } from './interceptors/Success.interceptor';
 import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 
@@ -6,10 +6,9 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @UseInterceptors(LoggingInterceptor)
+  @UseInterceptors(SuccessInterceptor)
   @Get()
-  getHello(): void {
-    console.log('Cotroller...');
-    this.appService.getHello();
+  getHello(): string {
+    return this.appService.getHello();
   }
 }
