@@ -15,6 +15,6 @@ import { TypegooseModule } from 'nestjs-typegoose';
 })
 export default class MongodbModule {}
 
-export const SantamongDatabaseModels = [
+export const MongodbModels = [
   TypegooseModule.forFeature([], process.env.MONGODB_CONNECTIONNAME),
 ];
