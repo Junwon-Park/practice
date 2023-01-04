@@ -2,9 +2,10 @@ import { FilmsController } from '../../interface/rest-api/controller/films.contr
 import { GraphqlConfigModule } from './../../interface/graphql/graphqlConfig.module';
 import { Module } from '@nestjs/common';
 import { FilmsService } from '../../application/service/films.service';
+import { MongodbModels } from 'src/infrastructure/mongodb/mongodb.module';
 
 @Module({
-  imports: [GraphqlConfigModule],
+  imports: [...MongodbModels, GraphqlConfigModule],
   controllers: [FilmsController],
   providers: [FilmsService],
 })
