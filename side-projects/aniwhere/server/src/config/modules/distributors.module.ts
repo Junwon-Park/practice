@@ -1,10 +1,11 @@
-import { DistributorsResolver } from '../../interface/resolver/distributors.resolver';
+import { GraphqlConfigModule } from './../../interface/graphql/graphqlConfig.module';
 import { Module } from '@nestjs/common';
-import { DistributorsController } from '../../interface/controller/distributors.controller';
 import { DistributorsService } from '../../application/service/distributors.service';
+import { DistributorsController } from 'src/interface/rest-api/controller/distributors.controller';
 
 @Module({
+  imports: [GraphqlConfigModule],
   controllers: [DistributorsController],
-  providers: [DistributorsService, DistributorsResolver],
+  providers: [DistributorsService],
 })
 export class DistributorsModule {}

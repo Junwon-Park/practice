@@ -1,10 +1,11 @@
-import { UsersResolver } from '../../interface/resolver/users.resolver';
+import { GraphqlConfigModule } from './../../interface/graphql/graphqlConfig.module';
 import { Module } from '@nestjs/common';
-import { UsersController } from '../../interface/controller/users.controller';
 import { UsersService } from '../../application/service/users.service';
+import { UsersController } from 'src/interface/rest-api/controller/users.controller';
 
 @Module({
+  imports: [GraphqlConfigModule],
   controllers: [UsersController],
-  providers: [UsersService, UsersResolver],
+  providers: [UsersService],
 })
 export class UsersModule {}

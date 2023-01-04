@@ -1,10 +1,11 @@
-import { FilmsResolver } from '../../interface/resolver/films.resolver';
+import { FilmsController } from '../../interface/rest-api/controller/films.controller';
+import { GraphqlConfigModule } from './../../interface/graphql/graphqlConfig.module';
 import { Module } from '@nestjs/common';
-import { FilmsController } from '../../interface/controller/films.controller';
 import { FilmsService } from '../../application/service/films.service';
 
 @Module({
+  imports: [GraphqlConfigModule],
   controllers: [FilmsController],
-  providers: [FilmsService, FilmsResolver],
+  providers: [FilmsService],
 })
 export class FilmsModule {}

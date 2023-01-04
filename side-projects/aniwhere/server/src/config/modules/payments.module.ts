@@ -1,10 +1,11 @@
-import { PaymentsResolver } from '../../interface/resolver/payments.resolver';
+import { GraphqlConfigModule } from './../../interface/graphql/graphqlConfig.module';
 import { Module } from '@nestjs/common';
-import { PaymentsController } from '../../interface/controller/payments.controller';
 import { PaymentsService } from '../../application/service/payments.service';
+import { PaymentsController } from 'src/interface/rest-api/controller/payments.controller';
 
 @Module({
+  imports: [GraphqlConfigModule],
   controllers: [PaymentsController],
-  providers: [PaymentsService, PaymentsResolver],
+  providers: [PaymentsService],
 })
 export class PaymentsModule {}
