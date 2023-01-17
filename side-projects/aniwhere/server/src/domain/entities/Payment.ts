@@ -22,6 +22,7 @@ export default class Payment {
 
   @Prop({ type: ObjectId, required: true, get: ObjectIdToString })
   ticketignId!: string;
+
   @Prop({
     ref: 'Ticketing',
     foreignField: '_id',

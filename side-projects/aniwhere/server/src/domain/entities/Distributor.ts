@@ -23,6 +23,7 @@ export default class Distributor {
 
   @Prop({ type: ObjectId, required: true, get: ObjectIdToString })
   directorId!: string;
+
   @Prop({
     ref: 'User',
     foreignField: '_id',

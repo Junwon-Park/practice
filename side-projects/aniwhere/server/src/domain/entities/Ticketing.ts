@@ -24,6 +24,7 @@ export default class Ticketing {
 
   @Prop({ type: ObjectId, required: true, get: ObjectIdToString })
   filmId!: string;
+
   @Prop({
     ref: 'Film',
     foreignField: '_id',
@@ -34,6 +35,7 @@ export default class Ticketing {
 
   @Prop({ type: ObjectId, required: true, get: ObjectIdToString })
   audienceId!: string;
+
   @Prop({
     ref: 'User',
     foreignField: '_id',

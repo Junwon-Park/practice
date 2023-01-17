@@ -1,4 +1,4 @@
-import { Index, modelOptions, Prop } from '@typegoose/typegoose';
+import { Index, modelOptions, Prop, Ref } from '@typegoose/typegoose';
 import { ObjectId, ObjectIdToString } from 'src/common/types/mongodb';
 import Distributor from './Distributor';
 import User from './User';
@@ -24,16 +24,19 @@ export default class Film {
 
   @Prop({ type: ObjectId, required: true, get: ObjectIdToString })
   directorId!: string;
+
   @Prop({
+    // Populate를 위한 가상 필드(실제 DB에 생성되지 않음)
     ref: 'User',
     foreignField: '_id',
     localField: 'directorId',
     justOne: true,
   })
-  user!: User;
+  director!: User;
 
   @Prop({ type: ObjectId, required: true, get: ObjectIdToString })
   distributorId!: string;
+
   @Prop({
     ref: 'Distributor',
     foreignField: '_id',
