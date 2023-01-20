@@ -1,4 +1,4 @@
-import { Index, modelOptions, Prop, Ref } from '@typegoose/typegoose';
+import { Index, modelOptions, Prop } from '@typegoose/typegoose';
 import { ObjectId, ObjectIdToString } from 'src/common/types/mongodb';
 import Distributor from './Distributor';
 import User from './User';
@@ -28,9 +28,10 @@ export default class Film {
   @Prop({
     // Populate를 위한 가상 필드(실제 DB에 생성되지 않음)
     ref: 'User',
-    foreignField: '_id',
-    localField: 'directorId',
-    justOne: true,
+    foreignField: '_id', // ref: User의 _id
+    localField: 'directorId', // 이 Entity의 directorId
+    justOne: true, // foreignField와 localField가 일치하는 Document 하나만 가져오는 옵션
+    // true로 하지 않으면 1 : 1인지 1 : N인지 알 수 없기 때문에 배열[]로 가져온다.(Default: false) ex_) director!: User[]
   })
   director!: User;
 

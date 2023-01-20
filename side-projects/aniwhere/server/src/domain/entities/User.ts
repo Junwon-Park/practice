@@ -42,6 +42,12 @@ export default class User {
     type: String,
     required: true,
   })
+  nickName!: string;
+
+  @Prop({
+    type: String,
+    required: true,
+  })
   phone!: string;
 
   @Prop({
@@ -53,6 +59,7 @@ export default class User {
   @Prop({
     type: Boolean,
     required: true,
+    default: true,
   })
   isActive!: boolean;
 
