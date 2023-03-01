@@ -1,6 +1,6 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
-import { GraphqlConfigModule } from './interface/graphql/graphqlConfig.module';
+import GraphqlConfigModule from './interface/graphql/graphql.config.module';
 import { Module } from '@nestjs/common';
 import { UsersModule } from './config/modules/users.module';
 import { FilmsModule } from './config/modules/films.module';

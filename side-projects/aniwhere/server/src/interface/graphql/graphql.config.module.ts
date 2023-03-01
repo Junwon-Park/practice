@@ -13,4 +13,4 @@ import { FilmsResolver } from './resolver/films.resolver';
     PaymentsResolver,
   ],
 })
-export class GraphqlConfigModule {}
+export default class GraphqlConfigModule {}
