@@ -6,7 +6,7 @@ import { UsersModule } from './config/modules/users.module';
 import { FilmsModule } from './config/modules/films.module';
 import { DistributorsModule } from './config/modules/distributors.module';
 import { PaymentsModule } from './config/modules/payments.module';
-import EnvConfigModule from 'env/env.module';
+import EnvConfigModule from 'env/env.config.module';
 import MongodbModule from './infrastructure/mongodb/mongodb.module';
 
 @Module({
