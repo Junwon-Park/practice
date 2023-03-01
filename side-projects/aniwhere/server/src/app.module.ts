@@ -14,7 +14,6 @@ import MongodbModule from './infrastructure/mongodb/mongodb.module';
     EnvConfigModule,
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
       driver: ApolloDriver,
-      // ? TODO: imports에 GraphqlConfigModule 등록 안해도 잘 되는데, 추후에도 없어도 되는 지 확인해보기
       imports: [GraphqlConfigModule], // Resolver를 가지고 있는 모듈 import(imports에 등록한 모듈에서 Resolver들을 exports에 등록하지 않아도 인식한다.(일단 현재 까지는?))
       useFactory: () => ({
         uploads: false,
