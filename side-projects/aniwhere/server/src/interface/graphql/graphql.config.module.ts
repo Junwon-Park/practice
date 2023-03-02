@@ -20,7 +20,6 @@ export const DefaultGraphQLModule = (path: string): DynamicModule => {
       // introspection: false,
       formatError: (error: GraphQLError): GraphQLFormattedError => {
         graphqlErrorLog.error(error);
-
         return error;
       },
       disableHealthCheck: true,
