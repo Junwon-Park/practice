@@ -1,16 +1,31 @@
-import { PaymentsResolver } from './resolver/payments.resolver';
-import { UsersResolver } from './resolver/users.resolver';
-import { Module } from '@nestjs/common';
-import { DistributorsResolver } from './resolver/distributors.resolver';
-import { FilmsResolver } from './resolver/films.resolver';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { DynamicModule, Logger } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
+import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import GraphqlModule from './graphql.module';
 
-@Module({
-  // ! providers에 Resolver를 등록 해야 Resolver를 인식할 수 있다.(AppModule에 이 모듈을 import하지 않고 이 providers에만 Resolver를 등록하면 정상 동작한다.)
-  providers: [
-    DistributorsResolver,
-    FilmsResolver,
-    UsersResolver,
-    PaymentsResolver,
-  ],
-})
-export default class GraphqlConfigModule {}
+const graphqlErrorLog = new Logger('GraphQL Error log');
+
+export const DefaultGraphQLModule = (path: string): DynamicModule => {
+  return GraphQLModule.forRootAsync<ApolloDriverConfig>({
+    driver: ApolloDriver,
+    imports: [GraphqlModule],
+    useFactory: () => ({
+      uploads: false,
+      cors: true,
+      validate: true,
+      playground: true,
+      autoSchemaFile: true,
+      debug: true,
+      // introspection: false,
+      formatError: (error: GraphQLError): GraphQLFormattedError => {
+        const originalError = error.originalError;
+        graphqlErrorLog.error(error);
+        return originalError;
+      },
+      disableHealthCheck: true,
+      path: path,
+      context: ({ req, res }) => ({ req, res }),
+    }),
+  });
+};
