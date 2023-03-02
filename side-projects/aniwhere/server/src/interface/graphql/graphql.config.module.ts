@@ -4,7 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import GraphqlModule from './graphql.module';
 
-const graphqlErrorLog = new Logger('GraphQL Error log');
+const graphqlErrorLog = new Logger('GraphQLErrorLog');
 
 export const DefaultGraphQLModule = (path: string): DynamicModule => {
   return GraphQLModule.forRootAsync<ApolloDriverConfig>({
@@ -19,9 +19,9 @@ export const DefaultGraphQLModule = (path: string): DynamicModule => {
       debug: true,
       // introspection: false,
       formatError: (error: GraphQLError): GraphQLFormattedError => {
-        const originalError = error.originalError;
         graphqlErrorLog.error(error);
-        return originalError;
+
+        return error;
       },
       disableHealthCheck: true,
       path: path,
