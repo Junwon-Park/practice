@@ -8,6 +8,7 @@ import User from './User';
   schemaOptions: {
     collection: 'live-film-viewer-log',
     versionKey: false,
+    id: true,
   },
 })
 @Index({ id: 1 })
@@ -17,7 +18,6 @@ import User from './User';
 export default class LiveFilmViewerLog {
   @Prop({
     type: ObjectId,
-    alias: 'id',
     default: () => ObjectId(),
     get: ObjectIdToString,
   })

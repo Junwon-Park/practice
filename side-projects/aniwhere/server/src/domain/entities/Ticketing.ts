@@ -7,6 +7,8 @@ import User from './User';
   schemaOptions: {
     collection: 'ticketing',
     versionKey: false,
+    id: true, // id를 true로 하면 _id 속성의 @Prop 옵션에 alias: 'id'를 지정하지 않아도 된다.
+    // 이러면 실제 DB 엔티티에는 id라는 필드가 생성되지는 않지만 데이터를 저장하거나 조회할 때, id라는 속성으로 수행할 수 있다.
   },
 })
 @Index({ id: 1 })
@@ -15,7 +17,6 @@ import User from './User';
 export default class Ticketing {
   @Prop({
     type: ObjectId,
-    alias: 'id',
     default: () => ObjectId(),
     get: ObjectIdToString,
   })

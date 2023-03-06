@@ -6,6 +6,7 @@ import Ticketing from './Ticketing';
   schemaOptions: {
     collection: 'payment',
     versionKey: false,
+    id: true,
   },
 })
 @Index({ id: 1 })
@@ -13,7 +14,6 @@ import Ticketing from './Ticketing';
 export default class Payment {
   @Prop({
     type: ObjectId,
-    alias: 'id',
     default: () => ObjectId(),
     get: ObjectIdToString,
   })

@@ -6,6 +6,7 @@ import User from './User';
   schemaOptions: {
     collection: 'distributor',
     versionKey: false,
+    id: true,
   },
 })
 @Index({ id: 1 })
@@ -14,7 +15,6 @@ import User from './User';
 export default class Distributor {
   @Prop({
     type: ObjectId,
-    alias: 'id',
     default: () => ObjectId(),
     get: ObjectIdToString,
   })

@@ -7,6 +7,7 @@ import User from './User';
   schemaOptions: {
     collection: 'film',
     versionKey: false,
+    id: true,
   },
 })
 @Index({ id: 1 })
@@ -15,7 +16,6 @@ import User from './User';
 export default class Film {
   @Prop({
     type: ObjectId,
-    alias: 'id',
     default: () => ObjectId(),
     get: ObjectIdToString,
   })

@@ -1,4 +1,4 @@
-import EnvConfigModule from 'env/env.config.module';
+import EnvConfigModule from 'src/config/env.config.module';
 import { Module } from '@nestjs/common';
 import { TypegooseModule } from 'nestjs-typegoose';
 import Distributor from 'src/domain/entities/Distributor';

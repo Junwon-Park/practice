@@ -5,6 +5,7 @@ import { ObjectId, ObjectIdToString } from 'src/common/types/mongodb';
   schemaOptions: {
     collection: 'user',
     versionKey: false,
+    id: true,
   },
 })
 @Index({ id: 1 })
@@ -13,7 +14,6 @@ import { ObjectId, ObjectIdToString } from 'src/common/types/mongodb';
 export default class User {
   @Prop({
     type: ObjectId,
-    alias: 'id',
     default: () => ObjectId(),
     get: ObjectIdToString,
   })
