@@ -2,7 +2,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { DynamicModule, Logger } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
-import GraphqlModule from './graphql.module';
+import GraphqlModule from 'interface/graphql/graphql.module';
 
 const graphqlErrorLog = new Logger('GraphQLErrorLog');
 

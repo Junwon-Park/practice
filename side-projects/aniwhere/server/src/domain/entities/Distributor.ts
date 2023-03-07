@@ -1,6 +1,6 @@
 import { Index, modelOptions, Prop } from '@typegoose/typegoose';
-import { ObjectId, ObjectIdToString } from 'src/common/types/mongodb';
-import User from './User';
+import { ObjectId, ObjectIdToString } from 'common/types/mongodb';
+import User from 'domain/entities/User';
 
 @modelOptions({
   schemaOptions: {

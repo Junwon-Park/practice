@@ -1,6 +1,6 @@
 import { Index, modelOptions, Prop } from '@typegoose/typegoose';
-import { ObjectId, ObjectIdToString } from 'src/common/types/mongodb';
-import Ticketing from './Ticketing';
+import { ObjectId, ObjectIdToString } from 'common/types/mongodb';
+import Ticketing from 'domain/entities/Ticketing';
 
 @modelOptions({
   schemaOptions: {

@@ -1,7 +1,7 @@
 import { Index, modelOptions, Prop } from '@typegoose/typegoose';
-import { ObjectId, ObjectIdToString } from 'src/common/types/mongodb';
-import Distributor from './Distributor';
-import User from './User';
+import { ObjectId, ObjectIdToString } from 'common/types/mongodb';
+import Distributor from 'domain/entities/Distributor';
+import User from 'domain/entities/User';
 
 @modelOptions({
   schemaOptions: {

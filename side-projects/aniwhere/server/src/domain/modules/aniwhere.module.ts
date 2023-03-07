@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import EnvConfigModule from 'src/config/env.config.module';
-import MongodbModule from 'src/infrastructure/mongodb/mongodb.module';
-import { DistributorsModule } from './distributors.module';
-import { FilmsModule } from './films.module';
-import { PaymentsModule } from './payments.module';
-import { UsersModule } from './users.module';
+import EnvConfigModule from 'config/env.config.module';
+import MongodbModule from 'infrastructure/mongodb/mongodb.module';
+import { DistributorsModule } from 'domain/modules/distributors.module';
+import { FilmsModule } from 'domain/modules/films.module';
+import { PaymentsModule } from 'domain/modules/payments.module';
+import { UsersModule } from 'domain/modules/users.module';
 
 @Module({
   imports: [

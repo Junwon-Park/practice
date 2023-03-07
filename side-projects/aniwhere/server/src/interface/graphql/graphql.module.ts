@@ -1,8 +1,8 @@
-import { PaymentsResolver } from './resolver/payments.resolver';
-import { UsersResolver } from './resolver/users.resolver';
+import { PaymentsResolver } from 'interface/graphql/resolver/payments.resolver';
+import { UsersResolver } from 'interface/graphql/resolver/users.resolver';
 import { Module } from '@nestjs/common';
-import { DistributorsResolver } from './resolver/distributors.resolver';
-import { FilmsResolver } from './resolver/films.resolver';
+import { DistributorsResolver } from 'interface/graphql/resolver/distributors.resolver';
+import { FilmsResolver } from 'interface/graphql/resolver/films.resolver';
 
 @Module({
   // ! providers에 Resolver를 등록 해야 Resolver를 인식할 수 있다.
