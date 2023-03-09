@@ -5,7 +5,8 @@ export class DistributorsResolver {
   @Query(() => String)
   sayHello(): string {
     console.log('Distributors');
+    console.log('Hello ?? Distributors@@@@@@@@@@@@@@@@@@@@@@@@@');
 
-    return 'Hello Distributors!';
+    return 'No Hello!! Distributors!';
   }
 }

@@ -1,17 +1,18 @@
 import { Index, modelOptions, Prop } from '@typegoose/typegoose';
-import { ObjectId, ObjectIdToString } from 'common/types/mongodb';
+import { ObjectId, ObjectIdToString } from 'aniwhere/common/types/mongodb';
+import User from 'aniwhere/domain/entities/User';
 
 @modelOptions({
   schemaOptions: {
-    collection: 'user',
+    collection: 'distributor',
     versionKey: false,
     id: true,
   },
 })
 @Index({ id: 1 })
-@Index({ loginId: 1 })
+@Index({ directorId: 1 })
 @Index({ name: 1 })
-export default class User {
+export default class Distributor {
   @Prop({
     type: ObjectId,
     default: () => ObjectId(),
@@ -20,17 +21,16 @@ export default class User {
   _id!: string;
   id!: string;
 
-  @Prop({
-    type: String,
-    required: true,
-  })
-  loginId!: string;
+  @Prop({ type: ObjectId, required: true, get: ObjectIdToString })
+  directorId!: string;
 
   @Prop({
-    type: String,
-    required: true,
+    ref: 'User',
+    foreignField: '_id',
+    localField: 'directorId',
+    justOne: true,
   })
-  password!: string;
+  user!: User;
 
   @Prop({
     type: String,
@@ -42,24 +42,11 @@ export default class User {
     type: String,
     required: true,
   })
-  nickName!: string;
-
-  @Prop({
-    type: String,
-    required: true,
-  })
-  phone!: string;
-
-  @Prop({
-    type: String,
-    required: true,
-  })
-  address!: string;
+  logo!: string;
 
   @Prop({
     type: Boolean,
     required: true,
-    default: true,
   })
   isActive!: boolean;
 

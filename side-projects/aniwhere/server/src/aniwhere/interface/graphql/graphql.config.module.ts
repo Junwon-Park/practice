@@ -2,14 +2,14 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { DynamicModule, Logger } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
-import GraphqlModule from 'interface/graphql/graphql.module';
+import GraphqlModule from 'aniwhere/interface/graphql/graphql.module';
 
 const graphqlErrorLog = new Logger('GraphQLErrorLog');
 
 export const DefaultGraphQLModule = (path: string): DynamicModule => {
   return GraphQLModule.forRootAsync<ApolloDriverConfig>({
     driver: ApolloDriver,
-    imports: [GraphqlModule], // Resolver를 가지고 있는 모듈 import(imports에 등록한 모듈에서 Resolver들을 exports에 등록하지 않아도 인식한다.(일단 현재 까지는?))
+    imports: [GraphqlModule], // Resolver를 import하고 있는 모듈 import(imports에 등록한 모듈에서 Resolver들을 exports에 등록하지 않아도 인식한다.(일단 현재 까지는?))
     useFactory: () => ({
       uploads: false,
       cors: true,

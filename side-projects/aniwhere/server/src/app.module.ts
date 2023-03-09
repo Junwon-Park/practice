@@ -1,9 +1,8 @@
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
-import { DefaultGraphQLModule } from 'interface/graphql/graphql.config.module';
-import { AniwhereModule } from 'domain/modules/aniwhere.module';
+import { AniwhereModule } from 'aniwhere/aniwhere.module';
+import EnvConfigModule from 'config/env.config.module';
 
 @Module({
-  imports: [AniwhereModule, DefaultGraphQLModule('/aniwhere')],
+  imports: [EnvConfigModule, AniwhereModule],
 })
 export class AppModule {}

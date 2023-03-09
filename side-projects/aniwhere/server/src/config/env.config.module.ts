@@ -1,14 +1,13 @@
 import { Global, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 
-// const env = process.env.NODE_ENV?.toLowerCase() || 'local';
-
+// * .env 파일은 전역에 적용되는 환경 변수를 정의하는 파일이기 때문에
 @Global()
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `env/.env${''}`,
+      envFilePath: `env/.env`,
     }),
   ],
 })

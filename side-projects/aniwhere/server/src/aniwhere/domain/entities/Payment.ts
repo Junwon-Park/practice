@@ -1,18 +1,17 @@
 import { Index, modelOptions, Prop } from '@typegoose/typegoose';
-import { ObjectId, ObjectIdToString } from 'common/types/mongodb';
-import User from 'domain/entities/User';
+import { ObjectId, ObjectIdToString } from 'aniwhere/common/types/mongodb';
+import Ticketing from 'aniwhere/domain/entities/Ticketing';
 
 @modelOptions({
   schemaOptions: {
-    collection: 'distributor',
+    collection: 'payment',
     versionKey: false,
     id: true,
   },
 })
 @Index({ id: 1 })
-@Index({ directorId: 1 })
-@Index({ name: 1 })
-export default class Distributor {
+@Index({ ticketing: 1 })
+export default class Payment {
   @Prop({
     type: ObjectId,
     default: () => ObjectId(),
@@ -22,33 +21,15 @@ export default class Distributor {
   id!: string;
 
   @Prop({ type: ObjectId, required: true, get: ObjectIdToString })
-  directorId!: string;
+  ticketignId!: string;
 
   @Prop({
-    ref: 'User',
+    ref: 'Ticketing',
     foreignField: '_id',
-    localField: 'directorId',
+    localField: 'ticketignId',
     justOne: true,
   })
-  user!: User;
-
-  @Prop({
-    type: String,
-    required: true,
-  })
-  name!: string;
-
-  @Prop({
-    type: String,
-    required: true,
-  })
-  logo!: string;
-
-  @Prop({
-    type: Boolean,
-    required: true,
-  })
-  isActive!: boolean;
+  ticketing!: Ticketing;
 
   @Prop({
     type: Date,

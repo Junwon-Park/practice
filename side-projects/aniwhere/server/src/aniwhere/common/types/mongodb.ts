@@ -1,4 +1,4 @@
-import { Nullable } from 'common/types/native';
+import { Nullable } from 'aniwhere/common/types/native';
 import { mongoose } from '@typegoose/typegoose';
 import { FilterQuery } from 'mongoose';
 

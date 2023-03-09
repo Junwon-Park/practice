@@ -1,12 +1,12 @@
 import EnvConfigModule from 'config/env.config.module';
 import { Module } from '@nestjs/common';
 import { TypegooseModule } from 'nestjs-typegoose';
-import Distributor from 'domain/entities/Distributor';
-import Film from 'domain/entities/Film';
-import LiveFilmViewerLog from 'domain/entities/LiveFilmViewerLog';
-import Payment from 'domain/entities/Payment';
-import Ticketing from 'domain/entities/Ticketing';
-import User from 'domain/entities/User';
+import Distributor from 'aniwhere/domain/entities/Distributor';
+import Film from 'aniwhere/domain/entities/Film';
+import LiveFilmViewerLog from 'aniwhere/domain/entities/LiveFilmViewerLog';
+import Payment from 'aniwhere/domain/entities/Payment';
+import Ticketing from 'aniwhere/domain/entities/Ticketing';
+import User from 'aniwhere/domain/entities/User';
 
 @Module({
   imports: [

@@ -1,7 +1,7 @@
 import { Index, modelOptions, Prop } from '@typegoose/typegoose';
-import { ObjectId, ObjectIdToString } from 'common/types/mongodb';
-import Film from 'domain/entities/Film';
-import User from 'domain/entities/User';
+import { ObjectId, ObjectIdToString } from 'aniwhere/common/types/mongodb';
+import Film from 'aniwhere/domain/entities/Film';
+import User from 'aniwhere/domain/entities/User';
 
 @modelOptions({
   schemaOptions: {
