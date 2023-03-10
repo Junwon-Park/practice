@@ -1,8 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { Args, Mutation, Resolver, Query } from '@nestjs/graphql';
+import { Injectable, UseGuards } from '@nestjs/common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { AniwhereAuthGuard } from 'aniwhere/common/auth/aniwhere.guard';
 @Injectable()
 @Resolver()
 export class AuthResolver {
+  @UseGuards(AniwhereAuthGuard)
   @Mutation(() => String, { name: 'signUp' })
   signUp(@Args('input') input: string): string {
     console.log('SignUp');
