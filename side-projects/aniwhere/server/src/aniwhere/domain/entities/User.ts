@@ -8,8 +8,8 @@ import { ObjectId, ObjectIdToString } from 'aniwhere/common/types/mongodb';
     id: true,
   },
 })
-@Index({ id: 1 })
 @Index({ loginId: 1 })
+@Index({ id: 1 })
 @Index({ name: 1 })
 export default class User {
   @Prop({

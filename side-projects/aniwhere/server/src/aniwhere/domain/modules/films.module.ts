@@ -1,7 +1,7 @@
-import { FilmsController } from 'aniwhere/interface/rest-api/controller/films.controller';
 import { Module } from '@nestjs/common';
-import { FilmsService } from 'aniwhere/application/service/films.service';
 import { MongodbModels } from 'aniwhere/infrastructure/mongodb/mongodb.module';
+import FilmsService from 'aniwhere/application/service/films.service';
+import FilmsController from 'aniwhere/interface/rest-api/controller/films.controller';
 
 @Module({
   imports: [...MongodbModels],

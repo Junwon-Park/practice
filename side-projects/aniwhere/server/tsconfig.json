@@ -16,6 +16,6 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "baseUrl": "src"
+    "baseUrl": "src" // import 경로 Root를 src 디렉토리러 지정
   }
 }

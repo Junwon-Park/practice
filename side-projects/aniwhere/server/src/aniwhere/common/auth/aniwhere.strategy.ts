@@ -1,8 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import UserRepository from 'aniwhere/infrastructure/mongodb/repository/users.repository';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import UserRepository from 'aniwhere/infrastructure/mongodb/repository/users.repository';
 
 @Injectable()
 export class AniwhereStrategy extends PassportStrategy(Strategy, 'aniwhere') {
@@ -21,12 +21,12 @@ export class AniwhereStrategy extends PassportStrategy(Strategy, 'aniwhere') {
 
   async validate(payload: any) {
     const aniwhereUser = await this.aniwhereUserRepository.findUserByLoginId(
-      payload.signature.loginId,
+      payload.loginId,
     );
     if (aniwhereUser == null) throw new UnauthorizedException();
 
-    payload.signature.aniwhereUser = aniwhereUser;
+    payload.aniwhereUser = aniwhereUser;
 
-    return payload.signature;
+    return payload;
   }
 }

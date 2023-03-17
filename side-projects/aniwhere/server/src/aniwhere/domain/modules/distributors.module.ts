@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { DistributorsService } from 'aniwhere/application/service/distributors.service';
-import { DistributorsController } from 'aniwhere/interface/rest-api/controller/distributors.controller';
 import { MongodbModels } from 'aniwhere/infrastructure/mongodb/mongodb.module';
+import DistributorsService from 'aniwhere/application/service/distributors.service';
+import DistributorsController from 'aniwhere/interface/rest-api/controller/distributors.controller';
 
 @Module({
   imports: [...MongodbModels],

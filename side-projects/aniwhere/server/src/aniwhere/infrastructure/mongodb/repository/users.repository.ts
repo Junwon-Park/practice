@@ -11,6 +11,6 @@ export default class UserRepository {
   ) {}
 
   async findUserByLoginId(loginId: string): Promise<User> {
-    return this.aniwhereUserModel.findOne({ loginId });
+    return await this.aniwhereUserModel.findOne({ loginId });
   }
 }
