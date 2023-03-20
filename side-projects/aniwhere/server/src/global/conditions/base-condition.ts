@@ -1,7 +1,7 @@
 import {
   IPaginationInput,
   ISortInput,
-} from 'global/types/pagination.interfaces';
+} from 'global/types/pagination.interface';
 
 export interface IBaseCondition {
   pagination?: IPaginationInput;
