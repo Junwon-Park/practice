@@ -1,5 +1,5 @@
 import { Index, modelOptions, Prop } from '@typegoose/typegoose';
-import { ObjectId, ObjectIdToString } from 'aniwhere/common/types/mongodb';
+import { ObjectId, ObjectIdToString } from 'global/types/mongodb';
 import Distributor from 'aniwhere/domain/entities/Distributor';
 import Film from 'aniwhere/domain/entities/Film';
 import User from 'aniwhere/domain/entities/User';
@@ -8,7 +8,8 @@ import User from 'aniwhere/domain/entities/User';
   schemaOptions: {
     collection: 'live-film-viewer-log',
     versionKey: false,
-    id: true,
+    id: true, // id를 true로 하면 _id 속성의 @Prop 옵션에 alias: 'id'를 지정하지 않아도 된다.
+    // 이러면 실제 DB 엔티티에는 id라는 필드가 생성되지는 않지만 데이터를 저장하거나 조회할 때, id라는 속성으로 수행할 수 있다.
   },
 })
 @Index({ id: 1 })

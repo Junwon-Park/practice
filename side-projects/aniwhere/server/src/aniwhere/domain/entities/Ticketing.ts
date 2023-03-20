@@ -1,5 +1,5 @@
 import { Index, modelOptions, Prop } from '@typegoose/typegoose';
-import { ObjectId, ObjectIdToString } from 'aniwhere/common/types/mongodb';
+import { ObjectId, ObjectIdToString } from 'global/types/mongodb';
 import Film from 'aniwhere/domain/entities/Film';
 import User from 'aniwhere/domain/entities/User';
 

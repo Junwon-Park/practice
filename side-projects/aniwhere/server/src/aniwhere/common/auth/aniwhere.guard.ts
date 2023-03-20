@@ -1,4 +1,4 @@
-import { ObjectId } from 'aniwhere/common/types/mongodb';
+import { ObjectId } from 'global/types/mongodb';
 import {
   createParamDecorator,
   ExecutionContext,

@@ -18,7 +18,7 @@ import { DefaultAniwhereJwtAuthModule } from 'aniwhere/common/auth/aniwhere.auth
     PaymentsModule,
     GraphqlModule,
     DefaultGraphQLModule('/aniwhere'),
-    DefaultAniwhereJwtAuthModule('30d'),
+    DefaultAniwhereJwtAuthModule('30d'), // * JwtModule.register()를 import하는 모듈
   ],
   providers: [AniwhereStrategy], // JwtModule.register()를 import하는 모듈에서 Strategy를 provider에 등록해야 한다.
 })

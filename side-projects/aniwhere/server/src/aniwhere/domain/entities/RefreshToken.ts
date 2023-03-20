@@ -1,5 +1,5 @@
 import { Index, ModelOptions, Prop } from '@typegoose/typegoose';
-import { ObjectId } from 'aniwhere/common/types/mongodb';
+import { ObjectId } from 'global/types/mongodb';
 
 @ModelOptions({
   schemaOptions: {
