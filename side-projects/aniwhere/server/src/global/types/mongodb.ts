@@ -1,6 +1,6 @@
 import { mongoose } from '@typegoose/typegoose';
 import { FilterQuery } from 'mongoose';
-import { Nullable } from './native';
+import { Nullable } from './natives';
 
 export type MongoDBMatches<T = any> = FilterQuery<T>;
 export type MongoDBSorts = any;
