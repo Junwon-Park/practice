@@ -25,7 +25,11 @@ export class AniwhereStrategy extends PassportStrategy(Strategy, 'aniwhere') {
     );
     if (aniwhereUser == null) throw new UnauthorizedException();
 
-    payload.aniwhereUser = aniwhereUser;
+    payload.id = aniwhereUser._id;
+    payload.name = aniwhereUser.name;
+    payload.nickName = aniwhereUser.nickName;
+    payload.phone = aniwhereUser.phone;
+    payload.address = aniwhereUser.address;
 
     return payload;
   }

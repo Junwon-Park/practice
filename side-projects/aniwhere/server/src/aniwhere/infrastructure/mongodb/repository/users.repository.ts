@@ -14,7 +14,7 @@ export default class UserRepository {
     return await this.aniwhereUserModel.findOne({ loginId });
   }
 
-  async signup(condition): Promise<> {
-    return;
-  }
+  //   async signup(condition): Promise<> {
+  //     return;
+  //   }
 }

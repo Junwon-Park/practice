@@ -22,6 +22,7 @@ export class AniwhereAuthGuard extends AuthGuard('aniwhere') {
     if (err || !signatureArg) {
       throw err || new UnauthorizedException();
     }
+
     return signatureArg; // 이 반환 값이 최종적으로 요청을 받은 Controller 또는 Resolver로 들어간다.
   }
 }
@@ -32,7 +33,6 @@ export const CurrentUser = createParamDecorator(
 
     return {
       ...ctx.getContext().req.user,
-      id: ObjectId(ctx.getContext().req.user.id),
     };
   },
 );
