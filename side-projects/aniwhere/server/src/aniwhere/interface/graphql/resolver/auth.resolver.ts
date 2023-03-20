@@ -28,7 +28,8 @@ export class AuthResolver {
   async logIn(
     @CurrentUser() user: IAuthFields, // * 데코레이터의 필드, 타입 체크 못함 -> 인터페이스의 필드는 잡아올 수 있다(자동완성 가능).
     @Args('input') input: string,
-  ): Promise<RefreshToken> {
-    return await this.refreshTokenRepository.test(input);
+  ): Promise<string> {
+    await this.refreshTokenRepository.test(input);
+    return '';
   }
 }
