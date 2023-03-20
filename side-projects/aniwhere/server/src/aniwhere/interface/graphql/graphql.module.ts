@@ -1,11 +1,13 @@
+import { AuthResolver } from 'aniwhere/interface/graphql/resolver/auth.resolver';
 import { PaymentsResolver } from 'aniwhere/interface/graphql/resolver/payments.resolver';
 import { UsersResolver } from 'aniwhere/interface/graphql/resolver/users.resolver';
 import { Module } from '@nestjs/common';
 import { DistributorsResolver } from 'aniwhere/interface/graphql/resolver/distributors.resolver';
 import { FilmsResolver } from 'aniwhere/interface/graphql/resolver/films.resolver';
-import { AuthResolver } from 'aniwhere/interface/graphql/resolver/auth.resolver';
+import { AuthModule } from 'aniwhere/domain/modules/auth.module';
 
 @Module({
+  imports: [AuthModule],
   // ! providers에 Resolver를 등록 해야 Resolver를 인식할 수 있다.
   providers: [
     DistributorsResolver,

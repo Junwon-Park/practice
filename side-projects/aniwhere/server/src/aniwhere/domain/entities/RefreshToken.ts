@@ -8,7 +8,14 @@ import { ObjectId } from 'global/types/mongodb';
   },
 })
 @Index({ userId: 1, token: 1 }, { unique: true })
-@Index({ expiresIn: 1 }, { expireAfterSeconds: 0 }) // * TTL, expiresIn 필드의 날짜가 되면 0초 뒤에 해당 데이터를 삭제한다.
+@Index(
+  { expiresIn: 1 },
+  {
+    expireAfterSeconds: Number(
+      process.env.AUTH_REFRESH_TOKEN_JWT_EXPIRATION_TIME,
+    ),
+  },
+) // * TTL, expiresIn 필드의 날짜가 되면 지정한 시간(초) 뒤에 해당 데이터를 자동으로 삭제한다.
 export default class RefreshToken {
   _id!: ObjectId;
 
