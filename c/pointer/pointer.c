@@ -98,7 +98,7 @@ void swap(int *num1, int *num2) { // 매개 변수를 포인터 변수로 선언
 
 /** 포인터 연산 */
 void pointerOperation() {
-    char charArr[6] = {"hello"};
+    char charArr[6] = "hello"; // 문자열은 chaf(문자)의 배열이다.
 
     char *ptr;
 
