@@ -1,0 +1,12 @@
+ul{
+    list-style:none;
+}
+
+.main {
+    color: green;
+}
+
+header {
+    position: sticky;
+    top: 0;
+}
